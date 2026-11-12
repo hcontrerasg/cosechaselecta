@@ -294,9 +294,10 @@ body{overflow-x:clip}
 </div>
 <form class="sell-form" id="sellForm" novalidate>
 <label for="sf-name">Nombre<input id="sf-name" name="name" autocomplete="name" required></label>
+<label for="sf-org"><span>Agrícola o sociedad <small style="font-weight:400;opacity:.7">(opcional)</small></span><input id="sf-org" name="org" autocomplete="organization" placeholder="Ej: Agrícola Los Robles SpA"></label>
 <label for="sf-phone">Teléfono<input id="sf-phone" name="phone" type="tel" autocomplete="tel" placeholder="+56 9" required></label>
 <label for="sf-place">Comuna o localidad<input id="sf-place" name="place" placeholder="Ej: Quillota" required></label>
-<label for="sf-crop">¿Qué cultivas?<input id="sf-crop" name="crop" placeholder="Ej: paltas, tomates" required></label>
+<label for="sf-crop" style="grid-column:1/-1">¿Qué cultivas?<input id="sf-crop" name="crop" placeholder="Ej: paltas, tomates" required></label>
 <button class="btn btn-primary full" type="submit">Quiero venderle a CosechaSelecta</button>
 <span class="ok" id="sellOk" role="status"></span>
 </form>
@@ -528,8 +529,8 @@ if(miss){qok.textContent='Completa los campos obligatorios para enviarte la coti
 qok.textContent=`Gracias. En el sitio real te enviaremos la cotización hoy mismo (prototipo: los datos no se envían).`;});
 const sf=document.getElementById('sellForm'), ok=document.getElementById('sellOk');
 sf.addEventListener('submit',e=>{e.preventDefault();
-const empty=[...sf.querySelectorAll('input')].find(i=>!i.value.trim());
-if(empty){ok.textContent='Completa todos los campos para que podamos contactarte.';empty.focus();return;}
+const empty=[...sf.querySelectorAll('input[required]')].find(i=>!i.value.trim());
+if(empty){ok.textContent='Completa los campos obligatorios para que podamos contactarte.';empty.focus();return;}
 ok.textContent=`Gracias, ${sf.name.value.trim().split(' ')[0]}. En el sitio real te llamaremos esta semana (prototipo: los datos no se envían).`;sf.reset();});
 const SL=[
 {name:'Cultivos en temporada',m:[]},

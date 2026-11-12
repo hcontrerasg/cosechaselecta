@@ -160,7 +160,6 @@ body{overflow-x:clip}
 <figure class="slide"><div class="ph ph3"><img src="https://images.pexels.com/photos/13834217/pexels-photo-13834217.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1920&h=1080" srcset="https://images.pexels.com/photos/13834217/pexels-photo-13834217.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=960&h=600 960w, https://images.pexels.com/photos/13834217/pexels-photo-13834217.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1920&h=1080 1920w" sizes="100vw" alt="Agricultor cosechando cebollines en la huerta" loading="lazy"></div><figcaption class="cap">Productores · Chillán</figcaption></figure>
 </div>
 <div class="badge-q"><span class="medal" aria-hidden="true">★</span><span><b>Lote seleccionado</b>Calidad, calibre y madurez verificados</span></div>
-<div class="verified"><span class="tick" aria-hidden="true">✓</span><span><b>Compra directa al productor</b><em id="slName">Hernán Muñoz, Quillota</em></span></div>
 <div class="dots" role="tablist" aria-label="Elegir productor">
 <button type="button" class="dot is-on" aria-label="Productor 1" aria-selected="true"></button>
 <button type="button" class="dot" aria-label="Productor 2" aria-selected="false"></button>
@@ -549,7 +548,7 @@ let cur=0, timer;
 const show=k=>{cur=(k+SL.length)%SL.length;
 slides.forEach((el,i)=>el.classList.toggle('is-on',i===cur));
 dots.forEach((d,i)=>{d.classList.toggle('is-on',i===cur);d.setAttribute('aria-selected',i===cur);});
-slName.textContent=SL[cur].name;
+if(slName)slName.textContent=SL[cur].name;
 if(minis)minis.innerHTML=SL[cur].m.map(x=>`<div class="mini"><div class="ar">${pic(x,art(x.s,x.col))}</div><div class="tx"><b>${x.n}</b><span>${x.f}</span><strong>${x.c}</strong></div></div>`).join('');};
 const auto=()=>{clearInterval(timer); if(!matchMedia('(prefers-reduced-motion: reduce)').matches) timer=setInterval(()=>show(cur+1),3000);};
 dots.forEach((d,i)=>d.addEventListener('click',()=>{show(i);auto();}));

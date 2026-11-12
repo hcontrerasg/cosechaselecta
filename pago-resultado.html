@@ -40,11 +40,13 @@ const M={
  pagado:['¡Pago <em>recibido</em>!',`Recibimos el pago${ped}. Te llegará el comprobante por correo y reservamos tu cosecha.`],
  pendiente:['Pago <em>pendiente</em>',`El pago${ped} aún no se confirma. Si pagaste por transferencia puede tardar unos minutos; te avisaremos por correo.`],
  rechazado:['El pago no se <em>completó</em>',`El pago${ped} fue rechazado. No se hizo ningún cargo. Puedes intentarlo de nuevo.`],
- anulado:['Pago <em>anulado</em>',`El pago${ped} se anuló. No se hizo ningún cargo.`]
+ anulado:['Pago <em>anulado</em>',`El pago${ped} se anuló. No se hizo ningún cargo.`],
+ reservado:['Pedido <em>reservado</em>',`Reservamos tu pedido${p?' '+p.replace(/[^A-Za-z0-9-]/g,''):''}. Pagas contra entrega, con transferencia o efectivo. Te escribiremos para confirmar el día de entrega.`]
 };
+if(e==='pagado'||e==='reservado'){try{localStorage.removeItem('cs_carrito')}catch(x){}}
 const [t,m]=M[e]||M.pendiente;
 document.getElementById('t').innerHTML=t;document.getElementById('m').textContent=m;
-if(e==='rechazado'||e==='anulado'){const b=document.getElementById('b');b.textContent='Intentar de nuevo';b.href='/pagar.html'+(p?'?pedido='+encodeURIComponent(p):'');}
+if(e==='rechazado'||e==='anulado'){const b=document.getElementById('b');b.textContent='Intentar de nuevo';let hay=false;try{hay=JSON.parse(localStorage.getItem('cs_carrito')||'[]').length>0}catch(x){}b.href=hay?'/checkout.html':'/pagar.html'+(p?'?pedido='+encodeURIComponent(p):'');}
 </script>
 </body>
 </html>

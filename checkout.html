@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Finalizar pedido · CosechaSelecta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+:root{--bg:#FAFAF6;--surface:#FFFFFF;--line:#D9E0D5;--ink:#14211A;--muted:#55645B;--forest:#1F4632;--forest-ink:#F4F7F2;--chili:#B8321D;--gold:#C98F12;--gold-soft:#F6EBCF;--display:"Instrument Serif","Iowan Old Style",Georgia,serif;--body:"Manrope","Segoe UI",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0F1612;--surface:#151F19;--line:#2A3A30;--ink:#EEF2EC;--muted:#A3B2A8;--forest:#2E6447;--chili:#E2654D;--gold:#E2AE3E;--gold-soft:#2E2610;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#0F1612;--surface:#151F19;--line:#2A3A30;--ink:#EEF2EC;--muted:#A3B2A8;--forest:#2E6447;--chili:#E2654D;--gold:#E2AE3E;--gold-soft:#2E2610;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 var(--body);min-height:100vh;display:flex;flex-direction:column}
+header,main{width:100%;max-width:1000px;margin:0 auto;padding:0 16px}header{padding-top:22px}
+.logo{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:inherit;font:400 24px var(--display)}.logo em{color:var(--forest)}.logo img{width:34px;height:34px}.m-d{display:none}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .m-l{display:none}:root:not([data-theme=light]) .m-d{display:block}}
+main{padding-block:28px 64px}h1{font:400 clamp(34px,7vw,46px)/1.05 var(--display);margin:0 0 10px}h1 em{color:var(--forest)}.lead{color:var(--muted);margin:0 0 26px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:24px;display:flex;flex-direction:column;gap:16px}
+label{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600}input{font:500 16px var(--body);padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);width:100%}input:focus-visible,.btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media (max-width:460px){.row{grid-template-columns:1fr}}
+.btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;font:600 16px/1 var(--body);padding:16px 22px;border-radius:999px;border:0;background:var(--forest);color:var(--forest-ink);cursor:pointer;text-decoration:none}.btn[disabled]{opacity:.6;cursor:wait}
+.note{font-size:13px;color:var(--muted);margin:0}.err{color:var(--chili);font-size:14px;font-weight:600;min-height:1.3em;margin:0}
+.badge{display:inline-flex;align-self:flex-start;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:6px 10px;border-radius:999px;background:var(--gold-soft);color:var(--gold)}
+</style>
+</head>
+<body>
+<header><a class="logo" href="/"><img class="m-l" src="/logo.png" alt=""><img class="m-d" src="/logo-claro.png" alt=""><span>Cosecha<em>Selecta</em></span></a></header>
+<style>
+.grid{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:start}@media (max-width:820px){.grid{grid-template-columns:1fr}.sum{order:-1}}
+h2{font:400 26px/1.1 var(--display);margin:0}textarea{font:500 15px var(--body);padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);width:100%;min-height:80px;resize:vertical}
+.pay{display:grid;gap:10px}.opt{flex-direction:row!important;align-items:flex-start;gap:12px!important;border:1px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;font-weight:500!important;font-size:14px!important}.opt:has(input:checked){border-color:var(--forest);box-shadow:0 0 0 1px var(--forest)}.opt input{width:auto;margin-top:3px;accent-color:var(--forest)}.opt b{display:block;font-size:15px}.opt span{color:var(--muted)}
+.sum{position:sticky;top:16px}.li{display:flex;justify-content:space-between;gap:12px;font-size:14px;padding:10px 0;border-bottom:1px solid var(--line)}.li small{display:block;color:var(--muted)}.li b{white-space:nowrap}
+.tr{display:flex;justify-content:space-between;font-size:14px;color:var(--muted)}.tr b{color:var(--ink)}.tr.big{font-size:20px;color:var(--ink)}.tr.big b{font-weight:700}
+.req{color:var(--chili)}a.back{color:var(--muted);font-size:14px}
+</style>
+<main>
+<p><a class="back" href="/#catalogo">← Seguir comprando</a></p>
+<h1>Finalizar <em>pedido</em></h1>
+<p class="lead">Precio fijo al reservar. Factura electrónica a nombre de tu negocio.</p>
+<div class="grid">
+<form class="card" id="cf" novalidate>
+<h2>Datos del negocio</h2>
+<div class="row">
+<label><span>Razón social <span class="req">*</span></span><input name="razon" required autocomplete="organization"></label>
+<label><span>RUT <span class="req">*</span></span><input name="rut" required placeholder="76.123.456-7"></label>
+</div>
+<div class="row">
+<label><span>Persona de contacto <span class="req">*</span></span><input name="contacto" required autocomplete="name"></label>
+<label><span>Teléfono <span class="req">*</span></span><input name="telefono" required type="tel" autocomplete="tel" placeholder="+56 9 1234 5678"></label>
+</div>
+<label><span>Correo <span class="req">*</span></span><input name="email" required type="email" autocomplete="email"></label>
+<h2 style="margin-top:8px">Entrega</h2>
+<div class="row">
+<label><span>Dirección <span class="req">*</span></span><input name="direccion" required autocomplete="street-address"></label>
+<label><span>Comuna <span class="req">*</span></span><input name="comuna" required autocomplete="address-level2"></label>
+</div>
+<label>Notas para la entrega<textarea name="notas" placeholder="Horario de recepción, acceso para camión, etc."></textarea></label>
+<h2 style="margin-top:8px">Pago</h2>
+<div class="pay">
+<label class="opt"><input type="radio" name="pago" value="flow" checked><span><b>Pagar ahora</b>Webpay (débito o crédito) o transferencia, a través de Flow.</span></label>
+<label class="opt"><input type="radio" name="pago" value="contra"><span><b>Pagar contra entrega</b>Transferencia o efectivo al recibir. Sin crédito.</span></label>
+</div>
+<p class="err" id="err" role="alert"></p>
+<button class="btn" type="submit" id="go">Confirmar y pagar</button>
+<p class="note">CosechaSelecta no ve ni guarda los datos de tu tarjeta.</p>
+</form>
+<aside class="card sum" aria-label="Resumen del pedido">
+<h2>Tu pedido</h2>
+<div id="lines"></div>
+<div class="tr"><span>Neto</span><b id="neto"></b></div>
+<div class="tr"><span>IVA 19%</span><b id="iva"></b></div>
+<div class="tr"><span>Despacho</span><b>Incluido</b></div>
+<div class="tr big"><span>Total</span><b id="total"></b></div>
+<p class="note" id="min"></p>
+</aside>
+</div>
+</main>
+<script src="/catalogo.js"></script>
+<script>
+const $=id=>document.getElementById(id), clp=v=>'$'+v.toLocaleString('es-CL'), esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let items=[];try{items=JSON.parse(localStorage.getItem('cs_carrito')||'[]')}catch(e){}
+const t=CATALOGO.totales(items);
+if(!t.lineas.length){location.replace('/#catalogo');}
+$('lines').innerHTML=t.lineas.map(l=>`<div class="li"><span>${esc(l.n)} · ${esc(l.cal)}<small>${l.q} × ${esc(l.bulto)} · ${clp(l.precio)} c/u</small></span><b>${clp(l.subtotal)}</b></div>`).join('');
+$('neto').textContent=clp(t.neto);$('iva').textContent=clp(t.iva);$('total').textContent=clp(t.total);
+const bajo=t.neto<CATALOGO.pedidoMinimo;
+$('min').textContent=bajo?'Te faltan '+clp(CATALOGO.pedidoMinimo-t.neto)+' + IVA para el pedido mínimo.':'';
+const f=$('cf'), go=$('go');
+const label=()=>{go.textContent=f.pago.value==='contra'?'Confirmar reserva':'Confirmar y pagar '+clp(t.total)};label();
+f.addEventListener('change',label);
+try{const d=JSON.parse(localStorage.getItem('cs_cliente')||'{}');for(const k in d)if(f[k]&&f[k].type!=='radio')f[k].value=d[k];}catch(e){}
+const rutOk=r=>{const s=String(r).replace(/[^0-9kK]/g,'').toUpperCase();if(s.length<8||s.length>9)return false;let su=0,m=2;for(let i=s.length-2;i>=0;i--){su+=+s[i]*m;m=m===7?2:m+1}const x=11-su%11;return s.slice(-1)===(x===11?'0':x===10?'K':String(x))};
+f.addEventListener('submit',async e=>{
+  e.preventDefault();$('err').textContent='';
+  if(bajo){$('err').textContent='Tu pedido no alcanza el mínimo.';return}
+  const miss=[...f.querySelectorAll('[required]')].find(i=>!i.value.trim());
+  if(miss){$('err').textContent='Completa los campos marcados con *.';miss.focus();return}
+  if(!rutOk(f.rut.value)){$('err').textContent='Revisa el RUT.';f.rut.focus();return}
+  if(!f.email.checkValidity()){$('err').textContent='Revisa el correo.';f.email.focus();return}
+  const cliente={};['razon','rut','contacto','telefono','email','direccion','comuna','notas'].forEach(k=>cliente[k]=f[k].value.trim());
+  try{localStorage.setItem('cs_cliente',JSON.stringify({...cliente,notas:''}))}catch(e){}
+  go.disabled=true;const prev=go.textContent;go.textContent='Procesando…';
+  try{
+    const r=await fetch('/api/pedido/crear',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({items,cliente,pago:f.pago.value})});
+    const j=await r.json().catch(()=>({}));
+    if(!r.ok||!j.redirect)throw new Error(j.error||'No pudimos registrar el pedido. Intenta de nuevo.');
+    location.href=j.redirect;
+  }catch(x){$('err').textContent=x.message;go.disabled=false;go.textContent=prev}
+});
+</script>
+</body>
+</html>

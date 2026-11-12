@@ -146,8 +146,7 @@ body{overflow-x:clip}
 </div>
 <div class="h-visual">
 <div class="slides" id="slides" aria-roledescription="carrusel" aria-label="Productores que nos abastecen">
-<figure class="slide is-on"><div class="ph ph1"><picture><source media="(max-width:900px)" srcset="/slide-plantacion-hd-m.jpg"><img src="/slide-plantacion-hd.jpg" alt="Agricultores con sombrero de paja plantando almácigos en el campo"></picture></div><figcaption class="cap">Temporada de plantación</figcaption></figure>
-<figure class="slide"><div class="ph ph1"><picture><source media="(max-width:900px)" srcset="/slide-productora-m.jpg"><img src="/slide-productora.jpg" alt="Productora sonriendo en su invernadero de acelgas"></picture></div><figcaption class="cap">Productora · invernadero</figcaption></figure>
+<figure class="slide is-on"><div class="ph ph1"><picture><source media="(max-width:900px)" srcset="/slide-productora-m.jpg"><img src="/slide-productora.jpg" alt="Productora sonriendo en su invernadero de acelgas"></picture></div><figcaption class="cap">Productora · invernadero</figcaption></figure>
 <figure class="slide"><div class="ph ph1"><img src="https://images.pexels.com/photos/33533970/pexels-photo-33533970.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1920&h=1080" srcset="https://images.pexels.com/photos/33533970/pexels-photo-33533970.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=960&h=600 960w, https://images.pexels.com/photos/33533970/pexels-photo-33533970.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1920&h=1080 1920w" sizes="100vw" alt="Agricultor con sombrero trabajando entre sus cultivos"></div><figcaption class="cap">Productor · Quillota</figcaption></figure>
 <figure class="slide"><div class="ph ph2"><img src="https://images.pexels.com/photos/28753124/pexels-photo-28753124.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1920&h=1080" srcset="https://images.pexels.com/photos/28753124/pexels-photo-28753124.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=960&h=600 960w, https://images.pexels.com/photos/28753124/pexels-photo-28753124.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1920&h=1080 1920w" sizes="100vw" alt="Agricultor mayor cosechando en el campo" loading="lazy"></div><figcaption class="cap">Productor · Limache</figcaption></figure>
 <figure class="slide"><div class="ph ph3"><img src="https://images.pexels.com/photos/13834217/pexels-photo-13834217.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1920&h=1080" srcset="https://images.pexels.com/photos/13834217/pexels-photo-13834217.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=960&h=600 960w, https://images.pexels.com/photos/13834217/pexels-photo-13834217.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1920&h=1080 1920w" sizes="100vw" alt="Agricultor cosechando cebollines en la huerta" loading="lazy"></div><figcaption class="cap">Productores · Chillán</figcaption></figure>
@@ -159,7 +158,6 @@ body{overflow-x:clip}
 <button type="button" class="dot" aria-label="Productor 2" aria-selected="false"></button>
 <button type="button" class="dot" aria-label="Productor 3" aria-selected="false"></button>
 <button type="button" class="dot" aria-label="Productor 4" aria-selected="false"></button>
-<button type="button" class="dot" aria-label="Productor 5" aria-selected="false"></button>
 </div>
 <button type="button" class="arrow prev" aria-label="Anterior">‹</button>
 <button type="button" class="arrow next" aria-label="Siguiente">›</button>
@@ -515,7 +513,6 @@ const empty=[...sf.querySelectorAll('input')].find(i=>!i.value.trim());
 if(empty){ok.textContent='Completa todos los campos para que podamos contactarte.';empty.focus();return;}
 ok.textContent=`Gracias, ${sf.name.value.trim().split(' ')[0]}. En el sitio real te llamaremos esta semana (prototipo: los datos no se envían).`;sf.reset();});
 const SL=[
-{name:'Plantación de temporada',m:[]},
 {name:'Acelga de invernadero',m:[]},
 {name:'Hernán Muñoz, Quillota',m:[{n:'Palta Hass',f:'Calibre 22–24',c:'$4.990 / kg',s:'avocado',col:'#3F5A2A'},{n:'Limón',f:'Grande',c:'$1.590 / kg',s:'round',col:'#D9B92E'}]},
 {name:'Familia Rojas, Limache',m:[{n:'Tomate limachino',f:'Primera',c:'$1.990 / kg',s:'round',col:'#C8402E'},{n:'Lechuga costina',f:'Primera',c:'$990 / unidad',s:'leaf',col:'#86B35A'}]},

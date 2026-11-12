@@ -6,7 +6,8 @@
 <meta name="description" content="CosechaSelecta: fruta y verdura mayorista en preventa, directo del agricultor y seleccionada por calibre. Para verdulerías, restaurantes y negocios en Santiago.">
 <meta name="robots" content="noindex">
 <link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#1F4632">
 <title>CosechaSelecta · Fruta y verdura mayorista directo del agricultor</title>
@@ -62,6 +63,39 @@ header{position:sticky;top:env(safe-area-inset-top,0);z-index:20;background:colo
 @media (max-width:520px){.exp-body fieldset{grid-template-columns:1fr}.exp-body,.exp-f,.exp-h{padding-inline:16px}.exp-h h2{font-size:28px}.exp-f .btn{flex:1;justify-content:center}}@media (max-width:480px){.nav{gap:6px}.logo{font-size:20px;gap:5px}.logo .mark{height:40px}.exp-btn{margin-left:auto}.exp-btn+.cta-quote{margin-left:0!important}}@media (max-width:380px){.cb-l{display:none}}.exp-body .lb{display:flex;flex-direction:column;gap:1px}.exp-dlg .en{display:block;font:500 11.5px/1.3 var(--body);color:var(--muted);letter-spacing:.01em}.exp-body .lb .en{font-style:italic}
 .chks .chk i{font-style:normal;color:var(--muted);font-size:12.5px}.exp-en{margin:-4px 0 8px;font:italic 400 20px var(--display);color:var(--muted)}.exp-sub .en{margin-top:2px;font-size:13px}.exp-body fieldset{align-items:start}.exp-body .inrow input{flex:0 0 34%}.chks .chg{flex-basis:100%;margin:4px 0 0;font:600 12px var(--body);color:var(--forest)}.chks .chg:first-child{margin-top:0}.chks .chg i{font-style:normal;color:var(--muted);font-weight:500}
 </style>
+<style>
+/* Portada a todo el ancho */
+body{overflow-x:clip}
+.slide .ph{background:#1c3324}
+@media (min-width:901px){
+.hero2{--r:max(16px,calc((100vw - 1180px)/2 + 16px));position:relative;display:flex;align-items:center;min-height:clamp(560px,78vh,740px);padding-block:48px 96px}
+.hero2 .h-copy{position:relative;z-index:2;max-width:660px;color:#fff}
+.hero2 h1{font-size:clamp(40px,4vw,58px)}
+.hero2 .h-visual{position:absolute;top:0;bottom:0;left:calc(50% - 50vw);width:100vw;z-index:0}
+.hero2 .slides{position:absolute;inset:0;aspect-ratio:auto;border-radius:0}
+.hero2 .slides::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(10,24,16,.86) 0,rgba(10,24,16,.7) 34%,rgba(10,24,16,.25) 62%,rgba(10,24,16,.05) 100%)}
+.hero2 .slide .cap,.hero2 .badge-q{display:none}
+.hero2 h1{color:#fff}.hero2 h1 em{color:#F0C35A}
+.hero2 .lead,.hero2 .h-presale,.hero2 .trust li{color:rgba(255,255,255,.84)}
+.hero2 .h-presale strong,.hero2 .trust b{color:#fff}
+.hero2 .trust{border-top-color:rgba(255,255,255,.25)}
+.hero2 .pill{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.25)}
+.hero2 .btn-ghost{color:#fff;border-color:rgba(255,255,255,.6)}
+.hero2 .btn-ghost:hover{background:rgba(255,255,255,.1)}
+.hero2 .verified{left:auto;right:var(--r);bottom:auto;top:28px;z-index:2}
+.hero2 .minis{right:var(--r);bottom:84px;z-index:2}
+.hero2 .dots{bottom:34px;z-index:2}
+.hero2 .dot{background:rgba(255,255,255,.5)}.hero2 .dot.is-on{background:#F0C35A}
+.hero2 .arrow{z-index:2;top:auto;bottom:22px;transform:none}
+.hero2 .arrow.prev{left:auto;right:calc(var(--r) + 50px)}.hero2 .arrow.next{right:var(--r)}
+}
+@media (max-width:900px){
+.hero2{padding-block:0 56px}
+.hero2 .h-visual{order:-1;margin-inline:calc(50% - 50vw)}
+.hero2 .slides{aspect-ratio:16/10;border-radius:0}
+.hero2 .slide .cap{display:none}
+}
+</style>
 </head>
 <body>
 <div class="topbar">
@@ -102,9 +136,9 @@ header{position:sticky;top:env(safe-area-inset-top,0);z-index:20;background:colo
 </div>
 <div class="h-visual">
 <div class="slides" id="slides" aria-roledescription="carrusel" aria-label="Productores que nos abastecen">
-<figure class="slide is-on"><div class="ph ph1"><img src="https://images.pexels.com/photos/33533970/pexels-photo-33533970.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1080&h=900" alt="Agricultor con sombrero trabajando entre sus cultivos"></div><figcaption class="cap">Productor · Quillota</figcaption></figure>
-<figure class="slide"><div class="ph ph2"><img src="https://images.pexels.com/photos/28753124/pexels-photo-28753124.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1080&h=900" alt="Agricultor mayor cosechando en el campo" loading="lazy"></div><figcaption class="cap">Productor · Limache</figcaption></figure>
-<figure class="slide"><div class="ph ph3"><img src="https://images.pexels.com/photos/13834217/pexels-photo-13834217.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1080&h=900" alt="Agricultor cosechando cebollines en la huerta" loading="lazy"></div><figcaption class="cap">Productores · Chillán</figcaption></figure>
+<figure class="slide is-on"><div class="ph ph1"><img src="https://images.pexels.com/photos/33533970/pexels-photo-33533970.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1920&h=1080" srcset="https://images.pexels.com/photos/33533970/pexels-photo-33533970.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=960&h=600 960w, https://images.pexels.com/photos/33533970/pexels-photo-33533970.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1920&h=1080 1920w" sizes="100vw" alt="Agricultor con sombrero trabajando entre sus cultivos"></div><figcaption class="cap">Productor · Quillota</figcaption></figure>
+<figure class="slide"><div class="ph ph2"><img src="https://images.pexels.com/photos/28753124/pexels-photo-28753124.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1920&h=1080" srcset="https://images.pexels.com/photos/28753124/pexels-photo-28753124.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=960&h=600 960w, https://images.pexels.com/photos/28753124/pexels-photo-28753124.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1920&h=1080 1920w" sizes="100vw" alt="Agricultor mayor cosechando en el campo" loading="lazy"></div><figcaption class="cap">Productor · Limache</figcaption></figure>
+<figure class="slide"><div class="ph ph3"><img src="https://images.pexels.com/photos/13834217/pexels-photo-13834217.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1920&h=1080" srcset="https://images.pexels.com/photos/13834217/pexels-photo-13834217.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=960&h=600 960w, https://images.pexels.com/photos/13834217/pexels-photo-13834217.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1920&h=1080 1920w" sizes="100vw" alt="Agricultor cosechando cebollines en la huerta" loading="lazy"></div><figcaption class="cap">Productores · Chillán</figcaption></figure>
 </div>
 <div class="badge-q"><span class="medal" aria-hidden="true">★</span><span><b>Lote seleccionado</b>Calidad, calibre y madurez verificados</span></div>
 <div class="verified"><span class="tick" aria-hidden="true">✓</span><span><b>Compra directa al productor</b><em id="slName">Hernán Muñoz, Quillota</em></span></div>
@@ -492,7 +526,7 @@ slides.forEach((el,i)=>el.classList.toggle('is-on',i===cur));
 dots.forEach((d,i)=>{d.classList.toggle('is-on',i===cur);d.setAttribute('aria-selected',i===cur);});
 slName.textContent=SL[cur].name;
 minis.innerHTML=SL[cur].m.map(x=>`<div class="mini"><div class="ar">${pic(x,art(x.s,x.col))}</div><div class="tx"><b>${x.n}</b><span>${x.f}</span><strong>${x.c}</strong></div></div>`).join('');};
-const auto=()=>{clearInterval(timer); if(!matchMedia('(prefers-reduced-motion: reduce)').matches) timer=setInterval(()=>show(cur+1),6000);};
+const auto=()=>{clearInterval(timer); if(!matchMedia('(prefers-reduced-motion: reduce)').matches) timer=setInterval(()=>show(cur+1),3000);};
 dots.forEach((d,i)=>d.addEventListener('click',()=>{show(i);auto();}));
 document.querySelector('.arrow.prev').addEventListener('click',()=>{show(cur-1);auto();});
 document.querySelector('.arrow.next').addEventListener('click',()=>{show(cur+1);auto();});

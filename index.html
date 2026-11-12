@@ -299,6 +299,8 @@ body{overflow-x:clip}
 <label for="sf-name">Nombre<input id="sf-name" name="name" autocomplete="name" required></label>
 <label for="sf-org"><span>Agrícola o sociedad <small style="font-weight:400;opacity:.7">(opcional)</small></span><input id="sf-org" name="org" autocomplete="organization" placeholder="Ej: Agrícola Los Robles SpA"></label>
 <label for="sf-phone">Teléfono<input id="sf-phone" name="phone" type="tel" autocomplete="tel" placeholder="+56 9" required></label>
+<label for="sf-mail">Correo electrónico<input id="sf-mail" name="email" type="email" autocomplete="email" placeholder="nombre@correo.cl" required></label>
+<label for="sf-web"><span>Página web <small style="font-weight:400;opacity:.7">(opcional)</small></span><input id="sf-web" name="web" type="url" inputmode="url" autocomplete="url" placeholder="www.tuagricola.cl"></label>
 <label for="sf-place">Comuna o localidad<input id="sf-place" name="place" placeholder="Ej: Quillota" required></label>
 <label for="sf-crop">¿Qué cultivas?<input id="sf-crop" name="crop" placeholder="Ej: paltas, tomates" required></label>
 <label for="sf-cal">Calibre o variedad<input id="sf-cal" name="calibre" placeholder="Ej: Hass, calibre 18-20" required></label>
@@ -395,6 +397,7 @@ body{overflow-x:clip}
 <div class="cart-f"><div class="cart-tot"><span id="cTotLbl">Total</span><b id="cTotal" class="num">0 bultos</b></div><p class="cart-min" id="cMin" hidden></p><p class="cart-ship" id="cShip" hidden></p><p id="cNote">Te confirmamos el precio del día por calibre antes de cosechar. Pago al reservar o contra entrega.</p><button type="button" class="btn btn-primary full" id="payBtn" style="justify-content:center">Confirmar reserva</button></div>
 </aside>
 <div class="toast" id="toast" role="status"></div>
+<input id="hpWeb" name="web" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
 <script>
 (function(){
 const days=['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
@@ -488,6 +491,8 @@ const P=[
 ];
 const quote=new Set(); const qc=document.getElementById('qCount'), ql=document.getElementById('qList'), toast=document.getElementById('toast'); let tt;
 const flash=t=>{toast.textContent=t;toast.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove('show'),1800);};
+const send=async(tipo,campos,btn)=>{if(btn)btn.disabled=true;try{const r=await fetch('/api/contacto',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({tipo,campos,pagina:location.href,_web:(document.getElementById('hpWeb')||{}).value||''})});return r.ok;}catch(e){return false;}finally{if(btn)btn.disabled=false;}};
+const FAIL='No pudimos enviar tu mensaje. Escríbenos a hector.contreras@cosechaselecta.com o intenta de nuevo.';
 const sync=()=>{qc.textContent=quote.size; ql.textContent=quote.size?'En tu pedido semanal: '+[...quote].join(', ')+'.':'Aún no agregas productos del catálogo.';};
 const grids={f:document.getElementById('products-f'),v:document.getElementById('products-v'),h:document.getElementById('products-h'),s:document.getElementById('products-s')};
 const clp=v=>'$'+v.toLocaleString('es-CL');
@@ -498,18 +503,22 @@ document.getElementById('cartBtn').addEventListener('click',()=>openCart(true));
 document.getElementById('cartClose').addEventListener('click',()=>openCart(false));
 scrim.addEventListener('click',()=>openCart(false));
 document.addEventListener('keydown',e=>{if(e.key==='Escape')openCart(false);});
-document.getElementById('payBtn').addEventListener('click',()=>flash(cart.size?'Prototipo: aquí enviaremos la reserva y te confirmaremos precios por calibre':'Aún no agregas productos'));
+document.getElementById('payBtn').addEventListener('click',()=>{if(!cart.size){flash('Aún no agregas productos');return;}openCart(false);document.getElementById('qList').textContent='Tu reserva: '+cartTxt().replace(/\n/g,' · ');document.getElementById('qOk').textContent='Completa tus datos y envía para confirmar tu reserva.';document.getElementById('pedido-semanal').scrollIntoView({behavior:'smooth'});setTimeout(()=>document.getElementById('q-biz').focus({preventScroll:true}),600);});
+const cartTxt=()=>[...cart].map(([key,q])=>{const [md,is,cal]=key.split('|'),x=P[+is];return md==='d'?`${x.n} · ${cal} · ${fq(x,q)} ${unitLbl(x)} × ${clp(x.p)} = ${clp(Math.round(q*x.p))} (detalle)`:`${x.n} · ${cal} · ${q} × ${x.f} (mayorista)`;}).join('\n');
 const expDlg=document.getElementById('expDlg'),expForm=document.getElementById('expForm'),expErr=document.getElementById('expErr');
 const expClose=()=>expDlg.close();
 document.getElementById('expBtn').addEventListener('click',()=>{expErr.hidden=true;expDlg.showModal();});
 document.getElementById('expClose').addEventListener('click',expClose);
 document.getElementById('expCancel').addEventListener('click',expClose);
 expDlg.addEventListener('click',e=>{if(e.target===expDlg)expClose();});
-expForm.addEventListener('submit',e=>{e.preventDefault();
+expForm.addEventListener('submit',async e=>{e.preventDefault();
 const bad=[...expForm.querySelectorAll('[required]')].filter(el=>!el.checkValidity());
 const noProd=!expForm.querySelector('input[name=prod]:checked');
 if(bad.length||noProd){expErr.textContent=noProd&&!bad.length?'Elige al menos un producto · Please select at least one product.':'Completa los campos marcados con * · Please complete the required fields (*).'+(noProd?' Elige al menos un producto · Select at least one product.':'');expErr.hidden=false;(bad[0]||document.getElementById('expProds')).scrollIntoView({block:'center',behavior:'smooth'});bad[0]&&bad[0].focus({preventScroll:true});return;}
-expErr.hidden=true;expForm.reset();expClose();flash('Solicitud recibida · Inquiry received (prototipo)');});
+expErr.hidden=true;const fd=new FormData(expForm),L={nombre:'Nombre',empresa:'Empresa importadora',cargo:'Cargo',correo:'Correo',telefono:'Teléfono / WhatsApp',pais:'País de destino',prod:'Productos',volumen:'Volumen por compra',unidad:'Unidad',frecuencia:'Frecuencia',calibre:'Calibre',categoria:'Categoría',embalaje:'Embalaje',condicion:'Condición',incoterm:'Incoterm',puerto:'Puerto/aeropuerto destino',transporte:'Transporte',embarque:'Ventana de embarque',pago:'Forma de pago',precio:'Precio objetivo (USD/kg)',cert:'Certificaciones',msg:'Comentarios'},c={};
+for(const k in L){const v=fd.getAll(k).filter(Boolean);if(v.length)c[L[k]]=v.join(', ');}
+const eb=expForm.querySelector('button[type=submit]');if(!(await send('exportacion',c,eb))){expErr.textContent=FAIL+' · We could not send your inquiry, please email us.';expErr.hidden=false;return;}
+expForm.reset();expClose();flash('Solicitud enviada, te contactaremos pronto · Inquiry sent, we will contact you soon');});
 const renderCart=()=>{let n=0,t=0,sd=0;
 cItems.innerHTML=cart.size?[...cart].map(([key,q])=>{const [md,is,cal]=key.split('|'),i=+is,x=P[i],d=dates(x);const img=PH[x.n]?`<img src="${PH[x.n]}" alt="">`:'<span></span>';
 if(md==='d'){const sub=Math.round(q*x.p);sd+=sub;return `<li>${img}<span class="nm">${x.n} · ${cal} <em class="tag">Detalle</em><small>${fq(x,q)} ${unitLbl(x)} × ${clp(x.p)} = ${clp(sub)}</small><small>Entrega ${fmt(d.e)}</small></span><span class="qty"><button type="button" data-d="-1" data-k="${key}" aria-label="Quitar">−</button><b class="num">${fq(x,q)}</b><button type="button" data-d="1" data-k="${key}" aria-label="Agregar">+</button></span></li>`;}
@@ -546,15 +555,21 @@ document.getElementById('modeNote').textContent=mode==='det'?'Por kilo o unidad 
 Object.values(grids).forEach(g=>g.addEventListener('click',onGrid));
 renderGrid(); renderCart();
 const qf=document.getElementById('qform'), qok=document.getElementById('qOk');
-qf.addEventListener('submit',e=>{e.preventDefault();
+qf.addEventListener('submit',async e=>{e.preventDefault();
 const miss=[...qf.querySelectorAll('[required]')].find(i=>!i.value.trim());
 if(miss){qok.textContent='Completa los campos obligatorios para enviarte la cotización.';miss.focus();return;}
-qok.textContent=`Gracias. En el sitio real te enviaremos la cotización hoy mismo (prototipo: los datos no se envían).`;});
+const v=id=>document.getElementById(id).value.trim(),c={'Nombre del negocio':v('q-biz'),'Tipo de negocio':v('q-type'),'Contacto':v('q-name'),'Teléfono':v('q-phone'),'Comuna':v('q-place'),'Volumen semanal':v('q-vol'),'Productos que necesita':v('q-msg')};
+if(quote.size)c['Productos marcados en catálogo']=[...quote].join(', ');if(cart.size)c['Reserva (carrito)']=cartTxt();
+qok.textContent='Enviando…';if(!(await send(cart.size?'reserva':'pedido',c,qf.querySelector('button[type=submit]')))){qok.textContent=FAIL;return;}
+qok.textContent=`Gracias, ${v('q-name').split(' ')[0]}. Recibimos tu solicitud y te contactaremos hoy mismo.`;qf.reset();if(cart.size){cart.clear();quote.clear();sync();renderCart();}});
 const sf=document.getElementById('sellForm'), ok=document.getElementById('sellOk');
-sf.addEventListener('submit',e=>{e.preventDefault();
+sf.addEventListener('submit',async e=>{e.preventDefault();
 const empty=[...sf.querySelectorAll('input[required]')].find(i=>!i.value.trim());
 if(empty){ok.textContent='Completa los campos obligatorios para que podamos contactarte.';empty.focus();return;}
-ok.textContent=`Gracias, ${sf.name.value.trim().split(' ')[0]}. En el sitio real te llamaremos esta semana (prototipo: los datos no se envían).`;sf.reset();});
+if(!sf.querySelector('[name=email]').checkValidity()){ok.textContent='Revisa tu correo electrónico.';sf.querySelector('[name=email]').focus();return;}
+const g=n=>sf.querySelector(`[name=${n}]`).value.trim(),nm=g('name');ok.textContent='Enviando…';
+if(!(await send('agricultor',{'Nombre':nm,'Agrícola o sociedad':g('org'),'Teléfono':g('phone'),'Correo':g('email'),'Página web':g('web'),'Comuna o localidad':g('place'),'Cultivo':g('crop'),'Calibre o variedad':g('calibre')},sf.querySelector('button[type=submit]')))){ok.textContent=FAIL;return;}
+ok.textContent=`Gracias, ${nm.split(' ')[0]}. Recibimos tus datos y te llamaremos esta semana.`;sf.reset();});
 const SL=[
 {name:'Cultivos en temporada',m:[]},
 {name:'Acelga de invernadero',m:[]},

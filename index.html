@@ -128,11 +128,6 @@ body{overflow-x:clip}
 <a class="btn btn-ghost" href="#pedido-semanal">Programar pedido semanal</a>
 </div>
 <p class="h-presale"><strong>Preventa mayorista</strong> · reserva por caja, saco o malla y recibe en tu local <strong>2 días después de la cosecha</strong></p>
-<ul class="trust">
-<li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18M5 21V10l7-5 7 5v11M10 21v-6h4v6"/></svg><span><b>Compra directa</b>Sin intermediarios entre el campo y tu local</span></li>
-<li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 14 7 22l5-3 5 3-1.5-8"/></svg><span><b>Filtro de calidad y calibre</b>Lotes clasificados y revisados</span></li>
-<li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18v13H3zM3 7l3-4h12l3 4M9 11h6"/></svg><span><b>Cosecha a pedido</b>Pago al reservar o contra entrega</span></li>
-</ul>
 </div>
 <div class="h-visual">
 <div class="slides" id="slides" aria-roledescription="carrusel" aria-label="Productores que nos abastecen">
@@ -142,7 +137,6 @@ body{overflow-x:clip}
 </div>
 <div class="badge-q"><span class="medal" aria-hidden="true">★</span><span><b>Lote seleccionado</b>Calidad, calibre y madurez verificados</span></div>
 <div class="verified"><span class="tick" aria-hidden="true">✓</span><span><b>Compra directa al productor</b><em id="slName">Hernán Muñoz, Quillota</em></span></div>
-<div class="minis" id="minis"></div>
 <div class="dots" role="tablist" aria-label="Elegir productor">
 <button type="button" class="dot is-on" aria-label="Productor 1" aria-selected="true"></button>
 <button type="button" class="dot" aria-label="Productor 2" aria-selected="false"></button>
@@ -525,7 +519,7 @@ const show=k=>{cur=(k+SL.length)%SL.length;
 slides.forEach((el,i)=>el.classList.toggle('is-on',i===cur));
 dots.forEach((d,i)=>{d.classList.toggle('is-on',i===cur);d.setAttribute('aria-selected',i===cur);});
 slName.textContent=SL[cur].name;
-minis.innerHTML=SL[cur].m.map(x=>`<div class="mini"><div class="ar">${pic(x,art(x.s,x.col))}</div><div class="tx"><b>${x.n}</b><span>${x.f}</span><strong>${x.c}</strong></div></div>`).join('');};
+if(minis)minis.innerHTML=SL[cur].m.map(x=>`<div class="mini"><div class="ar">${pic(x,art(x.s,x.col))}</div><div class="tx"><b>${x.n}</b><span>${x.f}</span><strong>${x.c}</strong></div></div>`).join('');};
 const auto=()=>{clearInterval(timer); if(!matchMedia('(prefers-reduced-motion: reduce)').matches) timer=setInterval(()=>show(cur+1),3000);};
 dots.forEach((d,i)=>d.addEventListener('click',()=>{show(i);auto();}));
 document.querySelector('.arrow.prev').addEventListener('click',()=>{show(cur-1);auto();});

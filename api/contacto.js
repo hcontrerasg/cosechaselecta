@@ -31,9 +31,8 @@ module.exports = async (req, res) => {
 
   const tipo = TIPOS[body.tipo] ? body.tipo : 'contacto';
   const campos = body.campos && typeof body.campos === 'object' ? body.campos : {};
-  const filas = Object.entries(campos).slice(0, 60)
-    .map(([k, v]) => [clean(k).slice(0, 80), clean(v)])
-    .filter(([, v]) => v);
+  const todas = Object.entries(campos).slice(0, 60).map(([k, v]) => [clean(k).slice(0, 80), clean(v)]);
+  const filas = todas.filter(([, v]) => v);
   if (!filas.length) return res.status(400).json({ ok: false, error: 'Formulario vacío' });
 
   const get = re => (filas.find(([k]) => re.test(k)) || [])[1] || '';
@@ -50,9 +49,14 @@ module.exports = async (req, res) => {
 <p style="color:#55645B;font-size:12px;margin-top:16px">Enviado desde ${esc(clean(body.pagina) || 'cosechaselecta.com')} · ${new Date().toLocaleString('es-CL', { timeZone: 'America/Santiago' })}</p></div>`;
   const text = filas.map(([k, v]) => `${k}: ${v}`).join('\n');
 
-  const key = process.env.RESEND_API_KEY;
-  if (!key) { console.error('FORMULARIO sin RESEND_API_KEY: no se envió correo'); return res.status(503).json({ ok: false, error: 'Correo no configurado' }); }
+  const [mailOk, sheetOk] = await Promise.all([enviarCorreo({ asunto, html, text, correo }), guardarEnHoja(tipo, todas)]);
+  if (mailOk || sheetOk) return res.status(200).json({ ok: true, correo: mailOk, hoja: sheetOk });
+  return res.status(502).json({ ok: false, error: 'No se pudo enviar' });
+};
 
+async function enviarCorreo({ asunto, html, text, correo }) {
+  const key = process.env.RESEND_API_KEY;
+  if (!key) { console.error('FORMULARIO sin RESEND_API_KEY: no se envió correo'); return false; }
   try {
     const r = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -62,10 +66,30 @@ module.exports = async (req, res) => {
         ...(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo) ? { reply_to: correo } : {}),
       }),
     });
-    if (!r.ok) { console.error('FORMULARIO error Resend', r.status, await r.text()); return res.status(502).json({ ok: false, error: 'No se pudo enviar' }); }
-    return res.status(200).json({ ok: true });
-  } catch (e) {
-    console.error('FORMULARIO error', e && e.message);
-    return res.status(502).json({ ok: false, error: 'No se pudo enviar' });
-  }
-};
+    if (!r.ok) { console.error('FORMULARIO error Resend', r.status, await r.text()); return false; }
+    return true;
+  } catch (e) { console.error('FORMULARIO error Resend', e && e.message); return false; }
+}
+
+// Agrega una fila a la hoja de Google (Apps Script, ver hoja/registro-formularios.gs).
+//   SHEETS_WEBHOOK_URL  URL de la aplicación web de Apps Script
+//   SHEETS_TOKEN        clave compartida (la misma que TOKEN en el script)
+async function guardarEnHoja(tipo, filas) {
+  const url = process.env.SHEETS_WEBHOOK_URL;
+  if (!url) { console.error('FORMULARIO sin SHEETS_WEBHOOK_URL: no se guardó en la hoja'); return false; }
+  try {
+    const r = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({
+        token: process.env.SHEETS_TOKEN || '',
+        hoja: TIPOS[tipo],
+        fila: { Fecha: new Date().toLocaleString('es-CL', { timeZone: 'America/Santiago' }), ...Object.fromEntries(filas), Estado: 'Nuevo' },
+      }),
+      redirect: 'follow',
+    });
+    const t = await r.text();
+    if (!r.ok || !/"ok":true/.test(t)) { console.error('FORMULARIO error hoja', r.status, t.slice(0, 300)); return false; }
+    return true;
+  } catch (e) { console.error('FORMULARIO error hoja', e && e.message); return false; }
+}

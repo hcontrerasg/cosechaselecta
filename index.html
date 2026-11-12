@@ -299,6 +299,8 @@ body{overflow-x:clip}
 <label for="sf-name">Nombre<input id="sf-name" name="name" autocomplete="name" required></label>
 <label for="sf-org"><span>Agrícola o sociedad <small style="font-weight:400;opacity:.7">(opcional)</small></span><input id="sf-org" name="org" autocomplete="organization" placeholder="Ej: Agrícola Los Robles SpA"></label>
 <label for="sf-phone">Teléfono<input id="sf-phone" name="phone" type="tel" autocomplete="tel" placeholder="+56 9" required></label>
+<label for="sf-mail">Correo electrónico<input id="sf-mail" name="email" type="email" autocomplete="email" placeholder="nombre@correo.cl" required></label>
+<label for="sf-web"><span>Página web <small style="font-weight:400;opacity:.7">(opcional)</small></span><input id="sf-web" name="web" type="url" inputmode="url" autocomplete="url" placeholder="www.tuagricola.cl"></label>
 <label for="sf-place">Comuna o localidad<input id="sf-place" name="place" placeholder="Ej: Quillota" required></label>
 <label for="sf-crop">¿Qué cultivas?<input id="sf-crop" name="crop" placeholder="Ej: paltas, tomates" required></label>
 <label for="sf-cal">Calibre o variedad<input id="sf-cal" name="calibre" placeholder="Ej: Hass, calibre 18-20" required></label>
@@ -564,8 +566,9 @@ const sf=document.getElementById('sellForm'), ok=document.getElementById('sellOk
 sf.addEventListener('submit',async e=>{e.preventDefault();
 const empty=[...sf.querySelectorAll('input[required]')].find(i=>!i.value.trim());
 if(empty){ok.textContent='Completa los campos obligatorios para que podamos contactarte.';empty.focus();return;}
+if(!sf.querySelector('[name=email]').checkValidity()){ok.textContent='Revisa tu correo electrónico.';sf.querySelector('[name=email]').focus();return;}
 const g=n=>sf.querySelector(`[name=${n}]`).value.trim(),nm=g('name');ok.textContent='Enviando…';
-if(!(await send('agricultor',{'Nombre':nm,'Agrícola o sociedad':g('org'),'Teléfono':g('phone'),'Comuna o localidad':g('place'),'Cultivo':g('crop'),'Calibre o variedad':g('calibre')},sf.querySelector('button[type=submit]')))){ok.textContent=FAIL;return;}
+if(!(await send('agricultor',{'Nombre':nm,'Agrícola o sociedad':g('org'),'Teléfono':g('phone'),'Correo':g('email'),'Página web':g('web'),'Comuna o localidad':g('place'),'Cultivo':g('crop'),'Calibre o variedad':g('calibre')},sf.querySelector('button[type=submit]')))){ok.textContent=FAIL;return;}
 ok.textContent=`Gracias, ${nm.split(' ')[0]}. Recibimos tus datos y te llamaremos esta semana.`;sf.reset();});
 const SL=[
 {name:'Cultivos en temporada',m:[]},

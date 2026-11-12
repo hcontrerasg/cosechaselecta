@@ -216,6 +216,7 @@ body{overflow-x:clip}
 <div class="modebar"><div class="seg" role="tablist" aria-label="Tipo de compra"><button type="button" role="tab" class="on" aria-selected="true" data-mode="det">Al detalle</button><button type="button" role="tab" aria-selected="false" data-mode="may">Al por mayor</button></div><p class="mode-note" id="modeNote">Por kilo o unidad para tu casa · compra mínima $15.000 · precios de ejemplo</p></div><p class="ship-free"><span aria-hidden="true">🚚</span> <b>Despacho gratis en la Región Metropolitana</b> desde $24.990</p>
 <div class="catsec" id="frutas"><div class="cat-h"><h3>Frutas</h3><span>Fruta de temporada, de la A a la Z</span></div><div class="products" id="products-f"></div></div>
 <div class="catsec" id="verduras"><div class="cat-h"><h3>Verduras</h3><span>Hortalizas y verduras de hoja, de la A a la Z</span></div><div class="products" id="products-v"></div></div>
+<div class="catsec" id="frutos-secos"><div class="cat-h"><h3>Frutos secos</h3><span>Cosechados en Chile, seleccionados por calibre</span></div><div class="products" id="products-s"></div></div>
 <div class="catsec" id="huevos"><div class="cat-h"><h3>Huevos de campo</h3><span>De gallinas libres, directo del productor</span></div><div class="products" id="products-h"></div></div>
 </div>
 </section>
@@ -418,11 +419,12 @@ const PH={"Palta Hass": "https://images.pexels.com/photos/557659/pexels-photo-55
 "Cerezas": "https://images.pexels.com/photos/1178610/pexels-photo-1178610.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
 "Lechuga costina": "https://images.pexels.com/photos/5589058/pexels-photo-5589058.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
 "Espárragos": "https://images.pexels.com/photos/4050973/pexels-photo-4050973.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
+"Almendras": "https://images.pexels.com/photos/13002250/pexels-photo-13002250.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
 "Huevos de campo": "https://images.pexels.com/photos/3789535/pexels-photo-3789535.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
 "Arándanos": "https://images.pexels.com/photos/30964386/pexels-photo-30964386.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
 "Uva de mesa": "https://images.pexels.com/photos/23042/pexels-photo.jpg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
 "Papa": "https://images.pexels.com/photos/4110466/pexels-photo-4110466.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
-"Cebolla": "https://images.pexels.com/photos/872400/pexels-photo-872400.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
+"Cebolla": "https://images.pexels.com/photos/25037071/pexels-photo-25037071.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
 "Zanahoria": "https://images.pexels.com/photos/7418944/pexels-photo-7418944.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
 "Pimentón": "https://images.pexels.com/photos/32084324/pexels-photo-32084324.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
 "Acelga": "https://images.pexels.com/photos/5738771/pexels-photo-5738771.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
@@ -430,7 +432,7 @@ const PH={"Palta Hass": "https://images.pexels.com/photos/557659/pexels-photo-55
 "Apio": "https://images.pexels.com/photos/13044694/pexels-photo-13044694.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
 "Brócoli": "https://images.pexels.com/photos/7676909/pexels-photo-7676909.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
 "Choclo": "https://images.pexels.com/photos/17605799/pexels-photo-17605799.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
-"Coliflor": "https://images.pexels.com/photos/4963759/pexels-photo-4963759.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
+"Coliflor": "https://images.pexels.com/photos/4963755/pexels-photo-4963755.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
 "Pepino": "https://images.pexels.com/photos/2775838/pexels-photo-2775838.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
 "Repollo": "https://images.pexels.com/photos/19917025/pexels-photo-19917025.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
 "Zapallo": "https://images.pexels.com/photos/5519121/pexels-photo-5519121.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
@@ -464,12 +466,13 @@ const P=[
 {k:'v',n:'Pepino',o:'Quillota',p:590,u:'unidad',f:'Caja 10 kg',c:['Primera','Segunda'],col:'#3F7A3A',s:'pod'},
 {k:'v',n:'Repollo',o:'San Bernardo',p:1190,u:'unidad',f:'Saco 10 unidades',c:['Primera'],col:'#7FA65A',s:'round'},
 {k:'v',n:'Zapallo',o:'Rancagua',p:990,u:'kg',f:'Malla 25 kg',c:['Camote','Italiano'],col:'#D9772B',s:'round'},
+{k:'s',n:'Almendras',o:'Buin',p:9990,u:'kg',f:'Saco 10 kg',c:['Nonpareil','Extra'],col:'#B07A4A',s:'round'},
 {k:'h',n:'Huevos de campo',o:'Pirque',p:4490,u:'docena',f:'Bandeja 180 unidades',c:['Extra','Grande'],col:'#D9B98A',s:'egg'}
 ];
 const quote=new Set(); const qc=document.getElementById('qCount'), ql=document.getElementById('qList'), toast=document.getElementById('toast'); let tt;
 const flash=t=>{toast.textContent=t;toast.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove('show'),1800);};
 const sync=()=>{qc.textContent=quote.size; ql.textContent=quote.size?'En tu pedido semanal: '+[...quote].join(', ')+'.':'Aún no agregas productos del catálogo.';};
-const grids={f:document.getElementById('products-f'),v:document.getElementById('products-v'),h:document.getElementById('products-h')};
+const grids={f:document.getElementById('products-f'),v:document.getElementById('products-v'),h:document.getElementById('products-h'),s:document.getElementById('products-s')};
 const clp=v=>'$'+v.toLocaleString('es-CL');
 let mode='det'; const cart=new Map(); const MIN_DET=15000;
 const cc=document.getElementById('cCount'), cItems=document.getElementById('cItems'), cTotal=document.getElementById('cTotal'), cartEl=document.getElementById('cart'), scrim=document.getElementById('cartScrim');
@@ -502,7 +505,7 @@ const FREE_RM=24990,cShip=document.getElementById('cShip');cShip.hidden=!(sd&&!n
 document.getElementById('cNote').textContent=n&&sd?'Mayorista: precio del día por calibre y factura. Detalle: precios de ejemplo y boleta. Pago al reservar o contra entrega.':sd?'Precios de ejemplo. Te enviamos boleta. Pago al reservar o contra entrega.':'Te confirmamos el precio del día por calibre antes de cosechar. Factura electrónica. Pago al reservar o contra entrega.';};
 cItems.addEventListener('click',e=>{const b=e.target.closest('button[data-d]');if(!b)return;const k=b.dataset.k,[md,is]=k.split('|'),st=md==='d'?step(P[+is]):1,q=Math.round(((cart.get(k)||0)+st*(+b.dataset.d))*2)/2;q>0?cart.set(k,q):cart.delete(k);renderCart();});
 const DAYS=['dom','lun','mar','mié','jue','vie','sáb'], MON=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
-const HD={f:2,v:3,h:1};
+const HD={f:2,v:3,h:1,s:1};
 const fmt=d=>`${DAYS[d.getDay()]} ${d.getDate()} ${MON[d.getMonth()]}`;
 const dates=x=>{const t=new Date();t.setHours(0,0,0,0);const h=new Date(t);h.setDate(t.getDate()+2);while(h.getDay()!==(x.hd??HD[x.k]))h.setDate(h.getDate()+1);const e=new Date(h);e.setDate(h.getDate()+2);return{h,e};};
 const isKg=x=>x.u==='kg';

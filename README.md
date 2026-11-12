@@ -14,8 +14,8 @@ Estado: prototipo. Productores, precios y formatos son ejemplos; fotos de Pexels
 - `catalogo.js`: lista de precios por bulto (neto), pedido mínimo e IVA. **Precios de ejemplo**: cámbialos aquí.
   La usan la web y el servidor; el total siempre se recalcula en el servidor.
 - El carrito ("Mi pedido") muestra precios, IVA, total y cuánto falta para el pedido mínimo, y se guarda en el navegador.
-- `checkout.html`: datos del negocio (razón social, RUT, contacto), entrega y forma de pago (Flow o contra entrega).
-- `api/pedido/crear.js`: valida el pedido y el RUT, genera el número `CS-AAMMDD-XXXX` y abre el pago en Flow.
+- `checkout.html`: contacto, entrega, boleta o factura (con nombre, RUT, teléfono, giro y dirección de facturación) y forma de pago (Flow o contra entrega).
+- `api/pedido/crear.js`: valida el pedido y, si es factura, sus datos y el RUT; genera el número `CS-AAMMDD-XXXX` y abre el pago en Flow.
   Cada pedido queda en los logs de Vercel con la línea `PEDIDO {...}`.
 
 ## Pagos (Flow)

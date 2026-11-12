@@ -32,21 +32,17 @@ h2{font:400 26px/1.1 var(--display);margin:0}textarea{font:500 15px var(--body);
 .pay{display:grid;gap:10px}.opt{flex-direction:row!important;align-items:flex-start;gap:12px!important;border:1px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;font-weight:500!important;font-size:14px!important}.opt:has(input:checked){border-color:var(--forest);box-shadow:0 0 0 1px var(--forest)}.opt input{width:auto;margin-top:3px;accent-color:var(--forest)}.opt b{display:block;font-size:15px}.opt span{color:var(--muted)}
 .sum{position:sticky;top:16px}.li{display:flex;justify-content:space-between;gap:12px;font-size:14px;padding:10px 0;border-bottom:1px solid var(--line)}.li small{display:block;color:var(--muted)}.li b{white-space:nowrap}
 .tr{display:flex;justify-content:space-between;font-size:14px;color:var(--muted)}.tr b{color:var(--ink)}.tr.big{font-size:20px;color:var(--ink)}.tr.big b{font-weight:700}
-.req{color:var(--chili)}a.back{color:var(--muted);font-size:14px}
+.req{color:var(--chili)}.fact{border:1px solid var(--line);border-radius:14px;padding:16px;margin:0;display:flex;flex-direction:column;gap:14px;background:var(--bg)}.fact[hidden]{display:none}.fact legend{font-weight:700;font-size:14px;padding:0 6px}.fact input{background:var(--surface)}a.back{color:var(--muted);font-size:14px}
 </style>
 <main>
 <p><a class="back" href="/#catalogo">← Seguir comprando</a></p>
 <h1>Finalizar <em>pedido</em></h1>
-<p class="lead">Precio fijo al reservar. Factura electrónica a nombre de tu negocio.</p>
+<p class="lead">Precio fijo al reservar. Elige boleta o factura electrónica.</p>
 <div class="grid">
 <form class="card" id="cf" novalidate>
-<h2>Datos del negocio</h2>
+<h2>Contacto</h2>
 <div class="row">
-<label><span>Razón social <span class="req">*</span></span><input name="razon" required autocomplete="organization"></label>
-<label><span>RUT <span class="req">*</span></span><input name="rut" required placeholder="76.123.456-7"></label>
-</div>
-<div class="row">
-<label><span>Persona de contacto <span class="req">*</span></span><input name="contacto" required autocomplete="name"></label>
+<label><span>Nombre <span class="req">*</span></span><input name="contacto" required autocomplete="name"></label>
 <label><span>Teléfono <span class="req">*</span></span><input name="telefono" required type="tel" autocomplete="tel" placeholder="+56 9 1234 5678"></label>
 </div>
 <label><span>Correo <span class="req">*</span></span><input name="email" required type="email" autocomplete="email"></label>
@@ -56,6 +52,21 @@ h2{font:400 26px/1.1 var(--display);margin:0}textarea{font:500 15px var(--body);
 <label><span>Comuna <span class="req">*</span></span><input name="comuna" required autocomplete="address-level2"></label>
 </div>
 <label>Notas para la entrega<textarea name="notas" placeholder="Horario de recepción, acceso para camión, etc."></textarea></label>
+<h2 style="margin-top:8px">Documento</h2>
+<div class="pay doc">
+<label class="opt"><input type="radio" name="doc" value="boleta" checked><span><b>Boleta</b>Boleta electrónica, sin datos adicionales.</span></label>
+<label class="opt"><input type="radio" name="doc" value="factura"><span><b>Factura</b>Factura electrónica a nombre de tu empresa.</span></label>
+</div>
+<fieldset class="fact" id="fact" hidden>
+<legend>Datos para facturar</legend>
+<label><span>Nombre o razón social <span class="req">*</span></span><input name="f_nombre" data-req autocomplete="organization"></label>
+<div class="row">
+<label><span>RUT <span class="req">*</span></span><input name="f_rut" data-req placeholder="76.123.456-7"></label>
+<label><span>Teléfono <span class="req">*</span></span><input name="f_telefono" data-req type="tel" placeholder="+56 9 1234 5678"></label>
+</div>
+<label><span>Giro <span class="req">*</span></span><input name="f_giro" data-req placeholder="Venta al por menor de frutas y verduras"></label>
+<label><span>Dirección de facturación <span class="req">*</span></span><input name="f_direccion" data-req placeholder="Calle, número, comuna"></label>
+</fieldset>
 <h2 style="margin-top:8px">Pago</h2>
 <div class="pay">
 <label class="opt"><input type="radio" name="pago" value="flow" checked><span><b>Pagar ahora</b>Webpay (débito o crédito) o transferencia, a través de Flow.</span></label>
@@ -88,21 +99,25 @@ const bajo=t.neto<CATALOGO.pedidoMinimo;
 $('min').textContent=bajo?'Te faltan '+clp(CATALOGO.pedidoMinimo-t.neto)+' + IVA para el pedido mínimo.':'';
 const f=$('cf'), go=$('go');
 const label=()=>{go.textContent=f.pago.value==='contra'?'Confirmar reserva':'Confirmar y pagar '+clp(t.total)};label();
-f.addEventListener('change',label);
-try{const d=JSON.parse(localStorage.getItem('cs_cliente')||'{}');for(const k in d)if(f[k]&&f[k].type!=='radio')f[k].value=d[k];}catch(e){}
+const fact=$('fact');
+const doc=()=>{const on=f.doc.value==='factura';fact.hidden=!on;fact.querySelectorAll('[data-req]').forEach(i=>i.required=on);
+ if(on){if(!f.f_telefono.value)f.f_telefono.value=f.telefono.value;if(!f.f_direccion.value&&f.direccion.value)f.f_direccion.value=f.direccion.value+(f.comuna.value?', '+f.comuna.value:'');}};
+f.addEventListener('change',()=>{label();doc();});
+try{const d=JSON.parse(localStorage.getItem('cs_cliente')||'{}');for(const k in d)if(f[k]&&!f[k].length&&f[k].type!=='radio')f[k].value=d[k];if(d.doc==='factura'){f.doc.value='factura';}}catch(e){}doc();
 const rutOk=r=>{const s=String(r).replace(/[^0-9kK]/g,'').toUpperCase();if(s.length<8||s.length>9)return false;let su=0,m=2;for(let i=s.length-2;i>=0;i--){su+=+s[i]*m;m=m===7?2:m+1}const x=11-su%11;return s.slice(-1)===(x===11?'0':x===10?'K':String(x))};
 f.addEventListener('submit',async e=>{
   e.preventDefault();$('err').textContent='';
   if(bajo){$('err').textContent='Tu pedido no alcanza el mínimo.';return}
   const miss=[...f.querySelectorAll('[required]')].find(i=>!i.value.trim());
   if(miss){$('err').textContent='Completa los campos marcados con *.';miss.focus();return}
-  if(!rutOk(f.rut.value)){$('err').textContent='Revisa el RUT.';f.rut.focus();return}
+  if(f.doc.value==='factura'&&!rutOk(f.f_rut.value)){$('err').textContent='Revisa el RUT de facturación.';f.f_rut.focus();return}
   if(!f.email.checkValidity()){$('err').textContent='Revisa el correo.';f.email.focus();return}
-  const cliente={};['razon','rut','contacto','telefono','email','direccion','comuna','notas'].forEach(k=>cliente[k]=f[k].value.trim());
-  try{localStorage.setItem('cs_cliente',JSON.stringify({...cliente,notas:''}))}catch(e){}
+  const cliente={};['contacto','telefono','email','direccion','comuna','notas'].forEach(k=>cliente[k]=f[k].value.trim());
+  const documento={tipo:f.doc.value};if(documento.tipo==='factura')['nombre','rut','telefono','giro','direccion'].forEach(k=>documento[k]=f['f_'+k].value.trim());
+  try{localStorage.setItem('cs_cliente',JSON.stringify({...cliente,notas:'',doc:documento.tipo,...(documento.tipo==='factura'?{f_nombre:documento.nombre,f_rut:documento.rut,f_telefono:documento.telefono,f_giro:documento.giro,f_direccion:documento.direccion}:{})}))}catch(e){}
   go.disabled=true;const prev=go.textContent;go.textContent='Procesando…';
   try{
-    const r=await fetch('/api/pedido/crear',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({items,cliente,pago:f.pago.value})});
+    const r=await fetch('/api/pedido/crear',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({items,cliente,documento,pago:f.pago.value})});
     const j=await r.json().catch(()=>({}));
     if(!r.ok||!j.redirect)throw new Error(j.error||'No pudimos registrar el pedido. Intenta de nuevo.');
     location.href=j.redirect;

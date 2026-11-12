@@ -37,7 +37,7 @@ module.exports = async (req, res) => {
   if (!filas.length) return res.status(400).json({ ok: false, error: 'Formulario vacío' });
 
   const get = re => (filas.find(([k]) => re.test(k)) || [])[1] || '';
-  const quien = get(/negocio|empresa|nombre/i) || 'sin nombre';
+  const quien = get(/negocio/i) || get(/empresa/i) || get(/nombre|contacto/i) || 'sin nombre';
   const correo = get(/correo|email/i);
   const asunto = `[Web] ${TIPOS[tipo]} · ${quien}`.slice(0, 180);
 

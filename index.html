@@ -98,6 +98,18 @@ body{overflow-x:clip}
 .stds-t{margin:0 0 14px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#F0C35A}
 .stds .big{font-variant-numeric:tabular-nums}
 @media (max-width:640px){.standard .stds{grid-template-columns:repeat(2,1fr);gap:24px 16px}}
+.qa2{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.qa2 li{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;font-size:14px;color:var(--muted);line-height:1.45}
+.qa2 .k{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.qa2 b{display:block;font-family:var(--display);font-weight:400;font-size:24px;line-height:1.1;color:var(--ink);margin-bottom:4px}
+.qa2-ex{margin:18px 0 0;display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;font-size:14px;color:var(--muted)}
+.qa2-ex .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+.qa2-ex .ex{display:inline-flex;align-items:center;gap:5px;flex-wrap:wrap}
+.qa2-ex b{color:var(--ink);margin-right:3px}
+.qa2-ex i{font-style:normal;margin:0;background:var(--surface)}.qa2-ex i.alt{background:var(--gold-soft)}.qa2-ex em{font-style:normal;margin-left:3px}
+@media (max-width:640px){.qa2-ex{flex-direction:column;align-items:flex-start}}
+@media (max-width:900px){.qa2{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:420px){.qa2 li{padding:14px}.qa2 b{font-size:21px}}
 </style>
 </head>
 <body>
@@ -173,29 +185,15 @@ body{overflow-x:clip}
 <div class="wrap">
 <div class="sec-head">
 <div><p class="eyebrow">Filtro de calidad y calibre</p><h2>Lo que llega a tu negocio pasó por nuestras manos primero.</h2></div>
-<p>Del campo viene con todo su sabor. Antes de llegar a ti, lo seleccionamos con el mismo rigor que exige la exportación.</p>
+<p>Seleccionamos cada lote con el mismo rigor que exige la exportación.</p>
 </div>
-<div class="qa">
-<div class="criteria">
-<div class="crit"><span class="k">Calibre</span><h3>Parejo por lote</h3><p>Clasificamos por tamaño para que cada caja sea uniforme y sepas exactamente qué compras.</p></div>
-<div class="crit"><span class="k">Madurez</span><h3>En su punto</h3><p>Elegimos el punto de cosecha según tu uso: venta en vitrina o cocina.</p></div>
-<div class="crit"><span class="k">Sanidad</span><h3>Sin daño</h3><p>Descartamos golpes, pudrición y defectos antes de embalar.</p></div>
-<div class="crit"><span class="k">Trazabilidad</span><h3>Con origen</h3><p>Cada lote indica productor, predio y fecha de cosecha.</p></div>
-</div>
-<div class="cal-wrap">
-<table class="cal">
-<caption>Así clasificamos · ejemplos</caption>
-<thead><tr><th>Producto</th><th>Calibres y categorías</th><th>Formato</th></tr></thead>
-<tbody>
-<tr><td>Palta Hass</td><td><span class="chip">Calibre 18–20</span><span class="chip">22–24</span><span class="chip">26–32</span></td><td>Caja 10 kg</td></tr>
-<tr><td>Tomate</td><td><span class="chip">Primera</span><span class="chip">Segunda</span><span class="chip alt">Cocina</span></td><td>Caja 18 kg</td></tr>
-<tr><td>Limón</td><td><span class="chip">Grande</span><span class="chip">Mediano</span><span class="chip alt">Jugo</span></td><td>Malla 18 kg</td></tr>
-<tr><td>Papa</td><td><span class="chip">Primera</span><span class="chip">Segunda</span><span class="chip">Semilla</span></td><td>Saco 25 kg</td></tr>
-<tr><td>Cebolla</td><td><span class="chip">Extra</span><span class="chip">Primera</span><span class="chip alt">Cocina</span></td><td>Malla 20 kg</td></tr>
-</tbody>
-</table>
-</div>
-</div>
+<ul class="qa2">
+<li><span class="k">Calibre</span><b>Parejo por lote</b>Cajas uniformes: sabes qué compras.</li>
+<li><span class="k">Madurez</span><b>En su punto</b>Para vitrina o para cocina.</li>
+<li><span class="k">Sanidad</span><b>Sin daño</b>Fuera golpes y defectos.</li>
+<li><span class="k">Trazabilidad</span><b>Con origen</b>Productor, predio y fecha.</li>
+</ul>
+<p class="qa2-ex"><span class="lbl">Ejemplos</span><span class="ex"><b>Palta Hass</b><i class="chip">18–20</i><i class="chip">22–24</i><i class="chip">26–32</i><em>caja 10 kg</em></span><span class="ex"><b>Tomate</b><i class="chip">Primera</i><i class="chip">Segunda</i><i class="chip alt">Cocina</i><em>caja 18 kg</em></span><span class="ex"><b>Limón</b><i class="chip">Grande</i><i class="chip">Mediano</i><i class="chip alt">Jugo</i><em>malla 18 kg</em></span></p>
 </div>
 </section>
 <section id="catalogo">

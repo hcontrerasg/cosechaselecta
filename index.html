@@ -212,7 +212,7 @@ body{overflow-x:clip}
 <div><p class="eyebrow" id="seasonEyebrow">Catálogo · noviembre</p><h2>Reserva la próxima cosecha.</h2></div>
 <p id="catLead">Elige si compras <b>al por mayor</b> para tu negocio (por caja, saco o malla) o <b>al detalle</b> para tu casa (por kilo o unidad).</p>
 </div>
-<div class="modebar"><div class="seg" role="tablist" aria-label="Tipo de compra"><button type="button" role="tab" class="on" aria-selected="true" data-mode="may">Al por mayor</button><button type="button" role="tab" aria-selected="false" data-mode="det">Al detalle</button></div><p class="mode-note" id="modeNote">Por caja, saco o malla · precio del día por calibre · formatos y orígenes de ejemplo</p></div>
+<div class="modebar"><div class="seg" role="tablist" aria-label="Tipo de compra"><button type="button" role="tab" class="on" aria-selected="true" data-mode="det">Al detalle</button><button type="button" role="tab" aria-selected="false" data-mode="may">Al por mayor</button></div><p class="mode-note" id="modeNote">Por kilo o unidad para tu casa · compra mínima $15.000 · precios de ejemplo</p></div>
 <div class="catsec" id="frutas"><div class="cat-h"><h3>Frutas</h3><span>Fruta de temporada, de la A a la Z</span></div><div class="products" id="products-f"></div></div>
 <div class="catsec" id="verduras"><div class="cat-h"><h3>Verduras</h3><span>Hortalizas y verduras de hoja, de la A a la Z</span></div><div class="products" id="products-v"></div></div>
 <div class="catsec" id="huevos"><div class="cat-h"><h3>Huevos de campo</h3><span>De gallinas libres, directo del productor</span></div><div class="products" id="products-h"></div></div>
@@ -468,7 +468,7 @@ const flash=t=>{toast.textContent=t;toast.classList.add('show');clearTimeout(tt)
 const sync=()=>{qc.textContent=quote.size; ql.textContent=quote.size?'En tu pedido semanal: '+[...quote].join(', ')+'.':'Aún no agregas productos del catálogo.';};
 const grids={f:document.getElementById('products-f'),v:document.getElementById('products-v'),h:document.getElementById('products-h')};
 const clp=v=>'$'+v.toLocaleString('es-CL');
-let mode='may'; const cart=new Map(); const MIN_DET=15000;
+let mode='det'; const cart=new Map(); const MIN_DET=15000;
 const cc=document.getElementById('cCount'), cItems=document.getElementById('cItems'), cTotal=document.getElementById('cTotal'), cartEl=document.getElementById('cart'), scrim=document.getElementById('cartScrim');
 const openCart=o=>{cartEl.hidden=!o;scrim.hidden=!o;};
 document.getElementById('cartBtn').addEventListener('click',()=>openCart(true));

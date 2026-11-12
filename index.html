@@ -110,6 +110,10 @@ body{overflow-x:clip}
 @media (max-width:640px){.qa2-ex{flex-direction:column;align-items:flex-start}}
 @media (max-width:900px){.qa2{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:420px){.qa2 li{padding:14px}.qa2 b{font-size:21px}}
+.modebar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin:-8px 0 24px}
+.modebar .mode-note{margin:0}
+.pref b{color:var(--ink);font-size:15px}
+.cart-min{font-size:12.5px;color:var(--chili);margin:0}
 </style>
 </head>
 <body>
@@ -203,10 +207,10 @@ body{overflow-x:clip}
 <section id="catalogo">
 <div class="wrap">
 <div class="sec-head">
-<div><p class="eyebrow" id="seasonEyebrow">Catálogo mayorista · noviembre</p><h2>Reserva la próxima cosecha.</h2></div>
-<p>Elige calibre y cantidad de cajas. Te confirmamos el precio del día por calibre y volumen antes de cosechar.</p>
+<div><p class="eyebrow" id="seasonEyebrow">Catálogo · noviembre</p><h2>Reserva la próxima cosecha.</h2></div>
+<p id="catLead">Elige si compras <b>al por mayor</b> para tu negocio (por caja, saco o malla) o <b>al detalle</b> para tu casa (por kilo o unidad).</p>
 </div>
-<p class="mode-note" style="margin:-8px 0 22px">Preventa · reserva hasta el día antes de la cosecha · formatos y orígenes de ejemplo</p>
+<div class="modebar"><div class="seg" role="tablist" aria-label="Tipo de compra"><button type="button" role="tab" class="on" aria-selected="true" data-mode="may">Al por mayor</button><button type="button" role="tab" aria-selected="false" data-mode="det">Al detalle</button></div><p class="mode-note" id="modeNote">Por caja, saco o malla · precio del día por calibre · formatos y orígenes de ejemplo</p></div>
 <div class="catsec" id="frutas"><div class="cat-h"><h3>Frutas</h3><span>Fruta de temporada, de la A a la Z</span></div><div class="products" id="products-f"></div></div>
 <div class="catsec" id="verduras"><div class="cat-h"><h3>Verduras</h3><span>Hortalizas y verduras de hoja, de la A a la Z</span></div><div class="products" id="products-v"></div></div>
 <div class="catsec" id="huevos"><div class="cat-h"><h3>Huevos de campo</h3><span>De gallinas libres, directo del productor</span></div><div class="products" id="products-h"></div></div>
@@ -381,7 +385,7 @@ body{overflow-x:clip}
 <aside class="drawer" id="cart" aria-label="Mi pedido" hidden>
 <div class="cart-h"><h3>Mi pedido</h3><button type="button" class="cart-x" id="cartClose" aria-label="Cerrar pedido">×</button></div>
 <ul class="cart-l" id="cItems"></ul>
-<div class="cart-f"><div class="cart-tot"><span>Volumen</span><b id="cTotal" class="num">0 bultos</b></div><p>Te confirmamos el precio del día por calibre antes de cosechar. Pago al reservar o contra entrega.</p><button type="button" class="btn btn-primary full" id="payBtn" style="justify-content:center">Confirmar reserva</button></div>
+<div class="cart-f"><div class="cart-tot"><span id="cTotLbl">Total</span><b id="cTotal" class="num">0 bultos</b></div><p class="cart-min" id="cMin" hidden></p><p id="cNote">Te confirmamos el precio del día por calibre antes de cosechar. Pago al reservar o contra entrega.</p><button type="button" class="btn btn-primary full" id="payBtn" style="justify-content:center">Confirmar reserva</button></div>
 </aside>
 <div class="toast" id="toast" role="status"></div>
 <script>
@@ -462,7 +466,7 @@ const flash=t=>{toast.textContent=t;toast.classList.add('show');clearTimeout(tt)
 const sync=()=>{qc.textContent=quote.size; ql.textContent=quote.size?'En tu pedido semanal: '+[...quote].join(', ')+'.':'Aún no agregas productos del catálogo.';};
 const grids={f:document.getElementById('products-f'),v:document.getElementById('products-v'),h:document.getElementById('products-h')};
 const clp=v=>'$'+v.toLocaleString('es-CL');
-let mode='det'; const cart=new Map();
+let mode='may'; const cart=new Map(); const MIN_DET=15000;
 const cc=document.getElementById('cCount'), cItems=document.getElementById('cItems'), cTotal=document.getElementById('cTotal'), cartEl=document.getElementById('cart'), scrim=document.getElementById('cartScrim');
 const openCart=o=>{cartEl.hidden=!o;scrim.hidden=!o;};
 document.getElementById('cartBtn').addEventListener('click',()=>openCart(true));
@@ -481,10 +485,16 @@ const bad=[...expForm.querySelectorAll('[required]')].filter(el=>!el.checkValidi
 const noProd=!expForm.querySelector('input[name=prod]:checked');
 if(bad.length||noProd){expErr.textContent=noProd&&!bad.length?'Elige al menos un producto · Please select at least one product.':'Completa los campos marcados con * · Please complete the required fields (*).'+(noProd?' Elige al menos un producto · Select at least one product.':'');expErr.hidden=false;(bad[0]||document.getElementById('expProds')).scrollIntoView({block:'center',behavior:'smooth'});bad[0]&&bad[0].focus({preventScroll:true});return;}
 expErr.hidden=true;expForm.reset();expClose();flash('Solicitud recibida · Inquiry received (prototipo)');});
-const renderCart=()=>{let n=0,t=0;
-cItems.innerHTML=cart.size?[...cart].map(([key,q])=>{const [is,cal]=key.split('|'),i=+is,x=P[i],fi=fmtInfo(x),d=dates(x);n+=q;t+=q*fi.kg;const vol=fi.kg?`${String(Math.round(q*fi.kg*10)/10).replace('.',',')} kg`:`${q*fi.n} ${fi.uu}`;return `<li>${PH[x.n]?`<img src="${PH[x.n]}" alt="">`:'<span></span>'}<span class="nm">${x.n} · ${cal}<small>${q} × ${x.f} · ${vol}</small><small>Entrega ${fmt(d.e)}</small></span><span class="qty"><button type="button" data-d="-1" data-k="${key}" aria-label="Quitar una">−</button><b class="num">${q}</b><button type="button" data-d="1" data-k="${key}" aria-label="Agregar una">+</button></span></li>`}).join(''):'<li class="cart-empty">Aún no agregas productos.</li>';
-cc.textContent=[...cart.values()].reduce((a,b)=>a+b,0); cTotal.textContent=n?`${n} ${n===1?'bulto':'bultos'}${t?' · '+String(Math.round(t)).replace(/\B(?=(\d{3})+(?!\d))/g,'.')+' kg':''}`:'0 bultos';};
-cItems.addEventListener('click',e=>{const b=e.target.closest('button[data-d]');if(!b)return;const k=b.dataset.k,q=(cart.get(k)||0)+(+b.dataset.d);q>0?cart.set(k,q):cart.delete(k);renderCart();});
+const renderCart=()=>{let n=0,t=0,sd=0;
+cItems.innerHTML=cart.size?[...cart].map(([key,q])=>{const [md,is,cal]=key.split('|'),i=+is,x=P[i],d=dates(x);const img=PH[x.n]?`<img src="${PH[x.n]}" alt="">`:'<span></span>';
+if(md==='d'){const sub=Math.round(q*x.p);sd+=sub;return `<li>${img}<span class="nm">${x.n} · ${cal} <em class="tag">Detalle</em><small>${fq(x,q)} ${unitLbl(x)} × ${clp(x.p)} = ${clp(sub)}</small><small>Entrega ${fmt(d.e)}</small></span><span class="qty"><button type="button" data-d="-1" data-k="${key}" aria-label="Quitar">−</button><b class="num">${fq(x,q)}</b><button type="button" data-d="1" data-k="${key}" aria-label="Agregar">+</button></span></li>`;}
+const fi=fmtInfo(x);n+=q;t+=q*fi.kg;const vol=fi.kg?`${String(Math.round(q*fi.kg*10)/10).replace('.',',')} kg`:`${q*fi.n} ${fi.uu}`;return `<li>${img}<span class="nm">${x.n} · ${cal} <em class="tag">Mayorista</em><small>${q} × ${x.f} · ${vol}</small><small>Entrega ${fmt(d.e)}</small></span><span class="qty"><button type="button" data-d="-1" data-k="${key}" aria-label="Quitar una">−</button><b class="num">${q}</b><button type="button" data-d="1" data-k="${key}" aria-label="Agregar una">+</button></span></li>`}).join(''):'<li class="cart-empty">Aún no agregas productos.</li>';
+cc.textContent=cart.size;
+const parts=[];if(n)parts.push(`${n} ${n===1?'bulto':'bultos'}${t?' · '+String(Math.round(t)).replace(/\B(?=(\d{3})+(?!\d))/g,'.')+' kg':''}`);if(sd)parts.push(clp(sd));
+cTotal.textContent=parts.length?parts.join(' + '):'$0';
+const cMin=document.getElementById('cMin');cMin.hidden=!(sd&&sd<MIN_DET);cMin.textContent=`Compra mínima al detalle: ${clp(MIN_DET)}. Te faltan ${clp(MIN_DET-sd)}.`;
+document.getElementById('cNote').textContent=n&&sd?'Mayorista: precio del día por calibre y factura. Detalle: precios de ejemplo y boleta. Pago al reservar o contra entrega.':sd?'Precios de ejemplo. Te enviamos boleta. Pago al reservar o contra entrega.':'Te confirmamos el precio del día por calibre antes de cosechar. Factura electrónica. Pago al reservar o contra entrega.';};
+cItems.addEventListener('click',e=>{const b=e.target.closest('button[data-d]');if(!b)return;const k=b.dataset.k,[md,is]=k.split('|'),st=md==='d'?step(P[+is]):1,q=Math.round(((cart.get(k)||0)+st*(+b.dataset.d))*2)/2;q>0?cart.set(k,q):cart.delete(k);renderCart();});
 const DAYS=['dom','lun','mar','mié','jue','vie','sáb'], MON=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
 const HD={f:2,v:3,h:1};
 const fmt=d=>`${DAYS[d.getDay()]} ${d.getDate()} ${MON[d.getMonth()]}`;
@@ -495,13 +505,18 @@ const step=x=>isKg(x)?0.5:1;
 const fq=(x,q)=>isKg(x)?String(q).replace('.',','):q;
 const fmtInfo=x=>{const k=x.f.match(/(\d+(?:,\d+)?)\s*kg/);const u=x.f.match(/(\d+)\s*(unidades|atados)/);return k?{kg:parseFloat(k[1].replace(',','.')),txt:x.f}:{kg:0,n:u?+u[1]:0,uu:u?u[2]:'',txt:x.f};};
 const pack=x=>x.f.split(' ')[0].toLowerCase();
-const card=(x,i)=>{const d=dates(x),fi=fmtInfo(x);return `<article class="prod"><div class="art">${pic(x,art(x.s,x.col))}</div><div class="info"><h3>${x.n}</h3><p class="origin">${x.o} · ${x.f}</p><dl class="harv"><div><dt>Cosecha</dt><dd>${fmt(d.h)}</dd></div><div><dt>Entrega</dt><dd>${fmt(d.e)}</dd></div></dl><label class="calsel"><span>Calibre</span><select id="c${i}">${x.c.map(c=>`<option>${c}</option>`).join('')}</select></label><p class="pref">Precio del día según calibre y volumen</p><div class="resv"><label class="qin"><span class="sr">Cajas de ${x.n}</span><button type="button" class="qm" data-i="${i}" data-d="-1" aria-label="Menos">−</button><input type="number" inputmode="numeric" min="1" step="1" value="1" id="q${i}"><span class="u">${pack(x)}${''}</span><button type="button" class="qm" data-i="${i}" data-d="1" aria-label="Más">+</button></label><button class="add rsv" type="button" data-i="${i}">Reservar</button></div></div></article>`;};
+const cardMay=(x,i)=>{const d=dates(x),fi=fmtInfo(x);return `<article class="prod"><div class="art">${pic(x,art(x.s,x.col))}</div><div class="info"><h3>${x.n}</h3><p class="origin">${x.o} · ${x.f}</p><dl class="harv"><div><dt>Cosecha</dt><dd>${fmt(d.h)}</dd></div><div><dt>Entrega</dt><dd>${fmt(d.e)}</dd></div></dl><label class="calsel"><span>Calibre</span><select id="c${i}">${x.c.map(c=>`<option>${c}</option>`).join('')}</select></label><p class="pref">Precio del día según calibre y volumen</p><div class="resv"><label class="qin"><span class="sr">Cajas de ${x.n}</span><button type="button" class="qm" data-i="${i}" data-d="-1" aria-label="Menos">−</button><input type="number" inputmode="numeric" min="1" step="1" value="1" id="q${i}"><span class="u">${pack(x)}${''}</span><button type="button" class="qm" data-i="${i}" data-d="1" aria-label="Más">+</button></label><button class="add rsv" type="button" data-i="${i}">Reservar</button></div></div></article>`;};
+const cardDet=(x,i)=>{const d=dates(x);return `<article class="prod"><div class="art">${pic(x,art(x.s,x.col))}</div><div class="info"><h3>${x.n}</h3><p class="origin">${x.o} · por ${unitLbl(x)}</p><dl class="harv"><div><dt>Cosecha</dt><dd>${fmt(d.h)}</dd></div><div><dt>Entrega</dt><dd>${fmt(d.e)}</dd></div></dl><label class="calsel"><span>Calibre</span><select id="c${i}">${x.c.map(c=>`<option>${c}</option>`).join('')}</select></label><p class="pref"><b>${clp(x.p)}</b> / ${unitLbl(x)} · precio de ejemplo</p><div class="resv"><label class="qin"><span class="sr">Cantidad de ${x.n}</span><button type="button" class="qm" data-i="${i}" data-d="-1" aria-label="Menos">−</button><input type="number" inputmode="decimal" min="${step(x)}" step="${step(x)}" value="1" id="q${i}"><span class="u">${unitLbl(x)}</span><button type="button" class="qm" data-i="${i}" data-d="1" aria-label="Más">+</button></label><button class="add rsv" type="button" data-i="${i}">Reservar</button></div></div></article>`;};
+const card=(x,i)=>mode==='det'?cardDet(x,i):cardMay(x,i);
 const renderGrid=()=>{for(const k in grids) grids[k].innerHTML=P.map((x,i)=>[x,i]).filter(([x])=>x.k===k).sort((a,b)=>a[0].n.localeCompare(b[0].n,'es')).map(([x,i])=>card(x,i)).join('');};
-const onGrid=e=>{const m=e.target.closest('.qm'); if(m){const inp=document.getElementById('q'+m.dataset.i);inp.value=Math.max(1,(parseInt(inp.value)||0)+(+m.dataset.d));return;}
-const b=e.target.closest('.add'); if(!b)return; const i=+b.dataset.i, x=P[i];
+const onGrid=e=>{const m=e.target.closest('.qm'); if(m){const i=+m.dataset.i,x=P[i],inp=document.getElementById('q'+i),st=mode==='det'?step(x):1;inp.value=Math.max(st,Math.round(((parseFloat(String(inp.value).replace(',','.'))||0)+st*(+m.dataset.d))*2)/2);return;}
+const b=e.target.closest('.add'); if(!b)return; const i=+b.dataset.i, x=P[i], cal=document.getElementById('c'+i).value;
+if(mode==='det'){let q=Math.round((parseFloat(String(document.getElementById('q'+i).value).replace(',','.'))||0)/step(x))*step(x);if(q<=0){flash('Indica cuántos '+unitLbl(x)+' quieres');return;}const key='d|'+i+'|'+cal;cart.set(key,(cart.get(key)||0)+q);renderCart();flash(`Agregaste ${fq(x,q)} ${unitLbl(x)} de ${x.n} · entrega ${fmt(dates(x).e)}`);return;}
 const q=parseInt(document.getElementById('q'+i).value)||0; if(q<1){flash('Indica cuántas cajas quieres reservar');return;}
-const cal=document.getElementById('c'+i).value, key=i+'|'+cal; cart.set(key,(cart.get(key)||0)+q); quote.add(x.n); sync(); renderCart();
+const key='m|'+i+'|'+cal; cart.set(key,(cart.get(key)||0)+q); quote.add(x.n); sync(); renderCart();
 flash(`Reservaste ${q} ${pack(x)}${q>1?'s':''} de ${x.n} (${cal}) · entrega ${fmt(dates(x).e)}`);};
+document.querySelectorAll('.seg button[data-mode]').forEach(b=>b.addEventListener('click',()=>{mode=b.dataset.mode;document.querySelectorAll('.seg button[data-mode]').forEach(o=>{o.classList.toggle('on',o===b);o.setAttribute('aria-selected',o===b);});
+document.getElementById('modeNote').textContent=mode==='det'?'Por kilo o unidad para tu casa · compra mínima '+clp(MIN_DET)+' · precios de ejemplo':'Por caja, saco o malla · precio del día por calibre · formatos y orígenes de ejemplo';renderGrid();}));
 Object.values(grids).forEach(g=>g.addEventListener('click',onGrid));
 renderGrid(); renderCart();
 const qf=document.getElementById('qform'), qok=document.getElementById('qOk');

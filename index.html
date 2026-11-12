@@ -115,6 +115,7 @@ body{overflow-x:clip}
 .pref b{color:var(--ink);font-size:15px}
 .cart-min{font-size:12.5px;color:var(--chili);margin:0}
 .lg-tx{display:flex;flex-direction:column;line-height:1}.lg-claim{align-self:flex-start;font-family:var(--body);font-size:10.5px;letter-spacing:.01em;color:var(--muted);margin-top:4px;font-style:normal;font-weight:500}@media(max-width:640px){.lg-claim{font-size:8px;letter-spacing:0;margin-top:2px}}
+.ship-free{display:block;margin:-10px 0 22px;padding:10px 14px;border-radius:12px;background:#EAF2E3;color:#1F4632;font-size:14px;line-height:1.35}.ship-free b{font-weight:700}.cart-ship{font-size:13px;color:#1F4632;background:#EAF2E3;border-radius:8px;padding:6px 10px;margin:6px 0 0}@media(prefers-color-scheme:dark){:root:not([data-theme=light]) .ship-free,:root:not([data-theme=light]) .cart-ship{background:#1f3a2b;color:#d8ead0}}
 </style>
 </head>
 <body>
@@ -213,7 +214,7 @@ body{overflow-x:clip}
 <div><p class="eyebrow" id="seasonEyebrow">Catálogo · noviembre</p><h2>Reserva la próxima cosecha.</h2></div>
 <p id="catLead">Elige si compras <b>al por mayor</b> para tu negocio (por caja, saco o malla) o <b>al detalle</b> para tu casa (por kilo o unidad).</p>
 </div>
-<div class="modebar"><div class="seg" role="tablist" aria-label="Tipo de compra"><button type="button" role="tab" class="on" aria-selected="true" data-mode="det">Al detalle</button><button type="button" role="tab" aria-selected="false" data-mode="may">Al por mayor</button></div><p class="mode-note" id="modeNote">Por kilo o unidad para tu casa · compra mínima $15.000 · precios de ejemplo</p></div>
+<div class="modebar"><div class="seg" role="tablist" aria-label="Tipo de compra"><button type="button" role="tab" class="on" aria-selected="true" data-mode="det">Al detalle</button><button type="button" role="tab" aria-selected="false" data-mode="may">Al por mayor</button></div><p class="mode-note" id="modeNote">Por kilo o unidad para tu casa · compra mínima $15.000 · precios de ejemplo</p></div><p class="ship-free"><span aria-hidden="true">🚚</span> <b>Despacho gratis en la Región Metropolitana</b> desde $24.990</p>
 <div class="catsec" id="frutas"><div class="cat-h"><h3>Frutas</h3><span>Fruta de temporada, de la A a la Z</span></div><div class="products" id="products-f"></div></div>
 <div class="catsec" id="verduras"><div class="cat-h"><h3>Verduras</h3><span>Hortalizas y verduras de hoja, de la A a la Z</span></div><div class="products" id="products-v"></div></div>
 <div class="catsec" id="huevos"><div class="cat-h"><h3>Huevos de campo</h3><span>De gallinas libres, directo del productor</span></div><div class="products" id="products-h"></div></div>
@@ -389,7 +390,7 @@ body{overflow-x:clip}
 <aside class="drawer" id="cart" aria-label="Mi pedido" hidden>
 <div class="cart-h"><h3>Mi pedido</h3><button type="button" class="cart-x" id="cartClose" aria-label="Cerrar pedido">×</button></div>
 <ul class="cart-l" id="cItems"></ul>
-<div class="cart-f"><div class="cart-tot"><span id="cTotLbl">Total</span><b id="cTotal" class="num">0 bultos</b></div><p class="cart-min" id="cMin" hidden></p><p id="cNote">Te confirmamos el precio del día por calibre antes de cosechar. Pago al reservar o contra entrega.</p><button type="button" class="btn btn-primary full" id="payBtn" style="justify-content:center">Confirmar reserva</button></div>
+<div class="cart-f"><div class="cart-tot"><span id="cTotLbl">Total</span><b id="cTotal" class="num">0 bultos</b></div><p class="cart-min" id="cMin" hidden></p><p class="cart-ship" id="cShip" hidden></p><p id="cNote">Te confirmamos el precio del día por calibre antes de cosechar. Pago al reservar o contra entrega.</p><button type="button" class="btn btn-primary full" id="payBtn" style="justify-content:center">Confirmar reserva</button></div>
 </aside>
 <div class="toast" id="toast" role="status"></div>
 <script>
@@ -398,7 +399,7 @@ const days=['domingo','lunes','martes','miércoles','jueves','viernes','sábado'
 const months=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
 const now=new Date();
 const nd=new Date(now); nd.setDate(nd.getDate()+(now.getHours()>=18?2:1)); if(nd.getDay()===0) nd.setDate(nd.getDate()+1);
-document.getElementById('seasonEyebrow').textContent='Catálogo mayorista · '+months[now.getMonth()];
+document.getElementById('seasonEyebrow').textContent='Catálogo · '+months[now.getMonth()];
 const art=(s,c)=>{const L='#4E7A34';
 const m={
 round:`<circle cx="50" cy="56" r="30" fill="${c}"/><path d="M38 28c6 4 18 4 24 0-2 6-8 8-12 8s-10-2-12-8z" fill="${L}"/>`,
@@ -497,6 +498,7 @@ cc.textContent=cart.size;
 const parts=[];if(n)parts.push(`${n} ${n===1?'bulto':'bultos'}${t?' · '+String(Math.round(t)).replace(/\B(?=(\d{3})+(?!\d))/g,'.')+' kg':''}`);if(sd)parts.push(clp(sd));
 cTotal.textContent=parts.length?parts.join(' + '):'$0';
 const cMin=document.getElementById('cMin');cMin.hidden=!(sd&&sd<MIN_DET);cMin.textContent=`Compra mínima al detalle: ${clp(MIN_DET)}. Te faltan ${clp(MIN_DET-sd)}.`;
+const FREE_RM=24990,cShip=document.getElementById('cShip');cShip.hidden=!(sd&&!n&&sd>=MIN_DET);cShip.textContent=sd>=FREE_RM?'¡Tienes despacho gratis en la Región Metropolitana!':`Te faltan ${clp(FREE_RM-sd)} para despacho gratis en la RM.`;
 document.getElementById('cNote').textContent=n&&sd?'Mayorista: precio del día por calibre y factura. Detalle: precios de ejemplo y boleta. Pago al reservar o contra entrega.':sd?'Precios de ejemplo. Te enviamos boleta. Pago al reservar o contra entrega.':'Te confirmamos el precio del día por calibre antes de cosechar. Factura electrónica. Pago al reservar o contra entrega.';};
 cItems.addEventListener('click',e=>{const b=e.target.closest('button[data-d]');if(!b)return;const k=b.dataset.k,[md,is]=k.split('|'),st=md==='d'?step(P[+is]):1,q=Math.round(((cart.get(k)||0)+st*(+b.dataset.d))*2)/2;q>0?cart.set(k,q):cart.delete(k);renderCart();});
 const DAYS=['dom','lun','mar','mié','jue','vie','sáb'], MON=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];

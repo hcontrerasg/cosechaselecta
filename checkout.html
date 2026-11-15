@@ -69,8 +69,7 @@ h2{font:400 26px/1.1 var(--display);margin:0}textarea{font:500 15px var(--body);
 </fieldset>
 <h2 style="margin-top:8px">Pago</h2>
 <div class="pay">
-<label class="opt" id="optFlow"><input type="radio" name="pago" value="flow" checked><span><b>Pagar ahora</b>Webpay (débito o crédito) o transferencia, a través de Flow.</span></label>
-<label class="opt"><input type="radio" name="pago" value="contra"><span><b>Pagar contra entrega</b>Transferencia o efectivo al recibir. Sin crédito.</span></label>
+<label class="opt" id="optFlow"><input type="radio" name="pago" value="flow" checked><span><b>Pagar en línea</b>Webpay (débito o crédito) o transferencia, a través de Flow.</span></label>
 </div>
 <p class="note" id="noFlow" hidden></p>
 <p class="err" id="err" role="alert"></p>
@@ -93,7 +92,7 @@ let items=[];try{items=JSON.parse(localStorage.getItem('cs_carrito')||'[]')}catc
 if(!items.length)location.replace('/#catalogo');
 let t={lineas:[],total:0,pagable:false};
 const f=$('cf'), go=$('go');
-const label=()=>{go.textContent=f.pago.value==='contra'?'Confirmar pedido':'Confirmar y pagar '+clp(t.totalConDespacho)};
+const label=()=>{go.textContent='Confirmar y pagar '+clp(t.totalConDespacho||0)};
 async function cotizar(){
   try{const r=await fetch('/api/pedido/cotizar',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({items})});t=await r.json();}catch(e){$('err').textContent='No pudimos cargar tu pedido. Recarga la página.';return}
   if(!t.lineas||!t.lineas.length){location.replace('/#catalogo');return}
@@ -105,8 +104,16 @@ async function cotizar(){
   $('ship').innerHTML=t.despachoGratis?`<s>${clp(t.SHIP)}</s><span class="free">Gratis</span>`:clp(t.despacho);
   $('total').textContent=t.todoConPrecio?clp(t.totalConDespacho):clp(t.totalConDespacho)+' + por confirmar';
   $('min').textContent=t.despachoGratis?'':'Te faltan '+clp(t.faltaDespacho)+' para despacho gratis en la RM.';
-  if(!t.pagable){f.pago.value='contra';f.querySelector('input[value=flow]').disabled=true;$('optFlow').classList.add('off');$('noFlow').hidden=false;
-    $('noFlow').textContent='Tu pedido tiene productos con precio del día. Te confirmamos el monto y te enviamos un enlace para pagar en línea.';}
+  // Los productos con precio del día no se pueden pagar en línea: se quitan del pedido y se cotizan aparte.
+  const sinPrecio=[...new Set(t.lineas.filter(l=>l.precio==null).map(l=>l.n))];
+  if(sinPrecio.length){
+    items=items.filter(it=>!sinPrecio.includes(it.n));
+    try{localStorage.setItem('cs_carrito',JSON.stringify(items))}catch(e){}
+    $('noFlow').hidden=false;
+    $('noFlow').textContent='Quitamos de este pedido '+sinPrecio.join(', ')+' porque tienen precio del día. Escríbenos y te los cotizamos aparte.';
+    if(!items.length){go.disabled=true;$('err').textContent='Tu pedido solo tiene productos con precio del día. Escríbenos para cotizarlos.';return}
+    return cotizar();
+  }
   label();
 }
 cotizar();
@@ -129,7 +136,7 @@ f.addEventListener('submit',async e=>{
   try{localStorage.setItem('cs_cliente',JSON.stringify({...cliente,notas:'',doc:documento.tipo,...(documento.tipo==='factura'?{f_nombre:documento.nombre,f_rut:documento.rut,f_telefono:documento.telefono,f_giro:documento.giro,f_direccion:documento.direccion}:{})}))}catch(e){}
   go.disabled=true;const prev=go.textContent;go.textContent='Procesando…';
   try{
-    const r=await fetch('/api/pedido/crear',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({items,cliente,documento,pago:f.pago.value})});
+    const r=await fetch('/api/pedido/crear',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({items,cliente,documento,pago:'flow'})});
     const j=await r.json().catch(()=>({}));
     if(!r.ok||!j.redirect)throw new Error(j.error||'No pudimos registrar el pedido. Intenta de nuevo.');
     location.href=j.redirect;

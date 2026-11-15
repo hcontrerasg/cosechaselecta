@@ -1,6 +1,6 @@
 // POST /api/pedido/crear
 // { items:[{t,n,f,cal,q}], cliente:{contacto,email,telefono,direccion,comuna,notas},
-//   documento:{tipo:'boleta'} | {tipo:'factura',nombre,rut,telefono,giro,direccion}, pago:'flow'|'contra' }
+//   documento:{tipo:'boleta'} | {tipo:'factura',nombre,rut,telefono,giro,direccion}, pago:'flow' }
 // Recalcula el total con los precios de index.html (lib/precios.js), avisa por correo y hoja
 // (como los demás formularios) y, si corresponde, abre el pago en Flow.
 const { cotizar, pagableEnLinea } = require('../../lib/precios');
@@ -48,14 +48,15 @@ module.exports = async (req, res) => {
     documento.rut = rut.formato(documento.rut);
   }
 
-  // Pago en línea si todos los productos tienen precio (con despacho $3.990 bajo FREE_RM).
-  const pago = b.pago === 'flow' && pagableEnLinea(c) ? 'flow' : 'contra';
+  // Solo pago en línea (Flow). Los productos con precio del día no se pueden pagar en línea.
+  if (!pagableEnLinea(c)) return res.status(400).json({ error: 'Tu pedido tiene productos con precio del día. Quítalos del carrito y escríbenos para cotizarlos.' });
+  const pago = 'flow';
   const pedido = numeroPedido();
   console.log('PEDIDO', JSON.stringify({ pedido, pago, cliente, documento, ...c }));
 
   const campos = {
     'N° de pedido': pedido,
-    'Forma de pago': pago === 'flow' ? 'En línea con Flow (pendiente hasta que Flow confirme)' : 'Contra entrega',
+    'Forma de pago': 'En línea con Flow (pendiente hasta que Flow confirme)',
     'Contacto': cliente.contacto, 'Teléfono': cliente.telefono, 'Correo': cliente.email,
     'Dirección de entrega': cliente.direccion, 'Comuna': cliente.comuna, 'Notas': cliente.notas,
     'Documento': documento.tipo === 'factura' ? 'Factura' : 'Boleta',
@@ -64,13 +65,11 @@ module.exports = async (req, res) => {
       'Factura: giro': documento.giro, 'Factura: dirección': documento.direccion,
     } : {}),
     'Pedido (carrito)': c.lineas.map(lineaTxt).join('\n'),
-    'Productos': clp(c.total) + (c.todoConPrecio ? '' : ' + productos con precio por confirmar'),
+    'Productos': clp(c.total),
     'Despacho': c.despacho ? clp(c.despacho) : 'Gratis (RM)',
-    'Total': clp(c.totalConDespacho) + (c.todoConPrecio ? '' : ' + por confirmar'),
+    'Total': clp(c.totalConDespacho),
   };
   await avisar('reserva', campos);
-
-  if (pago === 'contra') return res.status(200).json({ pedido, total: c.totalConDespacho, redirect: `/pago-resultado.html?estado=reservado&pedido=${pedido}` });
 
   const site = siteUrl(req);
   try {

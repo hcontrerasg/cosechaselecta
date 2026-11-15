@@ -391,7 +391,7 @@ body{overflow-x:clip}
 <aside class="drawer" id="cart" aria-label="Mi pedido" hidden>
 <div class="cart-h"><h3>Mi pedido</h3><button type="button" class="cart-x" id="cartClose" aria-label="Cerrar pedido">×</button></div>
 <ul class="cart-l" id="cItems"></ul>
-<div class="cart-f"><div class="cart-tot"><span id="cTotLbl">Total</span><b id="cTotal" class="num">0 bultos</b></div><p class="cart-min" id="cMin" hidden></p><p class="cart-ship" id="cShip" hidden></p><p id="cNote">Te confirmamos el precio del día por calibre antes de cosechar. Pago al reservar o contra entrega.</p><button type="button" class="btn btn-primary full" id="payBtn" style="justify-content:center">Confirmar pedido</button></div>
+<div class="cart-f"><div class="cart-tot"><span id="cTotLbl">Total</span><b id="cTotal" class="num">0 bultos</b></div><p class="cart-min" id="cMin" hidden></p><p class="cart-ship" id="cShip" hidden></p><p id="cNote">Te confirmamos el precio del día por calibre antes de cosechar. Pago en línea con Webpay o transferencia.</p><button type="button" class="btn btn-primary full" id="payBtn" style="justify-content:center">Confirmar pedido</button></div>
 </aside>
 <div class="toast" id="toast" role="status"></div>
 <input id="hpWeb" name="web" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
@@ -531,7 +531,7 @@ const parts=[];if(n)parts.push(`${n} ${n===1?'bulto':'bultos'}${t?' · '+String(
 cTotal.textContent=parts.length?parts.join(' · '):(cart.size&&priced?clp(tot+(tot>=FREE_RM?0:SHIP)):'$0');
 const cMin=document.getElementById('cMin');cMin.hidden=true;cMin.textContent=`Compra mínima al detalle: ${clp(MIN_DET)}. Te faltan ${clp(MIN_DET-sd)}.`;
 const cShip=document.getElementById('cShip');cShip.hidden=!(cart.size&&priced&&cMin.hidden);cShip.textContent=tot>=FREE_RM?'¡Tienes despacho gratis en la Región Metropolitana!':`Despacho ${clp(SHIP)} (incluido en el total). Te faltan ${clp(FREE_RM-tot)} para despacho gratis en la RM.`;
-document.getElementById('cNote').textContent=priced&&cart.size?'Precios con IVA incluido. Boleta o factura. Paga en línea con Webpay o transferencia, o contra entrega.':'Te confirmamos el precio del día por calibre antes del despacho. Boleta o factura. Paga en línea con Webpay o transferencia, o contra entrega.';saveCart();};
+document.getElementById('cNote').textContent=priced&&cart.size?'Precios con IVA incluido. Boleta o factura. Paga en línea con Webpay o transferencia.':'Los productos con precio del día se cotizan aparte: escríbenos. El resto se paga en línea con Webpay o transferencia.';saveCart();};
 cItems.addEventListener('click',e=>{const b=e.target.closest('button[data-d]');if(!b)return;const k=b.dataset.k,q=Math.round(((cart.get(k)||0)+(+b.dataset.d))*10)/10;q>0?cart.set(k,q):cart.delete(k);renderCart();});
 /* Estas fórmulas de precio están copiadas en lib/precios.js (cobro en línea): si cambian aquí, cambiarlas allá. */
 const bruto=x=>Math.round(x.pm*1.19/10)*10;

@@ -48,7 +48,7 @@ module.exports = async (req, res) => {
     documento.rut = rut.formato(documento.rut);
   }
 
-  // Pago en línea solo si el monto es definitivo (todo con precio y despacho gratis).
+  // Pago en línea si todos los productos tienen precio (con despacho $3.990 bajo FREE_RM).
   const pago = b.pago === 'flow' && pagableEnLinea(c) ? 'flow' : 'contra';
   const pedido = numeroPedido();
   console.log('PEDIDO', JSON.stringify({ pedido, pago, cliente, documento, ...c }));
@@ -64,11 +64,13 @@ module.exports = async (req, res) => {
       'Factura: giro': documento.giro, 'Factura: dirección': documento.direccion,
     } : {}),
     'Pedido (carrito)': c.lineas.map(lineaTxt).join('\n'),
-    'Total': clp(c.total) + (c.todoConPrecio ? '' : ' + productos por confirmar') + (c.despachoGratis ? ' · despacho gratis RM' : ' · despacho por confirmar'),
+    'Productos': clp(c.total) + (c.todoConPrecio ? '' : ' + productos con precio por confirmar'),
+    'Despacho': c.despacho ? clp(c.despacho) : 'Gratis (RM)',
+    'Total': clp(c.totalConDespacho) + (c.todoConPrecio ? '' : ' + por confirmar'),
   };
   await avisar('reserva', campos);
 
-  if (pago === 'contra') return res.status(200).json({ pedido, total: c.total, redirect: `/pago-resultado.html?estado=reservado&pedido=${pedido}` });
+  if (pago === 'contra') return res.status(200).json({ pedido, total: c.totalConDespacho, redirect: `/pago-resultado.html?estado=reservado&pedido=${pedido}` });
 
   const site = siteUrl(req);
   try {
@@ -76,13 +78,13 @@ module.exports = async (req, res) => {
       commerceOrder: pedido,
       subject: `CosechaSelecta · Pedido ${pedido}`,
       currency: 'CLP',
-      amount: String(c.total),
+      amount: String(c.totalConDespacho),
       email: cliente.email,
       urlConfirmation: `${site}/api/pago/confirmacion`,
       urlReturn: `${site}/api/pago/retorno`,
       optional: JSON.stringify({ pedido, nombre: documento.nombre || cliente.contacto }),
     });
-    return res.status(200).json({ pedido, total: c.total, redirect: `${r.url}?token=${r.token}` });
+    return res.status(200).json({ pedido, total: c.totalConDespacho, redirect: `${r.url}?token=${r.token}` });
   } catch (e) {
     console.error('pedido flow', e.message);
     return res.status(502).json({ pedido, error: `Recibimos tu pedido ${pedido}, pero no pudimos abrir el pago en línea. Te contactaremos para coordinar el pago.` });

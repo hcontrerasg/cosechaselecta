@@ -112,7 +112,7 @@ body{overflow-x:clip}
 @media (max-width:420px){.qa2 li{padding:14px}.qa2 b{font-size:21px}}
 .modebar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin:-8px 0 24px}
 .modebar .mode-note{margin:0}
-.pref b{color:var(--ink);font-size:19px}.pref .ptot{display:block;font-size:12.5px;margin-top:1px}
+.pref b{color:var(--ink);font-size:19px}.cart-grp{display:block!important;font:700 11px var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:10px 0 2px!important;border:0!important}.pref .ptot{display:block;font-size:12.5px;margin-top:1px}
 .cart-min{font-size:12.5px;color:var(--chili);margin:0}
 .lg-tx{display:flex;flex-direction:column;line-height:1}.lg-claim{align-self:flex-start;font-family:var(--body);font-size:10.5px;letter-spacing:.01em;color:var(--muted);margin-top:4px;font-style:normal;font-weight:500}@media(max-width:640px){.lg-claim{font-size:8px;letter-spacing:0;margin-top:2px}}
 .ship-free{display:block;margin:-10px 0 22px;padding:10px 14px;border-radius:12px;background:#EAF2E3;color:#1F4632;font-size:14px;line-height:1.35}.ship-free b{font-weight:700}.cart-ship{font-size:13px;color:#1F4632;background:#EAF2E3;border-radius:8px;padding:6px 10px;margin:6px 0 0}@media(prefers-color-scheme:dark){:root:not([data-theme=light]) .ship-free,:root:not([data-theme=light]) .cart-ship{background:#1f3a2b;color:#d8ead0}}
@@ -186,7 +186,7 @@ body{overflow-x:clip}
 <p>Compramos en origen y seleccionamos cada producto antes de despacharlo. Así recibes fruta y verdura fresca, pareja y con origen conocido.</p>
 </div>
 <div class="steps">
-<div class="step"><span class="n">1</span><span class="day">Tú</span><h3>Eliges</h3><p>Producto, calibre y cantidad: por kilo o por caja con 20% de descuento.</p></div>
+<div class="step"><span class="n">1</span><span class="day">Tú</span><h3>Eliges</h3><p>Al detalle por kilo o unidad, o al por mayor por caja, malla o saco con 20% de descuento.</p></div>
 <div class="step"><span class="n">2</span><span class="day">En el campo</span><h3>Compramos directo</h3><p>Le compramos al agricultor sin intermediarios y a precio justo. Por eso tú pagas precio mayorista.</p></div>
 <div class="step"><span class="n">3</span><span class="day">Centro de selección</span><h3>Filtro de calidad</h3><p>Revisamos calibre, madurez y sanidad. Lo que no cumple no sale.</p></div>
 <div class="step"><span class="n">4</span><span class="day">Tu casa o local</span><h3>Despacho</h3><p>Coordinamos contigo la entrega de tu pedido, con boleta o factura.</p></div>
@@ -211,10 +211,10 @@ body{overflow-x:clip}
 <section id="catalogo">
 <div class="wrap">
 <div class="sec-head">
-<div><p class="eyebrow" id="seasonEyebrow">Catálogo · noviembre</p><h2>Por kilo o al por mayor.</h2></div>
-<p id="catLead">Compra <b>por kilo</b> para tu casa, o <b>por caja, saco o malla con 20% de descuento</b> si tienes un negocio o revendes. Sin RUT de empresa.</p>
+<div><p class="eyebrow" id="seasonEyebrow">Catálogo · noviembre</p><h2>Al detalle o al por mayor.</h2></div>
+<p id="catLead">Compra <b>al detalle</b>, por kilo o unidad, para tu casa. O <b>al por mayor</b>, por caja, malla o saco con 20% de descuento, si tienes un negocio o revendes. Sin RUT de empresa.</p>
 </div>
-<div class="modebar"><div class="seg" role="tablist" aria-label="Tipo de compra"><button type="button" role="tab" class="on" aria-selected="true" data-mode="kg">Por kilo</button><button type="button" role="tab" aria-selected="false" data-mode="may">Al por mayor</button></div><p class="mode-note" id="modeNote"></p></div><p class="ship-free"><span aria-hidden="true">🚚</span> <b>Despacho gratis en la Región Metropolitana</b> desde $24.990</p>
+<div class="modebar"><div class="seg" role="tablist" aria-label="Tipo de compra"><button type="button" role="tab" class="on" aria-selected="true" data-mode="kg">Al detalle</button><button type="button" role="tab" aria-selected="false" data-mode="may">Al por mayor</button></div><p class="mode-note" id="modeNote"></p></div><p class="ship-free"><span aria-hidden="true">🚚</span> <b>Despacho gratis en la Región Metropolitana</b> desde $24.990</p>
 <div class="catsec" id="frutas"><div class="cat-h"><h3>Frutas</h3><span>Fruta de temporada, de la A a la Z</span></div><div class="products" id="products-f"></div></div>
 <div class="catsec" id="verduras"><div class="cat-h"><h3>Verduras</h3><span>Hortalizas y verduras de hoja, de la A a la Z</span></div><div class="products" id="products-v"></div></div>
 <div class="catsec" id="frutos-secos"><div class="cat-h"><h3>Frutos secos y semillas</h3><span>Seleccionados por calibre, de la A a la Z</span></div><div class="products" id="products-s"></div></div>
@@ -481,8 +481,8 @@ const P=[
 {k:'s',n:'Nueces',o:'Paine · Chandler',p:7990,u:'kg',f:'Saco 10 kg',c:['Con cáscara','Mariposa'],col:'#8A6640',s:'round'},
 {k:'s',n:'Chía',o:'Importado',p:5990,u:'kg',f:'Saco 25 kg',c:['Negra','Blanca'],col:'#4A4A48',s:'round'},
 {k:'s',n:'Linaza',o:'Importado',p:3490,u:'kg',f:'Saco 25 kg',c:['Café','Dorada'],col:'#8A4F2C',s:'round'},
-{k:'h',n:'Huevos de campo',o:'Pirque',p:4490,u:'docena',f:'Bandeja 30 unidades',pm:4202,nd:1,c:['Extra','Grande'],col:'#D9B98A',s:'egg'},
-{k:'h',n:'Huevos de campo',o:'Pirque',p:4490,u:'docena',f:'Caja 180 unidades',pm:16807,nd:1,c:['Extra','Grande'],col:'#D9B98A',s:'egg'}
+{k:'h',n:'Huevos de campo',o:'Pirque',p:4490,u:'docena',f:'Bandeja 30 unidades',pm:4202,nd:1,only:'kg',c:['Extra','Grande'],col:'#D9B98A',s:'egg'},
+{k:'h',n:'Huevos de campo',o:'Pirque',p:4490,u:'docena',f:'Caja 180 unidades',pm:16807,nd:1,only:'may',c:['Extra','Grande'],col:'#D9B98A',s:'egg'}
 ];
 const quote=new Set(); const qc=document.getElementById('qCount'), ql=document.getElementById('qList'), toast=document.getElementById('toast'); let tt;
 const flash=t=>{toast.textContent=t;toast.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove('show'),1800);};
@@ -492,7 +492,7 @@ const sync=()=>{qc.textContent=quote.size; ql.textContent=quote.size?'En tu pedi
 const grids={f:document.getElementById('products-f'),v:document.getElementById('products-v'),h:document.getElementById('products-h'),s:document.getElementById('products-s')};
 const clp=v=>'$'+v.toLocaleString('es-CL');
 const cart=new Map(); const FREE_RM=24990, MIN_DET=15000, DET_F=1, MAY_D=0.8; let mode='kg';
-const NOTE={kg:'Por kilo o unidad, sin comprar la caja completa · compra mínima $15.000',may:'Por caja, saco o malla completa · 20% de descuento sobre el precio por kilo, ideal para revender'};
+const NOTE={kg:'Por kilo o por unidad, para tu casa · compra mínima $15.000',may:'Por caja, saco o malla completa · 20% de descuento sobre el precio por kilo, ideal para revender'};
 const cc=document.getElementById('cCount'), cItems=document.getElementById('cItems'), cTotal=document.getElementById('cTotal'), cartEl=document.getElementById('cart'), scrim=document.getElementById('cartScrim');
 const openCart=o=>{cartEl.hidden=!o;scrim.hidden=!o;};
 document.getElementById('cartBtn').addEventListener('click',()=>openCart(true));
@@ -501,7 +501,7 @@ scrim.addEventListener('click',()=>openCart(false));
 document.addEventListener('keydown',e=>{if(e.key==='Escape')openCart(false);});
 document.getElementById('payBtn').addEventListener('click',()=>{if(!cart.size){flash('Aún no agregas productos');return;}openCart(false);document.getElementById('qList').textContent='Tu pedido: '+cartTxt().replace(/\n/g,' · ');document.getElementById('qOk').textContent='Completa tus datos y envía para confirmar tu pedido.';document.getElementById('pedido-semanal').scrollIntoView({behavior:'smooth'});setTimeout(()=>document.getElementById('q-biz').focus({preventScroll:true}),600);});
 const lineP=(t,x,q)=>t==='d'?q*udet(x):q*bmay(x);
-const cartTxt=()=>[...cart].map(([key,q])=>{const [t,is,cal]=key.split('|'),x=P[+is];return t==='d'?`${x.n} · ${cal} · ${nf(q)} ${uinf(x).u} (por kilo)`+(x.pm?` × ${clp(udet(x))} = ${clp(lineP(t,x,q))}`:''):`${x.n} · ${cal} · ${q} × ${x.f} (mayorista)`+(x.pm?` × ${clp(bmay(x))} = ${clp(lineP(t,x,q))}`:'');}).join('\n');
+const cartTxt=()=>[...cart].map(([key,q])=>{const [t,is,cal]=key.split('|'),x=P[+is];return t==='d'?`${x.n} · ${cal} · ${nf(q)} ${uinf(x).u} (al detalle)`+(x.pm?` × ${clp(udet(x))} = ${clp(lineP(t,x,q))}`:''):`${x.n} · ${cal} · ${q} × ${x.f} (mayorista)`+(x.pm?` × ${clp(bmay(x))} = ${clp(lineP(t,x,q))}`:'');}).join('\n');
 const expDlg=document.getElementById('expDlg'),expForm=document.getElementById('expForm'),expErr=document.getElementById('expErr');
 const expClose=()=>expDlg.close();
 document.getElementById('expBtn').addEventListener('click',()=>{expErr.hidden=true;expDlg.showModal();});
@@ -517,16 +517,17 @@ for(const k in L){const v=fd.getAll(k).filter(Boolean);if(v.length)c[L[k]]=v.joi
 const eb=expForm.querySelector('button[type=submit]');if(!(await send('exportacion',c,eb))){expErr.textContent=FAIL+' · We could not send your inquiry, please email us.';expErr.hidden=false;return;}
 expForm.reset();expClose();flash('Solicitud enviada, te contactaremos pronto · Inquiry sent, we will contact you soon');});
 const renderCart=()=>{let n=0,t=0,sum=0,sd=0,priced=true;
-cItems.innerHTML=cart.size?[...cart].map(([key,q])=>{const [ty,is,cal]=key.split('|'),i=+is,x=P[i];const img=PH[x.n]?`<img src="${PH[x.n]}" alt="">`:'<span></span>';
+const ord=[...cart].sort((a,b)=>a[0][0]===b[0][0]?0:a[0][0]==='d'?-1:1);let lastT='';
+cItems.innerHTML=cart.size?ord.map(([key,q])=>{const [ty,is,cal]=key.split('|'),i=+is,x=P[i];const img=PH[x.n]?`<img src="${PH[x.n]}" alt="">`:'<span></span>';
 const fi=fmtInfo(x),u=uinf(x);let l1,l2='';
-if(ty==='d'){l1=`${nf(q)} ${u.u} · por kilo`;if(x.pm){sd+=lineP(ty,x,q);l2=`${nf(q)} × ${clp(udet(x))} = ${clp(lineP(ty,x,q))}`;}else priced=false;}
+if(ty==='d'){l1=`${nf(q)} ${u.u}`;if(x.pm){sd+=lineP(ty,x,q);l2=`${nf(q)} × ${clp(udet(x))} = ${clp(lineP(ty,x,q))}`;}else priced=false;}
 else{n+=q;t+=q*fi.kg;l1=`${q} × ${x.f} · `+(fi.kg?`${nf(q*fi.kg)} kg`:`${q*fi.n} ${fi.uu}`);if(x.pm){sum+=lineP(ty,x,q);l2=`${q} × ${clp(bmay(x))} = ${clp(lineP(ty,x,q))}`;}else priced=false;}
-const d=ty==='d'?u.st:1;
-return `<li>${img}<span class="nm">${x.n} · ${cal}<small>${l1}</small>${l2?`<small>${l2}</small>`:''}</span><span class="qty"><button type="button" data-d="${-d}" data-k="${key}" aria-label="Quitar">−</button><b class="num">${ty==='d'?nf(q):q}</b><button type="button" data-d="${d}" data-k="${key}" aria-label="Agregar">+</button></span></li>`}).join(''):'<li class="cart-empty">Aún no agregas productos.</li>';
+const d=ty==='d'?u.st:1;const hd=ty!==lastT?(lastT=ty,`<li class="cart-grp">${ty==='d'?'Al detalle':'Al por mayor'}</li>`):'';
+return hd+`<li>${img}<span class="nm">${x.n} · ${cal}<small>${l1}</small>${l2?`<small>${l2}</small>`:''}</span><span class="qty"><button type="button" data-d="${-d}" data-k="${key}" aria-label="Quitar">−</button><b class="num">${ty==='d'?nf(q):q}</b><button type="button" data-d="${d}" data-k="${key}" aria-label="Agregar">+</button></span></li>`}).join(''):'<li class="cart-empty">Aún no agregas productos.</li>';
 cc.textContent=cart.size;const tot=sum+sd;
 const parts=[];if(n)parts.push(`${n} ${n===1?'bulto':'bultos'}${t?' · '+String(Math.round(t)).replace(/\B(?=(\d{3})+(?!\d))/g,'.')+' kg':''}`);if(cart.size&&priced)parts.push(clp(tot));
 cTotal.textContent=parts.length?parts.join(' · '):(cart.size&&priced?clp(tot):'$0');
-const cMin=document.getElementById('cMin');cMin.hidden=!(sd&&!n&&sd<MIN_DET);cMin.textContent=`Compra mínima por kilo: ${clp(MIN_DET)}. Te faltan ${clp(MIN_DET-sd)}.`;
+const cMin=document.getElementById('cMin');cMin.hidden=!(sd&&!n&&sd<MIN_DET);cMin.textContent=`Compra mínima al detalle: ${clp(MIN_DET)}. Te faltan ${clp(MIN_DET-sd)}.`;
 const cShip=document.getElementById('cShip');cShip.hidden=!(cart.size&&priced&&cMin.hidden);cShip.textContent=tot>=FREE_RM?'¡Tienes despacho gratis en la Región Metropolitana!':`Te faltan ${clp(FREE_RM-tot)} para despacho gratis en la RM.`;
 document.getElementById('cNote').textContent=priced&&cart.size?'Precios con IVA incluido. Boleta o factura. Pago al confirmar o contra entrega.':'Te confirmamos el precio del día por calibre antes del despacho. Boleta o factura. Pago al confirmar o contra entrega.';};
 cItems.addEventListener('click',e=>{const b=e.target.closest('button[data-d]');if(!b)return;const k=b.dataset.k,q=Math.round(((cart.get(k)||0)+(+b.dataset.d))*10)/10;q>0?cart.set(k,q):cart.delete(k);renderCart();});
@@ -543,10 +544,10 @@ const nf=v=>String(Math.round(v*10)/10).replace('.',',');
 const card=(x,i)=>{const u=uinf(x),det=mode==='kg'&&!x.nd;let pr;
 if(!x.pm)pr=det?'Precio del día según calibre':'Precio mayorista del día según calibre';
 else if(det)pr=`<b>${clp(udet(x))}</b> / ${u.u}<span class="ptot">IVA incl. · al por mayor ${clp(umay(x))}/${u.u} (−20%)</span>`;
-else pr=`<b>${clp(bmay(x))}</b> por ${pack(x)}<span class="ptot">${u.q?clp(umay(x))+'/'+u.u+' · ':''}${x.nd?'':'20% menos que por kilo · '}IVA incl.</span>`;
+else pr=`<b>${clp(bmay(x))}</b> por ${pack(x)}<span class="ptot">${u.q?clp(umay(x))+'/'+u.u+' · ':''}${x.nd?'':'20% menos que al detalle · '}IVA incl.</span>`;
 const st=det?u.st:1,un=det?u.u:pack(x);
 return `<article class="prod"><div class="art">${pic(x,art(x.s,x.col))}</div><div class="info"><h3>${x.n}</h3><p class="origin">${x.o}${det?'':' · '+x.f}</p><label class="calsel"><span>Calibre</span><select id="c${i}">${x.c.map(c=>`<option>${c}</option>`).join('')}</select></label><p class="pref">${pr}</p><div class="resv"><label class="qin"><span class="sr">Cantidad de ${x.n}</span><button type="button" class="qm" data-i="${i}" data-d="-1" aria-label="Menos">−</button><input type="number" inputmode="decimal" min="${st}" step="${st}" value="1" id="q${i}"><span class="u">${un}</span><button type="button" class="qm" data-i="${i}" data-d="1" aria-label="Más">+</button></label><button class="add rsv" type="button" data-i="${i}">Agregar</button></div></div></article>`;};
-const renderGrid=()=>{for(const k in grids) grids[k].innerHTML=P.map((x,i)=>[x,i]).filter(([x])=>x.k===k).sort((a,b)=>a[0].n.localeCompare(b[0].n,'es')).map(([x,i])=>card(x,i)).join('');};
+const renderGrid=()=>{for(const k in grids) grids[k].innerHTML=P.map((x,i)=>[x,i]).filter(([x])=>x.k===k&&(!x.only||x.only===mode)).sort((a,b)=>a[0].n.localeCompare(b[0].n,'es')).map(([x,i])=>card(x,i)).join('');};
 const onGrid=e=>{const m=e.target.closest('.qm'); if(m){const i=+m.dataset.i,x=P[i],inp=document.getElementById('q'+i),st=mode==='kg'&&!x.nd?uinf(x).st:1;inp.value=Math.max(st,Math.round(((parseFloat(String(inp.value).replace(',','.'))||0)+st*(+m.dataset.d))*2)/2);return;}
 const b=e.target.closest('.add'); if(!b)return; const i=+b.dataset.i, x=P[i], cal=document.getElementById('c'+i).value;
 const det=mode==='kg'&&!x.nd,q=det?Math.round((parseFloat(String(document.getElementById('q'+i).value).replace(',','.'))||0)*2)/2:(parseInt(document.getElementById('q'+i).value)||0); if(q<=0){flash('Indica la cantidad');return;}

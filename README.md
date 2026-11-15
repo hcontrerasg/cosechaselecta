@@ -18,3 +18,18 @@ Variables de entorno en Vercel: `RESEND_API_KEY` (obligatoria), `MAIL_TO` y `MAI
 Cada envío se agrega además como fila en una hoja de Google Sheets (una pestaña por formulario) mediante
 el Apps Script `hoja/registro-formularios.gs`: variables `SHEETS_WEBHOOK_URL` y `SHEETS_TOKEN`.
 También queda en los logs de Vercel como `FORMULARIO {...}`.
+
+## Checkout y pagos en línea (Flow)
+
+- El botón "Confirmar pedido" del carrito guarda el carrito en el navegador y abre `checkout.html`
+  (contacto, entrega, boleta o factura, y pago con Flow o contra entrega).
+- `api/pedido/cotizar.js` y `api/pedido/crear.js` recalculan el total en el servidor con `lib/precios.js`,
+  que lee el catálogo `const P=[...]` directamente de `index.html` (los precios se siguen editando allí).
+  Las fórmulas de precio (`bruto`, `bmay`, `udet`) están copiadas en `lib/precios.js`: si cambian, cambiarlas en ambos.
+- Pago en línea solo cuando el monto es definitivo: todos los productos con precio y despacho gratis
+  (desde `FREE_RM`). Si no, el pedido queda "contra entrega" y se puede cobrar después con `/pagar.html?pedido=X&monto=Y`.
+- Cada pedido llega por correo y a la hoja como "Pedido desde el carrito"; cada pago confirmado por Flow,
+  como "Pago en línea (Flow)". También en los logs de Vercel (`PEDIDO {...}`, `PAGO {...}`).
+- `pago-resultado.html` muestra pagado, pendiente, rechazado, anulado o reservado.
+
+Variables de entorno en Vercel: `FLOW_API_KEY`, `FLOW_SECRET_KEY`, `FLOW_ENV` (`sandbox` o `production`), `SITE_URL`.

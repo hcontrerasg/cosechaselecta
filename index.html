@@ -499,7 +499,9 @@ document.getElementById('cartBtn').addEventListener('click',()=>openCart(true));
 document.getElementById('cartClose').addEventListener('click',()=>openCart(false));
 scrim.addEventListener('click',()=>openCart(false));
 document.addEventListener('keydown',e=>{if(e.key==='Escape')openCart(false);});
-document.getElementById('payBtn').addEventListener('click',()=>{if(!cart.size){flash('Aún no agregas productos');return;}openCart(false);document.getElementById('qList').textContent='Tu pedido: '+cartTxt().replace(/\n/g,' · ');document.getElementById('qOk').textContent='Completa tus datos y envía para confirmar tu pedido.';document.getElementById('pedido-semanal').scrollIntoView({behavior:'smooth'});setTimeout(()=>document.getElementById('q-biz').focus({preventScroll:true}),600);});
+const CK='cs_carrito';
+const saveCart=()=>{try{localStorage.setItem(CK,JSON.stringify([...cart].map(([key,q])=>{const [t,is,cal]=key.split('|'),x=P[+is];return{t,n:x.n,f:x.f,cal,q};})));}catch(e){}};
+document.getElementById('payBtn').addEventListener('click',()=>{if(!cart.size){flash('Aún no agregas productos');return;}saveCart();location.href='/checkout.html';});
 const lineP=(t,x,q)=>t==='d'?q*udet(x):q*bmay(x);
 const cartTxt=()=>[...cart].map(([key,q])=>{const [t,is,cal]=key.split('|'),x=P[+is];return t==='d'?`${x.n} · ${cal} · ${nf(q)} ${uinf(x).u} (al detalle)`+(x.pm?` × ${clp(udet(x))} = ${clp(lineP(t,x,q))}`:''):`${x.n} · ${cal} · ${q} × ${x.f} (mayorista)`+(x.pm?` × ${clp(bmay(x))} = ${clp(lineP(t,x,q))}`:'');}).join('\n');
 const expDlg=document.getElementById('expDlg'),expForm=document.getElementById('expForm'),expErr=document.getElementById('expErr');
@@ -529,8 +531,9 @@ const parts=[];if(n)parts.push(`${n} ${n===1?'bulto':'bultos'}${t?' · '+String(
 cTotal.textContent=parts.length?parts.join(' · '):(cart.size&&priced?clp(tot):'$0');
 const cMin=document.getElementById('cMin');cMin.hidden=true;cMin.textContent=`Compra mínima al detalle: ${clp(MIN_DET)}. Te faltan ${clp(MIN_DET-sd)}.`;
 const cShip=document.getElementById('cShip');cShip.hidden=!(cart.size&&priced&&cMin.hidden);cShip.textContent=tot>=FREE_RM?'¡Tienes despacho gratis en la Región Metropolitana!':`Te faltan ${clp(FREE_RM-tot)} para despacho gratis en la RM. Bajo ese monto, te confirmamos el costo de despacho.`;
-document.getElementById('cNote').textContent=priced&&cart.size?'Precios con IVA incluido. Boleta o factura. Pago al confirmar o contra entrega.':'Te confirmamos el precio del día por calibre antes del despacho. Boleta o factura. Pago al confirmar o contra entrega.';};
+document.getElementById('cNote').textContent=priced&&cart.size?'Precios con IVA incluido. Boleta o factura. Paga en línea con Webpay o transferencia, o contra entrega.':'Te confirmamos el precio del día por calibre antes del despacho. Boleta o factura. Paga en línea con Webpay o transferencia, o contra entrega.';saveCart();};
 cItems.addEventListener('click',e=>{const b=e.target.closest('button[data-d]');if(!b)return;const k=b.dataset.k,q=Math.round(((cart.get(k)||0)+(+b.dataset.d))*10)/10;q>0?cart.set(k,q):cart.delete(k);renderCart();});
+/* Estas fórmulas de precio están copiadas en lib/precios.js (cobro en línea): si cambian aquí, cambiarlas allá. */
 const bruto=x=>Math.round(x.pm*1.19/10)*10;
 const fmtInfo=x=>{const k=x.f.match(/(\d+(?:,\d+)?)\s*kg/);const u=x.f.match(/(\d+)\s*(unidades|atados)/);return k?{kg:parseFloat(k[1].replace(',','.')),txt:x.f}:{kg:0,n:u?+u[1]:0,uu:u?u[2]:'',txt:x.f};};
 const pack=x=>x.f.split(' ')[0].toLowerCase();
@@ -556,6 +559,7 @@ flash(det?`Agregaste ${nf(q)} ${uinf(x).u} de ${x.n} (${cal})`:`Agregaste ${q} $
 Object.values(grids).forEach(g=>g.addEventListener('click',onGrid));
 const setMode=m=>{mode=m;document.querySelectorAll('.modebar .seg button').forEach(b=>{const on=b.dataset.mode===m;b.classList.toggle('on',on);b.setAttribute('aria-selected',on);});document.getElementById('modeNote').textContent=NOTE[m];renderGrid();};
 document.querySelectorAll('.modebar .seg button').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
+try{JSON.parse(localStorage.getItem(CK)||'[]').forEach(it=>{const i=P.findIndex(x=>x.n===it.n&&x.f===it.f);if(i>=0&&it.q>0&&P[i].c.includes(it.cal)&&(it.t==='m'||it.t==='d'))cart.set(it.t+'|'+i+'|'+it.cal,it.q);});}catch(e){}
 setMode('kg'); renderCart();
 const qf=document.getElementById('qform'), qok=document.getElementById('qOk');
 qf.addEventListener('submit',async e=>{e.preventDefault();

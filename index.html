@@ -3,9 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="CosechaSelecta: fruta y verdura mayorista en preventa, directo del agricultor y seleccionada por calibre. Para verdulerías, restaurantes y negocios en Santiago.">
+<meta name="description" content="CosechaSelecta: marketplace de fruta y verdura a precio mayorista para todos, directo del agricultor y seleccionada por calibre. Compra desde 1 caja, seas negocio o familia, en Santiago.">
 <meta name="robots" content="noindex">
-<title>CosechaSelecta · Fruta y verdura mayorista directo del agricultor</title>
+<link rel="icon" href="/favicon.ico?v=2" sizes="any">
+<link rel="icon" href="/favicon-32.png?v=2" type="image/png" sizes="32x32">
+<link rel="icon" href="/icon-192.png?v=2" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#1F4632">
+<title>CosechaSelecta · Fruta y verdura a precio mayorista, directo del agricultor</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
@@ -46,7 +51,7 @@ header{position:sticky;top:env(safe-area-inset-top,0);z-index:20;background:colo
 .wb-btn{background:var(--forest-ink);color:#1f4632}.seg,.seg button{border-radius:999px}.seg{display:inline-flex;background:var(--sage);padding:4px}.seg button{border:0;background:0 0;font:600 14px var(--body);color:var(--muted);padding:9px 18px;cursor:pointer}.cart-f p,.mode-note{font-size:13px;color:var(--muted)}.price{font-size:18px;font-weight:700;color:var(--ink)!important}.cart-l .nm small,.price small{color:var(--muted);font-weight:500}.price small{font-size:13px}.whl-sec{background:var(--gold-soft)}.qbadge{text-transform:none;letter-spacing:0}
 .cart-scrim{position:fixed;inset:0;background:rgba(10,20,14,.45);z-index:40}.drawer{position:fixed;top:0;right:0;bottom:0;color:var(--ink);width:min(400px,100%);background:var(--surface);z-index:41;display:flex;flex-direction:column;box-shadow:-20px 0 50px -20px rgba(0,0,0,.4)}.cart-h{display:flex;align-items:center;justify-content:space-between;padding:20px;border-bottom:1px solid var(--line)}.cart-h h3{font-size:28px}.cart-x,.qin input{border:0;color:var(--ink)}.cart-x{background:var(--sage);width:36px;height:36px;border-radius:50%;font-size:22px;cursor:pointer}
 .cart-l{list-style:none;margin:0;padding:8px 20px;overflow:auto;flex:1}.cart-l li,.qty{align-items:center}.cart-l li{display:grid;grid-template-columns:56px 1fr auto;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.cart-l img{width:56px;height:56px;object-fit:cover;border-radius:10px}.cart-l .nm{font-weight:600;line-height:1.3}.cart-l .nm small{display:block}.qty{display:inline-flex;gap:8px}.harv dd,.qty button{font-weight:700;color:var(--ink)}.qty button{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);background:var(--surface);cursor:pointer}
-.cart-empty{color:var(--muted);padding:24px 0}.cart-f,.harv div{display:flex;flex-direction:column}.cart-f{padding:20px;border-top:1px solid var(--line);gap:10px}.cart-tot{display:flex;justify-content:space-between;font-size:18px}.cart-row{display:flex;justify-content:space-between;font-size:14px;color:var(--muted)}.cart-row b{color:var(--ink);font-weight:600}#cMin{font-weight:600;color:var(--forest)}#payBtn[aria-disabled=true]{opacity:.55}.cart-l .ln{font-weight:700;font-size:13px;display:block}.pref b{color:var(--ink);font-size:16px}.cart-scrim[hidden],.drawer[hidden]{display:none}.catsec{margin-top:8px}.catsec+.catsec{margin-top:48px}.cat-h{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:20px}.cat-h h3{font-size:clamp(30px,4vw,40px)}.cat-h span,.harv dt{color:var(--muted);font-size:15px}
+.cart-empty{color:var(--muted);padding:24px 0}.cart-f,.harv div{display:flex;flex-direction:column}.cart-f{padding:20px;border-top:1px solid var(--line);gap:10px}.cart-tot{display:flex;justify-content:space-between;font-size:18px}.cart-scrim[hidden],.drawer[hidden]{display:none}.catsec{margin-top:8px}.catsec+.catsec{margin-top:48px}.cat-h{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:20px}.cat-h h3{font-size:clamp(30px,4vw,40px)}.cat-h span,.harv dt{color:var(--muted);font-size:15px}
 #frutas,#huevos,#verduras{scroll-margin-top:96px}.harv{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:6px 0 2px;padding:8px 10px;background:var(--gold-soft);border-radius:10px}.harv div{line-height:1.25}.harv dt{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase}.harv dd{margin:0;font-size:14px}.qin,.resv{align-items:center}.resv{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}.qin{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px;background:var(--surface)}
 .qin input{width:48px;background:0 0;text-align:right;font:700 15px var(--body);-moz-appearance:textfield}.qin input::-webkit-inner-spin-button,.qin input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}.qin .u{font-size:13px;color:var(--muted);padding:0 4px 0 2px;white-space:nowrap}.qm{width:28px;height:28px;border-radius:50%;border:0;background:var(--sage);color:var(--forest);font-weight:700;cursor:pointer}.add.rsv{background:var(--forest);color:var(--forest-ink);flex:1;text-align:center}.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .cart-l .nm small+small{color:var(--ink);font-weight:600}.calsel,.pref{font-size:13px;color:var(--muted)}.calsel{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:4px}.calsel select{font:600 14px var(--body);background:var(--surface);border:1px solid var(--line);padding:6px 10px;max-width:60%}.pref{margin-top:2px}.calsel select,.exp-btn{border-radius:999px;color:var(--ink)}
@@ -58,14 +63,69 @@ header{position:sticky;top:env(safe-area-inset-top,0);z-index:20;background:colo
 @media (max-width:520px){.exp-body fieldset{grid-template-columns:1fr}.exp-body,.exp-f,.exp-h{padding-inline:16px}.exp-h h2{font-size:28px}.exp-f .btn{flex:1;justify-content:center}}@media (max-width:480px){.nav{gap:6px}.logo{font-size:20px;gap:5px}.logo .mark{height:40px}.exp-btn{margin-left:auto}.exp-btn+.cta-quote{margin-left:0!important}}@media (max-width:380px){.cb-l{display:none}}.exp-body .lb{display:flex;flex-direction:column;gap:1px}.exp-dlg .en{display:block;font:500 11.5px/1.3 var(--body);color:var(--muted);letter-spacing:.01em}.exp-body .lb .en{font-style:italic}
 .chks .chk i{font-style:normal;color:var(--muted);font-size:12.5px}.exp-en{margin:-4px 0 8px;font:italic 400 20px var(--display);color:var(--muted)}.exp-sub .en{margin-top:2px;font-size:13px}.exp-body fieldset{align-items:start}.exp-body .inrow input{flex:0 0 34%}.chks .chg{flex-basis:100%;margin:4px 0 0;font:600 12px var(--body);color:var(--forest)}.chks .chg:first-child{margin-top:0}.chks .chg i{font-style:normal;color:var(--muted);font-weight:500}
 </style>
+<style>
+/* Portada a todo el ancho */
+body{overflow-x:clip}
+.slide .ph{background:#1c3324}
+@media (min-width:901px){
+.hero2{--r:max(16px,calc((100vw - 1180px)/2 + 16px));position:relative;display:flex;align-items:center;min-height:clamp(560px,78vh,740px);padding-block:48px 96px}
+.hero2 .h-copy{position:relative;z-index:2;max-width:660px;color:#fff}
+.hero2 h1{font-size:clamp(40px,4vw,58px)}
+.hero2 .h-visual{position:absolute;top:0;bottom:0;left:calc(50% - 50vw);width:100vw;z-index:0}
+.hero2 .slides{position:absolute;inset:0;aspect-ratio:auto;border-radius:0}
+.hero2 .slides::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(10,24,16,.86) 0,rgba(10,24,16,.7) 34%,rgba(10,24,16,.25) 62%,rgba(10,24,16,.05) 100%)}
+.hero2 .slide .cap,.hero2 .badge-q{display:none}
+.hero2 h1{color:#fff}.hero2 h1 em{color:#F0C35A}
+.hero2 .lead,.hero2 .h-presale,.hero2 .trust li{color:rgba(255,255,255,.84)}
+.hero2 .h-presale strong,.hero2 .trust b{color:#fff}
+.hero2 .trust{border-top-color:rgba(255,255,255,.25)}
+.hero2 .pill{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.25)}
+.hero2 .btn-ghost{color:#fff;border-color:rgba(255,255,255,.6)}
+.hero2 .btn-ghost:hover{background:rgba(255,255,255,.1)}
+.hero2 .verified{left:auto;right:var(--r);bottom:auto;top:28px;z-index:2}
+.hero2 .minis{right:var(--r);bottom:84px;z-index:2}
+.hero2 .dots{bottom:34px;z-index:2}
+.hero2 .dot{background:rgba(255,255,255,.5)}.hero2 .dot.is-on{background:#F0C35A}
+.hero2 .arrow{z-index:2;top:auto;bottom:22px;transform:none}
+.hero2 .arrow.prev{left:auto;right:calc(var(--r) + 50px)}.hero2 .arrow.next{right:var(--r)}
+}
+@media (max-width:900px){
+.hero2{padding-block:0 56px}
+.hero2 .h-visual{order:-1;margin-inline:calc(50% - 50vw)}
+.hero2 .slides{aspect-ratio:16/10;border-radius:0}
+.hero2 .slide .cap,.hero2 .badge-q{display:none}
+}
+.stds-t{margin:0 0 14px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#F0C35A}
+.stds .big{font-variant-numeric:tabular-nums}
+@media (max-width:640px){.standard .stds{grid-template-columns:repeat(2,1fr);gap:24px 16px}}
+.qa2{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.qa2 li{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;font-size:14px;color:var(--muted);line-height:1.45}
+.qa2 .k{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.qa2 b{display:block;font-family:var(--display);font-weight:400;font-size:24px;line-height:1.1;color:var(--ink);margin-bottom:4px}
+.qa2-ex{margin:18px 0 0;display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;font-size:14px;color:var(--muted)}
+.qa2-ex .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+.qa2-ex .ex{display:inline-flex;align-items:center;gap:5px;flex-wrap:wrap}
+.qa2-ex b{color:var(--ink);margin-right:3px}
+.qa2-ex i{font-style:normal;margin:0;background:var(--surface)}.qa2-ex i.alt{background:var(--gold-soft)}.qa2-ex em{font-style:normal;margin-left:3px}
+@media (max-width:640px){.qa2-ex{flex-direction:column;align-items:flex-start}}
+@media (max-width:900px){.qa2{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:420px){.qa2 li{padding:14px}.qa2 b{font-size:21px}}
+.modebar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin:-8px 0 24px}
+.modebar .mode-note{margin:0}
+.pref b{color:var(--ink);font-size:19px}.cart-grp{display:block!important;font:700 11px var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:10px 0 2px!important;border:0!important}.pref .ptot{display:block;font-size:12.5px;margin-top:1px}
+.cart-min{font-size:12.5px;color:var(--chili);margin:0}
+.lg-tx{display:flex;flex-direction:column;line-height:1}.lg-claim{align-self:flex-start;font-family:var(--body);font-size:10.5px;letter-spacing:.01em;color:var(--muted);margin-top:4px;font-style:normal;font-weight:500}@media(max-width:640px){.lg-claim{font-size:8px;letter-spacing:0;margin-top:2px}}
+.ship-free{display:block;margin:-10px 0 22px;padding:10px 14px;border-radius:12px;background:#EAF2E3;color:#1F4632;font-size:14px;line-height:1.35}.ship-free b{font-weight:700}.cart-ship{font-size:13px;color:#1F4632;background:#EAF2E3;border-radius:8px;padding:6px 10px;margin:6px 0 0}@media(prefers-color-scheme:dark){:root:not([data-theme=light]) .ship-free,:root:not([data-theme=light]) .cart-ship{background:#1f3a2b;color:#d8ead0}}
+.ig-f{display:inline-flex;align-items:center;gap:8px;margin-top:14px;color:inherit;text-decoration:none;font-weight:600}.ig-f:hover{text-decoration:underline}
+</style>
 </head>
 <body>
 <div class="topbar">
-<div class="wrap"><span><strong>¿Eres agricultor?</strong> Te compramos directo, a precio justo y con pago puntual.</span><a href="#vender">¡Contáctanos!</a></div>
+<div class="wrap"><span><strong>¿Eres agricultor</strong> y quieres vender directo, sin intermediarios, a un precio justo y con un pago puntual?</span><a href="#vender">¡Contáctanos!</a></div>
 </div>
 <header>
 <div class="wrap nav">
-<a class="logo" href="#inicio"><img class="mark m-l" src="/logo.png" alt=""><img class="mark m-d" src="/logo-claro.png" alt=""><span>Cosecha<em>Selecta</em></span></a>
+<a class="logo" href="#inicio"><img class="mark m-l" src="/logo.png" alt=""><img class="mark m-d" src="/logo-claro.png" alt=""><span class="lg-tx"><span>Cosecha<em>Selecta</em></span><small class="lg-claim">Del campo chileno a tu mesa</small></span></a>
 <nav class="nav-links" aria-label="Principal">
 <a href="#frutas">Frutas</a>
 <a href="#verduras">Verduras</a>
@@ -82,33 +142,32 @@ header{position:sticky;top:env(safe-area-inset-top,0);z-index:20;background:colo
 <main id="inicio">
 <div class="wrap hero2">
 <div class="h-copy">
-<span class="pill">Venta mayorista en preventa · para verdulerías, restaurantes y negocios</span>
-<h1>Reserva la cosecha para tu negocio, <em>directo del agricultor y seleccionada por calibre.</em></h1>
-<p class="lead">Compramos directo a agricultores chilenos y cosechamos según tus reservas. Cada lote pasa un filtro riguroso de calidad, calibre y madurez, y llega a tu local 2 días después de la cosecha.</p>
+<span class="pill">Marketplace de fruta y verdura · precio mayorista para todos</span>
+<h1>Precios mayoristas para todos, <em>directo del agricultor y seleccionados por calibre.</em></h1>
+<p class="lead">Compra por caja, saco o malla al mismo precio que paga un negocio, aunque compres para tu casa. Compramos directo a agricultores chilenos y cada lote pasa un filtro riguroso de calidad, calibre y madurez antes de llegar a ti.</p>
 <div class="h-ctas">
-<a class="btn btn-primary" href="#catalogo">Reservar cosecha</a>
+<a class="btn btn-primary" href="#catalogo">Ver catálogo y precios</a>
 <a class="btn btn-ghost" href="#pedido-semanal">Programar pedido semanal</a>
 </div>
-<p class="h-presale"><strong>Preventa mayorista</strong> · reserva por caja, saco o malla y recibe en tu local <strong>2 días después de la cosecha</strong></p>
-<ul class="trust">
-<li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18M5 21V10l7-5 7 5v11M10 21v-6h4v6"/></svg><span><b>Compra directa</b>Sin intermediarios entre el campo y tu local</span></li>
-<li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 14 7 22l5-3 5 3-1.5-8"/></svg><span><b>Filtro de calidad y calibre</b>Lotes clasificados y revisados</span></li>
-<li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18v13H3zM3 7l3-4h12l3 4M9 11h6"/></svg><span><b>Cosecha a pedido</b>Pago al reservar o contra entrega</span></li>
-</ul>
+<p class="h-presale"><strong>Sin ser empresa y sin grandes volúmenes</strong> · compra desde 1 caja, con boleta o factura</p>
 </div>
 <div class="h-visual">
 <div class="slides" id="slides" aria-roledescription="carrusel" aria-label="Productores que nos abastecen">
-<figure class="slide is-on"><div class="ph ph1"><img src="https://images.pexels.com/photos/33533970/pexels-photo-33533970.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1080&h=900" alt="Agricultor con sombrero trabajando entre sus cultivos"></div><figcaption class="cap">Productor · Quillota</figcaption></figure>
-<figure class="slide"><div class="ph ph2"><img src="https://images.pexels.com/photos/28753124/pexels-photo-28753124.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1080&h=900" alt="Agricultor mayor cosechando en el campo" loading="lazy"></div><figcaption class="cap">Productor · Limache</figcaption></figure>
-<figure class="slide"><div class="ph ph3"><img src="https://images.pexels.com/photos/13834217/pexels-photo-13834217.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1080&h=900" alt="Agricultor cosechando cebollines en la huerta" loading="lazy"></div><figcaption class="cap">Productores · Chillán</figcaption></figure>
+<figure class="slide is-on"><div class="ph ph1"><picture><source media="(max-width:900px)" srcset="/slide-tractor-v2-m.jpg"><img src="/slide-tractor-v2.jpg" alt="Vista aérea de un tractor trabajando un campo de cultivo verde"></picture></div><figcaption class="cap">Campo en temporada</figcaption></figure>
+<figure class="slide"><div class="ph ph1"><picture><source media="(max-width:900px)" srcset="/slide-productora-m.jpg"><img src="/slide-productora.jpg" alt="Productora sonriendo en su invernadero de acelgas"></picture></div><figcaption class="cap">Productora · invernadero</figcaption></figure>
+<figure class="slide"><div class="ph ph1"><picture><source media="(max-width:900px)" srcset="/slide-plantacion-v2-m.jpg"><img src="/slide-plantacion-v2.jpg" alt="Agricultores con sombrero de paja plantando hortalizas en hileras" loading="lazy"></picture></div><figcaption class="cap">Plantación · temporada</figcaption></figure>
+<figure class="slide"><div class="ph ph1"><img src="https://images.pexels.com/photos/33533970/pexels-photo-33533970.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1920&h=1080" srcset="https://images.pexels.com/photos/33533970/pexels-photo-33533970.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=960&h=600 960w, https://images.pexels.com/photos/33533970/pexels-photo-33533970.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1920&h=1080 1920w" sizes="100vw" alt="Agricultor con sombrero trabajando entre sus cultivos"></div><figcaption class="cap">Productor · Quillota</figcaption></figure>
+<figure class="slide"><div class="ph ph2"><img src="https://images.pexels.com/photos/28753124/pexels-photo-28753124.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1920&h=1080" srcset="https://images.pexels.com/photos/28753124/pexels-photo-28753124.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=960&h=600 960w, https://images.pexels.com/photos/28753124/pexels-photo-28753124.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1920&h=1080 1920w" sizes="100vw" alt="Agricultor mayor cosechando en el campo" loading="lazy"></div><figcaption class="cap">Productor · Limache</figcaption></figure>
+<figure class="slide"><div class="ph ph3"><img src="https://images.pexels.com/photos/13834217/pexels-photo-13834217.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1920&h=1080" srcset="https://images.pexels.com/photos/13834217/pexels-photo-13834217.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=960&h=600 960w, https://images.pexels.com/photos/13834217/pexels-photo-13834217.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1920&h=1080 1920w" sizes="100vw" alt="Agricultor cosechando cebollines en la huerta" loading="lazy"></div><figcaption class="cap">Productores · Chillán</figcaption></figure>
 </div>
 <div class="badge-q"><span class="medal" aria-hidden="true">★</span><span><b>Lote seleccionado</b>Calidad, calibre y madurez verificados</span></div>
-<div class="verified"><span class="tick" aria-hidden="true">✓</span><span><b>Compra directa al productor</b><em id="slName">Hernán Muñoz, Quillota</em></span></div>
-<div class="minis" id="minis"></div>
 <div class="dots" role="tablist" aria-label="Elegir productor">
 <button type="button" class="dot is-on" aria-label="Productor 1" aria-selected="true"></button>
 <button type="button" class="dot" aria-label="Productor 2" aria-selected="false"></button>
 <button type="button" class="dot" aria-label="Productor 3" aria-selected="false"></button>
+<button type="button" class="dot" aria-label="Productor 4" aria-selected="false"></button>
+<button type="button" class="dot" aria-label="Productor 5" aria-selected="false"></button>
+<button type="button" class="dot" aria-label="Productor 6" aria-selected="false"></button>
 </div>
 <button type="button" class="arrow prev" aria-label="Anterior">‹</button>
 <button type="button" class="arrow next" aria-label="Siguiente">›</button>
@@ -116,62 +175,49 @@ header{position:sticky;top:env(safe-area-inset-top,0);z-index:20;background:colo
 </div>
 <div class="whl-banner">
 <div class="wrap">
-<div class="wb-t"><span class="wb-k">Pedido semanal</span><p>Programa tu pedido fijo y <strong>te reservamos la cosecha cada semana</strong>. Mismo día de entrega, calibre parejo y factura electrónica.</p></div>
+<div class="wb-t"><span class="wb-k">Pedido semanal</span><p>Programa tu pedido fijo y <strong>recíbelo cada semana el mismo día</strong>. Precio mayorista, calibre parejo y boleta o factura.</p></div>
 <a class="btn wb-btn" href="#pedido-semanal">Programar pedido →</a>
 </div>
 </div>
 <section id="como-funciona">
 <div class="wrap">
 <div class="sec-head">
-<div><p class="eyebrow">Cómo funciona</p><h2>Del campo a tu local en cuatro pasos.</h2></div>
+<div><p class="eyebrow">Cómo funciona</p><h2>Del campo a tu mesa o tu negocio en cuatro pasos.</h2></div>
 <p>Compramos en origen y seleccionamos cada producto antes de despacharlo. Así recibes fruta y verdura fresca, pareja y con origen conocido.</p>
 </div>
 <div class="steps">
-<div class="step"><span class="n">1</span><span class="day">Tu negocio</span><h3>Reservas</h3><p>Eliges producto, calibre y cantidad de cajas, hasta el día antes de la cosecha.</p></div>
-<div class="step"><span class="n">2</span><span class="day">En el campo</span><h3>Cosechamos a pedido</h3><p>El agricultor cosecha lo reservado en la fecha indicada. Le compramos directo, a precio justo.</p></div>
+<div class="step"><span class="n">1</span><span class="day">Tú</span><h3>Eliges</h3><p>Al detalle por kilo o unidad, o al por mayor por caja, malla o saco con 20% de descuento.</p></div>
+<div class="step"><span class="n">2</span><span class="day">En el campo</span><h3>Compramos directo</h3><p>Le compramos al agricultor sin intermediarios y a precio justo. Por eso tú pagas precio mayorista.</p></div>
 <div class="step"><span class="n">3</span><span class="day">Centro de selección</span><h3>Filtro de calidad</h3><p>Revisamos calibre, madurez y sanidad. Lo que no cumple no sale.</p></div>
-<div class="step"><span class="n">4</span><span class="day">Tu local</span><h3>Entrega en 2 días</h3><p>Recibes tu pedido en el local 2 días después de la cosecha, con guía y factura.</p></div>
+<div class="step"><span class="n">4</span><span class="day">Tu casa o local</span><h3>Despacho</h3><p>Coordinamos contigo la entrega de tu pedido, con boleta o factura.</p></div>
 </div>
 </div>
 </section>
 <section id="calidad" class="boxes-band">
 <div class="wrap">
 <div class="sec-head">
-<div><p class="eyebrow">Filtro de calidad y calibre</p><h2>Lo que llega a tu negocio pasó por nuestras manos primero.</h2></div>
-<p>Del campo viene con todo su sabor. Antes de llegar a ti, lo seleccionamos con el mismo rigor que exige la exportación.</p>
+<div><p class="eyebrow">Filtro de calidad y calibre</p><h2>Lo que llega a tu negocio fue previamente inspeccionado por nosotros.</h2></div>
+<p>Seleccionamos cada lote con el mismo rigor que exige la exportación.</p>
 </div>
-<div class="qa">
-<div class="criteria">
-<div class="crit"><span class="k">Calibre</span><h3>Parejo por lote</h3><p>Clasificamos por tamaño para que cada caja sea uniforme y sepas exactamente qué compras.</p></div>
-<div class="crit"><span class="k">Madurez</span><h3>En su punto</h3><p>Elegimos el punto de cosecha según tu uso: venta en vitrina o cocina.</p></div>
-<div class="crit"><span class="k">Sanidad</span><h3>Sin daño</h3><p>Descartamos golpes, pudrición y defectos antes de embalar.</p></div>
-<div class="crit"><span class="k">Trazabilidad</span><h3>Con origen</h3><p>Cada lote indica productor, predio y fecha de cosecha.</p></div>
-</div>
-<div class="cal-wrap">
-<table class="cal">
-<caption>Así clasificamos · ejemplos</caption>
-<thead><tr><th>Producto</th><th>Calibres y categorías</th><th>Formato</th></tr></thead>
-<tbody>
-<tr><td>Palta Hass</td><td><span class="chip">Calibre 18–20</span><span class="chip">22–24</span><span class="chip">26–32</span></td><td>Caja 10 kg</td></tr>
-<tr><td>Tomate</td><td><span class="chip">Primera</span><span class="chip">Segunda</span><span class="chip alt">Cocina</span></td><td>Caja 18 kg</td></tr>
-<tr><td>Limón</td><td><span class="chip">Grande</span><span class="chip">Mediano</span><span class="chip alt">Jugo</span></td><td>Malla 18 kg</td></tr>
-<tr><td>Papa</td><td><span class="chip">Primera</span><span class="chip">Segunda</span><span class="chip">Semilla</span></td><td>Saco 25 kg</td></tr>
-<tr><td>Cebolla</td><td><span class="chip">Extra</span><span class="chip">Primera</span><span class="chip alt">Cocina</span></td><td>Malla 20 kg</td></tr>
-</tbody>
-</table>
-</div>
-</div>
+<ul class="qa2">
+<li><span class="k">Calibre</span><b>Parejo por lote</b>Cajas uniformes: sabes qué compras.</li>
+<li><span class="k">Madurez</span><b>En su punto</b>Para vitrina o para cocina.</li>
+<li><span class="k">Sanidad</span><b>Sin daño</b>Fuera golpes y defectos.</li>
+<li><span class="k">Trazabilidad</span><b>Con origen</b>Productor y predio conocidos.</li>
+</ul>
+<p class="qa2-ex"><span class="lbl">Ejemplos</span><span class="ex"><b>Palta Hass</b><i class="chip">18–20</i><i class="chip">22–24</i><i class="chip">26–32</i><em>caja 10 kg</em></span><span class="ex"><b>Tomate</b><i class="chip">Primera</i><i class="chip">Segunda</i><i class="chip alt">Cocina</i><em>caja 18 kg</em></span><span class="ex"><b>Limón</b><i class="chip">Grande</i><i class="chip">Mediano</i><i class="chip alt">Jugo</i><em>malla 18 kg</em></span></p>
 </div>
 </section>
 <section id="catalogo">
 <div class="wrap">
 <div class="sec-head">
-<div><p class="eyebrow" id="seasonEyebrow">Catálogo mayorista · noviembre</p><h2>Reserva la próxima cosecha.</h2></div>
-<p>Elige calibre y cantidad de cajas. Ves el precio por bulto al reservar y pagas en línea o contra entrega.</p>
+<div><p class="eyebrow" id="seasonEyebrow">Catálogo · noviembre</p><h2>Al detalle o al por mayor.</h2></div>
+<p id="catLead">Compra <b>al detalle</b>, por kilo o unidad, para tu casa. O <b>al por mayor</b>, por caja, malla o saco con 20% de descuento, si tienes un negocio o revendes. Sin RUT de empresa.</p>
 </div>
-<p class="mode-note" style="margin:-8px 0 22px">Preventa · reserva hasta el día antes de la cosecha · formatos y orígenes de ejemplo</p>
+<div class="modebar"><div class="seg" role="tablist" aria-label="Tipo de compra"><button type="button" role="tab" class="on" aria-selected="true" data-mode="kg">Al detalle</button><button type="button" role="tab" aria-selected="false" data-mode="may">Al por mayor</button></div><p class="mode-note" id="modeNote"></p></div><p class="ship-free"><span aria-hidden="true">🚚</span> <b>Despacho gratis en la Región Metropolitana</b> desde $24.990</p>
 <div class="catsec" id="frutas"><div class="cat-h"><h3>Frutas</h3><span>Fruta de temporada, de la A a la Z</span></div><div class="products" id="products-f"></div></div>
 <div class="catsec" id="verduras"><div class="cat-h"><h3>Verduras</h3><span>Hortalizas y verduras de hoja, de la A a la Z</span></div><div class="products" id="products-v"></div></div>
+<div class="catsec" id="frutos-secos"><div class="cat-h"><h3>Frutos secos y semillas</h3><span>Seleccionados por calibre, de la A a la Z</span></div><div class="products" id="products-s"></div></div>
 <div class="catsec" id="huevos"><div class="cat-h"><h3>Huevos de campo</h3><span>De gallinas libres, directo del productor</span></div><div class="products" id="products-h"></div></div>
 </div>
 </section>
@@ -182,11 +228,11 @@ header{position:sticky;top:env(safe-area-inset-top,0);z-index:20;background:colo
 <p>Trabajamos con pequeños y medianos agricultores chilenos. Les pagamos un precio justo y a tiempo, y ellos nos entregan lo mejor de su cosecha.</p>
 </div>
 <div class="growers">
-<article class="grower"><div class="portrait p1"><img src="https://images.pexels.com/photos/11798034/pexels-photo-11798034.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=960&h=720" alt="Agricultor cosechando en su campo" loading="lazy"><span>Quillota</span></div><h3>Hernán Muñoz</h3><p class="meta">Quillota, Valparaíso · paltas y cítricos</p><p>Paltas Hass de huerto de ladera, cosechadas con la madurez justa para vitrina o cocina.</p></article>
-<article class="grower"><div class="portrait p2"><img src="https://images.pexels.com/photos/5529604/pexels-photo-5529604.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=960&h=720" alt="Familia de agricultores cosechando tomates" loading="lazy"><span>Limache</span></div><h3>Familia Rojas</h3><p class="meta">Limache, Valparaíso · tomates y hortalizas</p><p>Tomate limachino tradicional, cosechado maduro y clasificado por categoría.</p></article>
-<article class="grower"><div class="portrait p3"><img src="https://images.pexels.com/photos/9798975/pexels-photo-9798975.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=960&h=720" alt="Agricultor llenando un cajón con camotes recién cosechados" loading="lazy"><span>Chillán</span></div><h3>Cooperativa Los Aromos</h3><p class="meta">Chillán, Ñuble · frutillas y berries</p><p>14 familias que venden su cosecha sin intermediarios, con despacho en frío.</p></article>
+<article class="grower"><div class="portrait p1"><img src="/productor-frutillas-melipilla.jpg" alt="Hernán Muñoz junto a cajas de frutillas recién cosechadas" loading="lazy"><span>Melipilla</span></div><h3>Hernán Muñoz</h3><p class="meta">Melipilla, Región Metropolitana · frutillas</p><p>Frutillas cultivadas bajo malla, cosechadas en su punto de madurez y seleccionadas por calibre.</p></article>
+<article class="grower"><div class="portrait p2"><img src="/productor-lechugas-limache.jpg" alt="Productora cosechando lechugas en el campo" loading="lazy"><span>Limache</span></div><h3>Familia Rojas</h3><p class="meta">Limache, Valparaíso · lechugas, repollos y hortalizas</p><p>Lechugas y repollos de hoja firme, cosechados al amanecer y seleccionados por tamaño para llegar frescos a tu local.</p></article>
+<article class="grower"><div class="portrait p3"><img src="/productor-papas-carahue.jpg" alt="Socios de la cooperativa revisando papas rojas recién cosechadas" loading="lazy"><span>Carahue</span></div><h3>Cooperativa Los Aromos</h3><p class="meta">Carahue, La Araucanía · papas</p><p>14 familias que cultivan papas en los suelos de Carahue y venden su cosecha sin intermediarios, seleccionada por calibre.</p></article>
 </div>
-<p class="note">Productores de ejemplo para el prototipo.</p>
+
 </div>
 </section>
 <section class="standard">
@@ -195,11 +241,12 @@ header{position:sticky;top:env(safe-area-inset-top,0);z-index:20;background:colo
 <div><p class="eyebrow">Estándar CosechaSelecta</p><h2>La calidad del campo, en la mesa de todos los chilenos.</h2></div>
 <p>Queremos que cada verdulería, restaurante y negocio de Chile ofrezca la frescura del campo.</p>
 </div>
+<p class="stds-t">Trabajan con nosotros</p>
 <div class="stds">
-<div class="std"><span class="big num">48 h</span><p>Desde la cosecha hasta tu local. Sin bodegas ni cámaras de frío largas.</p></div>
-<div class="std"><span class="big">100%</span><p>De los lotes revisados por calidad y calibre.</p></div>
-<div class="std"><span class="big">Directo</span><p>Compra al agricultor, sin intermediarios.</p></div>
-<div class="std"><span class="big">Garantía</span><p>Si un lote no cumple, lo reponemos.</p></div>
+<div class="std"><span class="big">+<span class="cnt" data-to="45">45</span></span><p>Restaurantes</p></div>
+<div class="std"><span class="big">+<span class="cnt" data-to="36">36</span></span><p>Verdulerías</p></div>
+<div class="std"><span class="big">+<span class="cnt" data-to="48">48</span></span><p>Almacenes</p></div>
+<div class="std"><span class="big">+<span class="cnt" data-to="67">67</span></span><p>Feriantes</p></div>
 </div>
 </div>
 </section>
@@ -207,12 +254,12 @@ header{position:sticky;top:env(safe-area-inset-top,0);z-index:20;background:colo
 <div class="wrap">
 <div class="sec-head">
 <div><p class="eyebrow">Para negocios</p><h2>Un proveedor que planifica contigo.</h2></div>
-<p>Precios por caja, saco o malla para verdulerías, restaurantes y minimarkets. Factura electrónica, pago al reservar o contra entrega, y cosecha programada según tu pedido.</p>
+<p>Precios por caja, saco o malla para verdulerías, restaurantes y minimarkets. Factura electrónica, pago al confirmar o contra entrega, y pedido semanal con día fijo de entrega.</p>
 </div>
 <div class="forwho">
-<article class="who"><div class="ph w1"><img src="https://images.pexels.com/photos/35206311/pexels-photo-35206311.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=960&h=540" alt="Puesto de verduras frescas con cajones iluminados" loading="lazy"><span>Verdulerías</span></div><div class="bd"><h3>Verdulerías y almacenes</h3><ul><li>Calibre parejo que luce en la vitrina</li><li>Pedido semanal fijo con día de entrega</li><li>Precio mayorista para mantener tu margen</li></ul></div></article>
-<article class="who"><div class="ph w2"><img src="https://images.pexels.com/photos/29145279/pexels-photo-29145279.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=960&h=540" alt="Chef emplatando verduras frescas en un restaurante" loading="lazy"><span>Restaurantes</span></div><div class="bd"><h3>Restaurantes y hoteles</h3><ul><li>Línea cocina: calibre comercial a menor precio</li><li>Madurez según tu menú del día</li><li>Despacho temprano antes del servicio</li></ul></div></article>
-<article class="who"><div class="ph w3"><img src="https://images.pexels.com/photos/18123381/pexels-photo-18123381.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=960&h=540" alt="Pasillo de frutas y verduras de un minimarket" loading="lazy"><span>Negocios</span></div><div class="bd"><h3>Minimarkets y negocios</h3><ul><li>Surtido básico listo para reponer</li><li>Pedido mínimo accesible</li><li>Factura electrónica y pago contra entrega</li></ul></div></article>
+<article class="who"><div class="ph w1"><img src="/verduleria-cesta.jpg" alt="Verdulería con frutas y verduras frescas en canastos de mimbre" loading="lazy"><span>Verdulerías</span></div><div class="bd"><h3>Verdulerías y almacenes</h3><ul><li>Calibre parejo que luce en la vitrina</li><li>Pedido semanal fijo con día de entrega</li><li>Precio mayorista para mantener tu margen</li></ul></div></article>
+<article class="who"><div class="ph w2"><img src="/restaurantes.jpg" alt="Plato gourmet de verduras frescas en un restaurante" loading="lazy"><span>Restaurantes</span></div><div class="bd"><h3>Restaurantes y hoteles</h3><ul><li>Línea cocina: calibre comercial a menor precio</li><li>Madurez según tu menú del día</li><li>Despacho temprano antes del servicio</li></ul></div></article>
+<article class="who"><div class="ph w3"><img src="/minimarket.jpg" alt="Minimarket con frutas frescas en canastos sobre un mesón de madera" loading="lazy"><span>Negocios</span></div><div class="bd"><h3>Minimarkets y negocios</h3><ul><li>Surtido básico listo para reponer</li><li>Pedido mínimo accesible</li><li>Factura electrónica y pago contra entrega</li></ul></div></article>
 </div>
 </div>
 </section>
@@ -222,16 +269,16 @@ header{position:sticky;top:env(safe-area-inset-top,0);z-index:20;background:colo
 <div>
 <p class="eyebrow">Pedido semanal · <span class="qbadge"><b id="qCount" class="num">0</b> productos en tu pedido</span></p>
 <h2>Programa tu pedido semanal.</h2>
-<p>Abre tu cuenta de negocio y fija un pedido que se repite cada semana. Te reservamos la cosecha y te confirmamos precios por calibre antes de cosechar.</p>
-<ul><li>Mismo día de entrega cada semana</li><li>Factura electrónica</li><li>Pago al reservar o contra entrega, sin crédito</li><li>Pedido mínimo por despacho</li></ul>
+<p>Abre tu cuenta de negocio y fija un pedido que se repite cada semana. Te apartamos el producto y te confirmamos precios por calibre antes de cada despacho.</p>
+<ul><li>Mismo día de entrega cada semana</li><li>Factura electrónica</li><li>Pago al confirmar o contra entrega, sin crédito</li><li>Pedido mínimo por despacho</li></ul>
 </div>
 <form class="qform" id="qform" novalidate>
-<label for="q-biz">Nombre del negocio<input id="q-biz" autocomplete="organization" required></label>
-<label for="q-type">Tipo de negocio<select id="q-type" required><option value="">Elige una opción</option><option>Verdulería o almacén</option><option>Restaurante u hotel</option><option>Minimarket</option><option>Otro negocio</option></select></label>
+<label for="q-biz">Nombre o negocio<input id="q-biz" autocomplete="organization" required></label>
+<label for="q-type">Tipo de negocio<select id="q-type" required><option value="">Elige una opción</option><option>Verdulería o almacén</option><option>Restaurante u hotel</option><option>Minimarket</option><option>Otro negocio</option><option>Hogar o familia</option></select></label>
 <label for="q-name">Nombre de contacto<input id="q-name" autocomplete="name" required></label>
 <label for="q-phone">Teléfono<input id="q-phone" type="tel" autocomplete="tel" placeholder="+56 9" required></label>
 <label for="q-place">Comuna del local<input id="q-place" placeholder="Ej: Providencia" required></label>
-<label for="q-vol">Volumen semanal estimado<select id="q-vol"><option>Menos de 100 kg</option><option>100 a 500 kg</option><option>500 kg a 1 tonelada</option><option>Más de 1 tonelada</option></select></label>
+<label for="q-vol">Volumen semanal estimado<select id="q-vol"><option>Menos de 30 kg</option><option>30 a 100 kg</option><option>100 a 500 kg</option><option>500 kg a 1 tonelada</option><option>Más de 1 tonelada</option></select></label>
 <label for="q-msg" class="full">Productos que necesitas<textarea id="q-msg" placeholder="Ej: palta calibre 22–24, 5 cajas por semana"></textarea></label>
 <p class="qlist" id="qList">Aún no agregas productos del catálogo.</p>
 <button class="btn btn-primary full" type="submit" style="justify-content:center">Abrir cuenta y programar pedido</button>
@@ -250,9 +297,13 @@ header{position:sticky;top:env(safe-area-inset-top,0);z-index:20;background:colo
 </div>
 <form class="sell-form" id="sellForm" novalidate>
 <label for="sf-name">Nombre<input id="sf-name" name="name" autocomplete="name" required></label>
+<label for="sf-org"><span>Agrícola o sociedad <small style="font-weight:400;opacity:.7">(opcional)</small></span><input id="sf-org" name="org" autocomplete="organization" placeholder="Ej: Agrícola Los Robles SpA"></label>
 <label for="sf-phone">Teléfono<input id="sf-phone" name="phone" type="tel" autocomplete="tel" placeholder="+56 9" required></label>
+<label for="sf-mail">Correo electrónico<input id="sf-mail" name="email" type="email" autocomplete="email" placeholder="nombre@correo.cl" required></label>
+<label for="sf-web"><span>Página web <small style="font-weight:400;opacity:.7">(opcional)</small></span><input id="sf-web" name="web" type="url" inputmode="url" autocomplete="url" placeholder="www.tuagricola.cl"></label>
 <label for="sf-place">Comuna o localidad<input id="sf-place" name="place" placeholder="Ej: Quillota" required></label>
 <label for="sf-crop">¿Qué cultivas?<input id="sf-crop" name="crop" placeholder="Ej: paltas, tomates" required></label>
+<label for="sf-cal">Calibre o variedad<input id="sf-cal" name="calibre" placeholder="Ej: Hass, calibre 18-20" required></label>
 <button class="btn btn-primary full" type="submit">Quiero venderle a CosechaSelecta</button>
 <span class="ok" id="sellOk" role="status"></span>
 </form>
@@ -263,9 +314,9 @@ header{position:sticky;top:env(safe-area-inset-top,0);z-index:20;background:colo
 <footer>
 <div class="wrap">
 <div class="foot">
-<div><a class="logo" href="#inicio" style="font-size:24px"><img class="mark m-l" src="/logo.png" alt=""><img class="mark m-d" src="/logo-claro.png" alt=""><span>Cosecha<em>Selecta</em></span></a><p style="margin-top:10px;max-width:24em">Fruta y verdura mayorista en preventa, directo del agricultor y seleccionada por calidad y calibre.</p></div>
+<div><a class="logo" href="#inicio" style="font-size:24px"><img class="mark m-l" src="/logo.png" alt=""><img class="mark m-d" src="/logo-claro.png" alt=""><span>Cosecha<em>Selecta</em></span></a><p style="margin-top:10px;max-width:24em">Fruta y verdura a precio mayorista para todos, directo del agricultor y seleccionada por calidad y calibre.</p><a class="ig-f" href="https://www.instagram.com/cosecha.selecta_/" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/></svg><span>@cosecha.selecta_</span></a></div>
 <div><h4>Para negocios</h4><ul><li><a href="#negocios">Verdulerías</a></li><li><a href="#negocios">Restaurantes y hoteles</a></li><li><a href="#negocios">Minimarkets</a></li><li><a href="#pedido-semanal">Pedido semanal</a></li></ul></div>
-<div><h4>Catálogo</h4><ul><li><a href="#frutas">Frutas por mayor</a></li><li><a href="#verduras">Verduras por mayor</a></li><li><a href="#calidad">Calibres y formatos</a></li><li><a href="#negocios">Línea cocina</a></li></ul></div>
+<div><h4>Catálogo</h4><ul><li><a href="#frutas">Frutas por mayor</a></li><li><a href="#verduras">Verduras por mayor</a></li><li><a href="#frutos-secos">Frutos secos y semillas</a></li><li><a href="#calidad">Calibres y formatos</a></li><li><a href="#negocios">Línea cocina</a></li></ul></div>
 <div><h4>CosechaSelecta</h4><ul><li><a href="#como-funciona">Cómo trabajamos</a></li><li><a href="#productores">Productores</a></li><li><a href="#vender">Vende tu cosecha</a></li><li><a href="#pedido-semanal">Contacto</a></li></ul></div>
 </div>
 <p class="proto">Prototipo de diseño · cosechaselecta.com · productores, precios, calibres y formatos son ejemplos · fotos: Pexels</p>
@@ -289,7 +340,6 @@ header{position:sticky;top:env(safe-area-inset-top,0);z-index:20;background:colo
 </fieldset>
 <fieldset><legend>Productos de interés * · <i>Products of interest</i></legend><div class="chks" id="expProds"><p class="chg">Frutas · <i>Fruit</i></p><label class="chk"><input type="checkbox" name="prod" value="Arándanos"><span>Arándanos <i>· Blueberries</i></span></label>
 <label class="chk"><input type="checkbox" name="prod" value="Cerezas"><span>Cerezas <i>· Cherries</i></span></label>
-<label class="chk"><input type="checkbox" name="prod" value="Durazno"><span>Durazno <i>· Peach</i></span></label>
 <label class="chk"><input type="checkbox" name="prod" value="Frutillas"><span>Frutillas <i>· Strawberries</i></span></label>
 <label class="chk"><input type="checkbox" name="prod" value="Limón"><span>Limón <i>· Lemon</i></span></label>
 <label class="chk"><input type="checkbox" name="prod" value="Manzana"><span>Manzana <i>· Apple</i></span></label>
@@ -300,9 +350,7 @@ header{position:sticky;top:env(safe-area-inset-top,0);z-index:20;background:colo
 <label class="chk"><input type="checkbox" name="prod" value="Apio"><span>Apio <i>· Celery</i></span></label>
 <label class="chk"><input type="checkbox" name="prod" value="Brócoli"><span>Brócoli <i>· Broccoli</i></span></label>
 <label class="chk"><input type="checkbox" name="prod" value="Cebolla"><span>Cebolla <i>· Onion</i></span></label>
-<label class="chk"><input type="checkbox" name="prod" value="Choclo"><span>Choclo <i>· Sweet corn</i></span></label>
 <label class="chk"><input type="checkbox" name="prod" value="Coliflor"><span>Coliflor <i>· Cauliflower</i></span></label>
-<label class="chk"><input type="checkbox" name="prod" value="Espárragos"><span>Espárragos <i>· Asparagus</i></span></label>
 <label class="chk"><input type="checkbox" name="prod" value="Lechuga costina"><span>Lechuga costina <i>· Romaine lettuce</i></span></label>
 <label class="chk"><input type="checkbox" name="prod" value="Papa"><span>Papa <i>· Potato</i></span></label>
 <label class="chk"><input type="checkbox" name="prod" value="Pepino"><span>Pepino <i>· Cucumber</i></span></label>
@@ -343,17 +391,17 @@ header{position:sticky;top:env(safe-area-inset-top,0);z-index:20;background:colo
 <aside class="drawer" id="cart" aria-label="Mi pedido" hidden>
 <div class="cart-h"><h3>Mi pedido</h3><button type="button" class="cart-x" id="cartClose" aria-label="Cerrar pedido">×</button></div>
 <ul class="cart-l" id="cItems"></ul>
-<div class="cart-f"><div class="cart-row"><span>Volumen</span><b id="cTotal" class="num">0 bultos</b></div><div class="cart-row"><span>Neto</span><b id="cNeto" class="num">$0</b></div><div class="cart-row"><span>IVA 19%</span><b id="cIva" class="num">$0</b></div><div class="cart-tot"><span>Total</span><b id="cSum" class="num">$0</b></div><p id="cMin"></p><button type="button" class="btn btn-primary full" id="payBtn" style="justify-content:center">Continuar al pago</button><p>Precio fijo al reservar. Pagas en línea con Webpay o transferencia, o contra entrega.</p></div>
+<div class="cart-f"><div class="cart-tot"><span id="cTotLbl">Total</span><b id="cTotal" class="num">0 bultos</b></div><p class="cart-min" id="cMin" hidden></p><p class="cart-ship" id="cShip" hidden></p><p id="cNote">Te confirmamos el precio del día por calibre antes de cosechar. Pago al reservar o contra entrega.</p><button type="button" class="btn btn-primary full" id="payBtn" style="justify-content:center">Confirmar pedido</button></div>
 </aside>
 <div class="toast" id="toast" role="status"></div>
-<script src="/catalogo.js"></script>
+<input id="hpWeb" name="web" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
 <script>
 (function(){
 const days=['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
 const months=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
 const now=new Date();
 const nd=new Date(now); nd.setDate(nd.getDate()+(now.getHours()>=18?2:1)); if(nd.getDay()===0) nd.setDate(nd.getDate()+1);
-document.getElementById('seasonEyebrow').textContent='Catálogo mayorista · '+months[now.getMonth()];
+document.getElementById('seasonEyebrow').textContent='Catálogo · '+months[now.getMonth()];
 const art=(s,c)=>{const L='#4E7A34';
 const m={
 round:`<circle cx="50" cy="56" r="30" fill="${c}"/><path d="M38 28c6 4 18 4 24 0-2 6-8 8-12 8s-10-2-12-8z" fill="${L}"/>`,
@@ -372,11 +420,20 @@ const PH={"Palta Hass": "https://images.pexels.com/photos/557659/pexels-photo-55
 "Cerezas": "https://images.pexels.com/photos/1178610/pexels-photo-1178610.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
 "Lechuga costina": "https://images.pexels.com/photos/5589058/pexels-photo-5589058.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
 "Espárragos": "https://images.pexels.com/photos/4050973/pexels-photo-4050973.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
+"Almendras": "https://images.pexels.com/photos/13002250/pexels-photo-13002250.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
+"Pistacho": "https://images.pexels.com/photos/1799307/pexels-photo-1799307.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
+"Semillas de zapallo": "https://images.pexels.com/photos/4753633/pexels-photo-4753633.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
+"Maní": "https://images.pexels.com/photos/209371/pexels-photo-209371.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
+"Castañas de cajú": "https://images.pexels.com/photos/4499222/pexels-photo-4499222.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
+"Nueces": "https://images.pexels.com/photos/19396252/pexels-photo-19396252.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
+"Chía": "https://images.pexels.com/photos/13613874/pexels-photo-13613874.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
+"Linaza": "https://images.pexels.com/photos/9974505/pexels-photo-9974505.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
+"Champiñones": "https://images.pexels.com/photos/5950443/pexels-photo-5950443.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
 "Huevos de campo": "https://images.pexels.com/photos/3789535/pexels-photo-3789535.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
 "Arándanos": "https://images.pexels.com/photos/30964386/pexels-photo-30964386.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
 "Uva de mesa": "https://images.pexels.com/photos/23042/pexels-photo.jpg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
 "Papa": "https://images.pexels.com/photos/4110466/pexels-photo-4110466.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
-"Cebolla": "https://images.pexels.com/photos/872400/pexels-photo-872400.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
+"Cebolla": "https://images.pexels.com/photos/25037071/pexels-photo-25037071.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
 "Zanahoria": "https://images.pexels.com/photos/7418944/pexels-photo-7418944.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
 "Pimentón": "https://images.pexels.com/photos/32084324/pexels-photo-32084324.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
 "Acelga": "https://images.pexels.com/photos/5738771/pexels-photo-5738771.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
@@ -384,7 +441,7 @@ const PH={"Palta Hass": "https://images.pexels.com/photos/557659/pexels-photo-55
 "Apio": "https://images.pexels.com/photos/13044694/pexels-photo-13044694.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
 "Brócoli": "https://images.pexels.com/photos/7676909/pexels-photo-7676909.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
 "Choclo": "https://images.pexels.com/photos/17605799/pexels-photo-17605799.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
-"Coliflor": "https://images.pexels.com/photos/4963759/pexels-photo-4963759.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
+"Coliflor": "https://images.pexels.com/photos/4963743/pexels-photo-4963743.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
 "Pepino": "https://images.pexels.com/photos/2775838/pexels-photo-2775838.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
 "Repollo": "https://images.pexels.com/photos/19917025/pexels-photo-19917025.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
 "Zapallo": "https://images.pexels.com/photos/5519121/pexels-photo-5519121.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540",
@@ -393,101 +450,133 @@ const PH={"Palta Hass": "https://images.pexels.com/photos/557659/pexels-photo-55
 "Naranja": "https://images.pexels.com/photos/12901232/pexels-photo-12901232.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=720&h=540"};
 const pic=(x,f)=>PH[x.n]?`<img src="${PH[x.n]}" alt="${x.n} fresco, seleccionado por calibre" loading="lazy">`:f;
 const P=[
-{k:'f',n:'Palta Hass',o:'Quillota',p:4990,u:'kg',f:'Caja 10 kg',c:['Calibre 18–20','22–24','26–32'],col:'#3F5A2A',s:'avocado'},
-{k:'f',n:'Limón',o:'Quillota',p:1590,u:'kg',f:'Malla 18 kg',c:['Grande','Mediano','Jugo'],col:'#D9B92E',s:'round'},
-{k:'f',n:'Frutillas',o:'Chillán',p:5490,u:'kg',f:'Caja 4 kg',c:['Primera','Mermelada'],col:'#D23A3A',s:'berry'},
-{k:'f',n:'Cerezas',o:'Curicó',p:5990,u:'kg',f:'Caja 5 kg',c:['Jumbo','Extra'],col:'#9E1B2C',s:'cherry'},
-{k:'f',n:'Arándanos',o:'Chillán',p:8990,u:'kg',f:'Caja 2 kg',c:['Extra','Primera'],col:'#3B4A8C',s:'round'},
-{k:'f',n:'Uva de mesa',o:'Rancagua',p:2290,u:'kg',f:'Caja 8,2 kg',c:['Extra','Primera'],col:'#8E2F4A',s:'round'},
-{k:'f',n:'Durazno',o:'Rancagua',p:1990,u:'kg',f:'Caja 10 kg',c:['Primera','Segunda'],col:'#E9965A',s:'round'},
-{k:'f',n:'Manzana',o:'Curicó',p:1490,u:'kg',f:'Caja 18 kg',c:['Extra','Primera'],col:'#C8402E',s:'round'},
-{k:'f',n:'Naranja',o:'Ovalle',p:1290,u:'kg',f:'Malla 18 kg',c:['Mesa','Jugo'],col:'#E58A1F',s:'round'},
-{k:'v',n:'Tomate limachino',o:'Limache',p:1990,u:'kg',f:'Caja 18 kg',c:['Primera','Segunda','Cocina'],col:'#C8402E',s:'round'},
-{k:'v',n:'Lechuga costina',o:'Colina',p:990,u:'unidad',f:'Caja 12 unidades',c:['Primera'],col:'#86B35A',s:'leaf'},
-{k:'v',n:'Espárragos',o:'San Fernando',p:6490,u:'kg',f:'Caja 5 kg',c:['Grueso','Mediano'],col:'#5E8C3A',s:'stalk'},
-{k:'v',n:'Papa',o:'Osorno',p:990,u:'kg',f:'Saco 25 kg',c:['Primera','Segunda'],col:'#C9A66B',s:'round'},
-{k:'v',n:'Cebolla',o:'Rengo',p:890,u:'kg',f:'Malla 20 kg',c:['Extra','Primera','Cocina'],col:'#B9824A',s:'round'},
-{k:'v',n:'Zanahoria',o:'Colina',p:790,u:'kg',f:'Saco 20 kg',c:['Primera','Segunda'],col:'#E07A2B',s:'stalk'},
-{k:'v',n:'Pimentón',o:'Quillota',p:890,u:'unidad',f:'Caja 10 kg',c:['Rojo','Amarillo'],col:'#C8402E',s:'round'},
-{k:'v',n:'Acelga',o:'Colina',p:890,u:'atado',f:'Caja 12 atados',c:['Primera'],col:'#3F7A3A',s:'leaf'},
-{k:'v',n:'Ajo',o:'Melipilla',p:690,u:'cabeza',f:'Malla 10 kg',c:['Extra','Primera'],col:'#E8E0CF',s:'round'},
-{k:'v',n:'Apio',o:'Colina',p:1290,u:'unidad',f:'Caja 12 unidades',c:['Primera'],col:'#8DBF5A',s:'stalk'},
-{k:'v',n:'Brócoli',o:'Graneros',p:1190,u:'unidad',f:'Caja 12 unidades',c:['Primera'],col:'#3F6E2E',s:'leaf'},
-{k:'v',n:'Choclo',o:'Melipilla',p:490,u:'unidad',f:'Saco 50 unidades',c:['Pastelero','Humero'],col:'#E2C046',s:'stalk'},
-{k:'v',n:'Coliflor',o:'Graneros',p:1490,u:'unidad',f:'Caja 8 unidades',c:['Primera'],col:'#EDE6D3',s:'round'},
-{k:'v',n:'Pepino',o:'Quillota',p:590,u:'unidad',f:'Caja 10 kg',c:['Primera','Segunda'],col:'#3F7A3A',s:'pod'},
-{k:'v',n:'Repollo',o:'San Bernardo',p:1190,u:'unidad',f:'Saco 10 unidades',c:['Primera'],col:'#7FA65A',s:'round'},
-{k:'v',n:'Zapallo',o:'Rancagua',p:990,u:'kg',f:'Malla 25 kg',c:['Camote','Italiano'],col:'#D9772B',s:'round'},
-{k:'h',n:'Huevos de campo',o:'Pirque',p:4490,u:'docena',f:'Bandeja 180 unidades',c:['Extra','Grande'],col:'#D9B98A',s:'egg'}
+{k:'f',n:'Palta Hass',o:'Quillota',p:4990,u:'kg',f:'Caja 17 kg',pm:35714,c:['Calibre 18–20','22–24','26–32'],col:'#3F5A2A',s:'avocado'},
+{k:'f',n:'Limón',o:'Quillota',p:1590,u:'kg',f:'Malla 18 kg',pm:12101,c:['Grande','Mediano','Jugo'],col:'#D9B92E',s:'round'},
+{k:'f',n:'Frutillas',o:'Chillán',p:5490,u:'kg',f:'Bandeja 7 kg',pm:17588,c:['Primera','Mermelada'],col:'#D23A3A',s:'berry'},
+{k:'f',n:'Cerezas',o:'Curicó',p:5990,u:'kg',f:'Bandeja 10 kg',pm:33529,c:['Jumbo','Extra'],col:'#9E1B2C',s:'cherry'},
+{k:'f',n:'Arándanos',o:'Chillán',p:8990,u:'kg',f:'Bandeja 2 kg',pm:16790,c:['Extra','Primera'],col:'#3B4A8C',s:'round'},
+{k:'f',n:'Uva de mesa',o:'Rancagua',p:2290,u:'kg',f:'Bandeja 8 kg',pm:46992,c:['Extra','Primera'],col:'#8E2F4A',s:'round'},
+{k:'f',n:'Manzana',o:'Curicó',p:1490,u:'kg',f:'Bandeja 15 kg',pm:18782,c:['Extra','Primera'],col:'#C8402E',s:'round'},
+{k:'f',n:'Naranja',o:'Ovalle',p:1290,u:'kg',f:'Bandeja 15 kg',pm:18782,c:['Mesa','Jugo'],col:'#E58A1F',s:'round'},
+{k:'v',n:'Tomate limachino',o:'Limache',p:1990,u:'kg',f:'Bandeja 18 kg',pm:22538,c:['Primera','Segunda','Cocina'],col:'#C8402E',s:'round'},
+{k:'v',n:'Lechuga costina',o:'Colina',p:990,u:'unidad',f:'Caja 15 unidades',pm:12479,c:['Primera'],col:'#86B35A',s:'leaf'},
+{k:'v',n:'Champiñones',o:'Talagante',p:3990,u:'kg',f:'Caja 3 kg',pm:5017,c:['Paris enteros','Laminados'],col:'#EDE3D3',s:'round'},
+{k:'v',n:'Papa',o:'Osorno',p:990,u:'kg',f:'Saco 25 kg',pm:20798,c:['Primera','Segunda'],col:'#C9A66B',s:'round'},
+{k:'v',n:'Cebolla',o:'Rengo',p:890,u:'kg',f:'Malla 17 kg',pm:18429,c:['Extra','Primera','Cocina'],col:'#B9824A',s:'round'},
+{k:'v',n:'Zanahoria',o:'Colina',p:790,u:'kg',f:'Saco 20 kg',pm:16639,c:['Primera','Segunda'],col:'#E07A2B',s:'stalk'},
+{k:'v',n:'Pimentón',o:'Quillota',p:890,u:'unidad',f:'Caja 60 unidades',pm:49916,c:['Rojo','Amarillo'],col:'#C8402E',s:'round'},
+{k:'v',n:'Acelga',o:'Colina',p:890,u:'atado',f:'Caja 12 atados',pm:20067,c:['Primera'],col:'#3F7A3A',s:'leaf'},
+{k:'v',n:'Ajo',o:'Melipilla',p:690,u:'cabeza',f:'Malla 200 unidades',pm:31933,c:['Extra','Primera'],col:'#E8E0CF',s:'round'},
+{k:'v',n:'Apio',o:'Colina',p:1290,u:'unidad',f:'Caja 12 unidades',pm:20067,c:['Primera'],col:'#8DBF5A',s:'stalk'},
+{k:'v',n:'Brócoli',o:'Graneros',p:1190,u:'unidad',f:'Caja 12 unidades',pm:13008,c:['Primera'],col:'#3F6E2E',s:'leaf'},
+{k:'v',n:'Coliflor',o:'Graneros',p:1490,u:'unidad',f:'Caja 8 unidades',pm:8672,c:['Primera'],col:'#EDE6D3',s:'round'},
+{k:'v',n:'Pepino',o:'Quillota',p:590,u:'unidad',f:'Caja 60 unidades',pm:39832,c:['Primera','Segunda'],col:'#3F7A3A',s:'pod'},
+{k:'v',n:'Repollo',o:'San Bernardo',p:1190,u:'unidad',f:'Saco 10 unidades',pm:11681,c:['Primera'],col:'#7FA65A',s:'round'},
+{k:'v',n:'Zapallo',o:'Rancagua',p:990,u:'kg',f:'Malla 25 kg',pm:31303,c:['Camote','Italiano'],col:'#D9772B',s:'round'},
+{k:'s',n:'Almendras',o:'Buin',p:9990,u:'kg',f:'Saco 10 kg',c:['Nonpareil','Extra'],col:'#B07A4A',s:'round'},
+{k:'s',n:'Pistacho',o:'San Fernando',p:18990,u:'kg',f:'Saco 10 kg',c:['Con cáscara','Pelado'],col:'#9DB36A',s:'round'},
+{k:'s',n:'Semillas de zapallo',o:'Chillán',p:8990,u:'kg',f:'Saco 10 kg',c:['Crudas','Tostadas'],col:'#4F6B3A',s:'round'},
+{k:'s',n:'Maní',o:'Importado',p:4990,u:'kg',f:'Saco 25 kg',c:['Con cáscara','Pelado tostado'],col:'#C9A05A',s:'round'},
+{k:'s',n:'Castañas de cajú',o:'Importado',p:14990,u:'kg',f:'Saco 10 kg',c:['W320 entera','Trozos'],col:'#E2CFA0',s:'round'},
+{k:'s',n:'Nueces',o:'Paine · Chandler',p:7990,u:'kg',f:'Saco 10 kg',c:['Con cáscara','Mariposa'],col:'#8A6640',s:'round'},
+{k:'s',n:'Chía',o:'Importado',p:5990,u:'kg',f:'Saco 25 kg',c:['Negra','Blanca'],col:'#4A4A48',s:'round'},
+{k:'s',n:'Linaza',o:'Importado',p:3490,u:'kg',f:'Saco 25 kg',c:['Café','Dorada'],col:'#8A4F2C',s:'round'},
+{k:'h',n:'Huevos de campo',o:'Pirque',p:4490,u:'docena',f:'Bandeja 30 unidades',pm:4202,nd:1,only:'kg',c:['Extra','Grande'],col:'#D9B98A',s:'egg'},
+{k:'h',n:'Huevos de campo',o:'Pirque',p:4490,u:'docena',f:'Caja 180 unidades',pm:16807,nd:1,only:'may',c:['Extra','Grande'],col:'#D9B98A',s:'egg'}
 ];
 const quote=new Set(); const qc=document.getElementById('qCount'), ql=document.getElementById('qList'), toast=document.getElementById('toast'); let tt;
 const flash=t=>{toast.textContent=t;toast.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove('show'),1800);};
+const send=async(tipo,campos,btn)=>{if(btn)btn.disabled=true;try{const r=await fetch('/api/contacto',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({tipo,campos,pagina:location.href,_web:(document.getElementById('hpWeb')||{}).value||''})});return r.ok;}catch(e){return false;}finally{if(btn)btn.disabled=false;}};
+const FAIL='No pudimos enviar tu mensaje. Escríbenos a hector.contreras@cosechaselecta.com o intenta de nuevo.';
 const sync=()=>{qc.textContent=quote.size; ql.textContent=quote.size?'En tu pedido semanal: '+[...quote].join(', ')+'.':'Aún no agregas productos del catálogo.';};
-const grids={f:document.getElementById('products-f'),v:document.getElementById('products-v'),h:document.getElementById('products-h')};
+const grids={f:document.getElementById('products-f'),v:document.getElementById('products-v'),h:document.getElementById('products-h'),s:document.getElementById('products-s')};
 const clp=v=>'$'+v.toLocaleString('es-CL');
-let mode='det'; const cart=new Map();
+const cart=new Map(); const FREE_RM=24990, MIN_DET=15000, DET_F=1, MAY_D=0.8; let mode='kg';
+const NOTE={kg:'Por kilo o por unidad, para tu casa · sin compra mínima',may:'Por caja, saco o malla completa · 20% de descuento sobre el precio por kilo, ideal para revender'};
 const cc=document.getElementById('cCount'), cItems=document.getElementById('cItems'), cTotal=document.getElementById('cTotal'), cartEl=document.getElementById('cart'), scrim=document.getElementById('cartScrim');
 const openCart=o=>{cartEl.hidden=!o;scrim.hidden=!o;};
 document.getElementById('cartBtn').addEventListener('click',()=>openCart(true));
 document.getElementById('cartClose').addEventListener('click',()=>openCart(false));
 scrim.addEventListener('click',()=>openCart(false));
 document.addEventListener('keydown',e=>{if(e.key==='Escape')openCart(false);});
-const CK='cs_carrito';
-const items=()=>[...cart].map(([key,q])=>{const [is,cal]=key.split('|');return{n:P[+is].n,cal,q};});
-const save=()=>{try{localStorage.setItem(CK,JSON.stringify(items()));}catch(e){}};
-document.getElementById('payBtn').addEventListener('click',()=>{if(!cart.size){flash('Aún no agregas productos');return;}
-const t=CATALOGO.totales(items());if(t.neto<CATALOGO.pedidoMinimo){flash('El pedido mínimo es '+clp(CATALOGO.pedidoMinimo)+' + IVA');return;}
-save();location.href='/checkout.html';});
+document.getElementById('payBtn').addEventListener('click',()=>{if(!cart.size){flash('Aún no agregas productos');return;}openCart(false);document.getElementById('qList').textContent='Tu pedido: '+cartTxt().replace(/\n/g,' · ');document.getElementById('qOk').textContent='Completa tus datos y envía para confirmar tu pedido.';document.getElementById('pedido-semanal').scrollIntoView({behavior:'smooth'});setTimeout(()=>document.getElementById('q-biz').focus({preventScroll:true}),600);});
+const lineP=(t,x,q)=>t==='d'?q*udet(x):q*bmay(x);
+const cartTxt=()=>[...cart].map(([key,q])=>{const [t,is,cal]=key.split('|'),x=P[+is];return t==='d'?`${x.n} · ${cal} · ${nf(q)} ${uinf(x).u} (al detalle)`+(x.pm?` × ${clp(udet(x))} = ${clp(lineP(t,x,q))}`:''):`${x.n} · ${cal} · ${q} × ${x.f} (mayorista)`+(x.pm?` × ${clp(bmay(x))} = ${clp(lineP(t,x,q))}`:'');}).join('\n');
 const expDlg=document.getElementById('expDlg'),expForm=document.getElementById('expForm'),expErr=document.getElementById('expErr');
 const expClose=()=>expDlg.close();
 document.getElementById('expBtn').addEventListener('click',()=>{expErr.hidden=true;expDlg.showModal();});
 document.getElementById('expClose').addEventListener('click',expClose);
 document.getElementById('expCancel').addEventListener('click',expClose);
 expDlg.addEventListener('click',e=>{if(e.target===expDlg)expClose();});
-expForm.addEventListener('submit',e=>{e.preventDefault();
+expForm.addEventListener('submit',async e=>{e.preventDefault();
 const bad=[...expForm.querySelectorAll('[required]')].filter(el=>!el.checkValidity());
 const noProd=!expForm.querySelector('input[name=prod]:checked');
 if(bad.length||noProd){expErr.textContent=noProd&&!bad.length?'Elige al menos un producto · Please select at least one product.':'Completa los campos marcados con * · Please complete the required fields (*).'+(noProd?' Elige al menos un producto · Select at least one product.':'');expErr.hidden=false;(bad[0]||document.getElementById('expProds')).scrollIntoView({block:'center',behavior:'smooth'});bad[0]&&bad[0].focus({preventScroll:true});return;}
-expErr.hidden=true;expForm.reset();expClose();flash('Solicitud recibida · Inquiry received (prototipo)');});
-const renderCart=()=>{let n=0,t=0;
-cItems.innerHTML=cart.size?[...cart].map(([key,q])=>{const [is,cal]=key.split('|'),i=+is,x=P[i],fi=fmtInfo(x),d=dates(x);n+=q;t+=q*fi.kg;const vol=fi.kg?`${String(Math.round(q*fi.kg*10)/10).replace('.',',')} kg`:`${q*fi.n} ${fi.uu}`;const pu=CATALOGO.precio(x.n,cal)||0;return `<li>${PH[x.n]?`<img src="${PH[x.n]}" alt="">`:'<span></span>'}<span class="nm">${x.n} · ${cal}<small>${q} × ${x.f} · ${vol}</small><small>Entrega ${fmt(d.e)}</small><span class="ln num">${clp(pu*q)} <small style="display:inline">(${clp(pu)} c/u)</small></span></span><span class="qty"><button type="button" data-d="-1" data-k="${key}" aria-label="Quitar una">−</button><b class="num">${q}</b><button type="button" data-d="1" data-k="${key}" aria-label="Agregar una">+</button></span></li>`}).join(''):'<li class="cart-empty">Aún no agregas productos.</li>';
-cc.textContent=[...cart.values()].reduce((a,b)=>a+b,0); cTotal.textContent=n?`${n} ${n===1?'bulto':'bultos'}${t?' · '+String(Math.round(t)).replace(/\B(?=(\d{3})+(?!\d))/g,'.')+' kg':''}`:'0 bultos';
-const tt=CATALOGO.totales(items()),falta=CATALOGO.pedidoMinimo-tt.neto;
-document.getElementById('cNeto').textContent=clp(tt.neto);document.getElementById('cIva').textContent=clp(tt.iva);document.getElementById('cSum').textContent=clp(tt.total);
-document.getElementById('cMin').textContent=!cart.size?'Pedido mínimo '+clp(CATALOGO.pedidoMinimo)+' + IVA.':falta>0?'Te faltan '+clp(falta)+' + IVA para el pedido mínimo.':'Cumples el pedido mínimo. Despacho incluido.';
-document.getElementById('payBtn').setAttribute('aria-disabled',String(!cart.size||falta>0));save();};
-cItems.addEventListener('click',e=>{const b=e.target.closest('button[data-d]');if(!b)return;const k=b.dataset.k,q=(cart.get(k)||0)+(+b.dataset.d);q>0?cart.set(k,q):cart.delete(k);renderCart();});
-const DAYS=['dom','lun','mar','mié','jue','vie','sáb'], MON=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
-const HD={f:2,v:3,h:1};
-const fmt=d=>`${DAYS[d.getDay()]} ${d.getDate()} ${MON[d.getMonth()]}`;
-const dates=x=>{const t=new Date();t.setHours(0,0,0,0);const h=new Date(t);h.setDate(t.getDate()+2);while(h.getDay()!==(x.hd??HD[x.k]))h.setDate(h.getDate()+1);const e=new Date(h);e.setDate(h.getDate()+2);return{h,e};};
-const isKg=x=>x.u==='kg';
-const unitLbl=x=>isKg(x)?'kg':(x.u==='unidad'?'un.':x.u);
-const step=x=>isKg(x)?0.5:1;
-const fq=(x,q)=>isKg(x)?String(q).replace('.',','):q;
+expErr.hidden=true;const fd=new FormData(expForm),L={nombre:'Nombre',empresa:'Empresa importadora',cargo:'Cargo',correo:'Correo',telefono:'Teléfono / WhatsApp',pais:'País de destino',prod:'Productos',volumen:'Volumen por compra',unidad:'Unidad',frecuencia:'Frecuencia',calibre:'Calibre',categoria:'Categoría',embalaje:'Embalaje',condicion:'Condición',incoterm:'Incoterm',puerto:'Puerto/aeropuerto destino',transporte:'Transporte',embarque:'Ventana de embarque',pago:'Forma de pago',precio:'Precio objetivo (USD/kg)',cert:'Certificaciones',msg:'Comentarios'},c={};
+for(const k in L){const v=fd.getAll(k).filter(Boolean);if(v.length)c[L[k]]=v.join(', ');}
+const eb=expForm.querySelector('button[type=submit]');if(!(await send('exportacion',c,eb))){expErr.textContent=FAIL+' · We could not send your inquiry, please email us.';expErr.hidden=false;return;}
+expForm.reset();expClose();flash('Solicitud enviada, te contactaremos pronto · Inquiry sent, we will contact you soon');});
+const renderCart=()=>{let n=0,t=0,sum=0,sd=0,priced=true;
+const ord=[...cart].sort((a,b)=>a[0][0]===b[0][0]?0:a[0][0]==='d'?-1:1);let lastT='';
+cItems.innerHTML=cart.size?ord.map(([key,q])=>{const [ty,is,cal]=key.split('|'),i=+is,x=P[i];const img=PH[x.n]?`<img src="${PH[x.n]}" alt="">`:'<span></span>';
+const fi=fmtInfo(x),u=uinf(x);let l1,l2='';
+if(ty==='d'){l1=`${nf(q)} ${u.u}`;if(x.pm){sd+=lineP(ty,x,q);l2=`${nf(q)} × ${clp(udet(x))} = ${clp(lineP(ty,x,q))}`;}else priced=false;}
+else{n+=q;t+=q*fi.kg;l1=`${q} × ${x.f} · `+(fi.kg?`${nf(q*fi.kg)} kg`:`${q*fi.n} ${fi.uu}`);if(x.pm){sum+=lineP(ty,x,q);l2=`${q} × ${clp(bmay(x))} = ${clp(lineP(ty,x,q))}`;}else priced=false;}
+const d=ty==='d'?u.st:1;const hd=ty!==lastT?(lastT=ty,`<li class="cart-grp">${ty==='d'?'Al detalle':'Al por mayor'}</li>`):'';
+return hd+`<li>${img}<span class="nm">${x.n} · ${cal}<small>${l1}</small>${l2?`<small>${l2}</small>`:''}</span><span class="qty"><button type="button" data-d="${-d}" data-k="${key}" aria-label="Quitar">−</button><b class="num">${ty==='d'?nf(q):q}</b><button type="button" data-d="${d}" data-k="${key}" aria-label="Agregar">+</button></span></li>`}).join(''):'<li class="cart-empty">Aún no agregas productos.</li>';
+cc.textContent=cart.size;const tot=sum+sd;
+const parts=[];if(n)parts.push(`${n} ${n===1?'bulto':'bultos'}${t?' · '+String(Math.round(t)).replace(/\B(?=(\d{3})+(?!\d))/g,'.')+' kg':''}`);if(cart.size&&priced)parts.push(clp(tot));
+cTotal.textContent=parts.length?parts.join(' · '):(cart.size&&priced?clp(tot):'$0');
+const cMin=document.getElementById('cMin');cMin.hidden=true;cMin.textContent=`Compra mínima al detalle: ${clp(MIN_DET)}. Te faltan ${clp(MIN_DET-sd)}.`;
+const cShip=document.getElementById('cShip');cShip.hidden=!(cart.size&&priced&&cMin.hidden);cShip.textContent=tot>=FREE_RM?'¡Tienes despacho gratis en la Región Metropolitana!':`Te faltan ${clp(FREE_RM-tot)} para despacho gratis en la RM. Bajo ese monto, te confirmamos el costo de despacho.`;
+document.getElementById('cNote').textContent=priced&&cart.size?'Precios con IVA incluido. Boleta o factura. Pago al confirmar o contra entrega.':'Te confirmamos el precio del día por calibre antes del despacho. Boleta o factura. Pago al confirmar o contra entrega.';};
+cItems.addEventListener('click',e=>{const b=e.target.closest('button[data-d]');if(!b)return;const k=b.dataset.k,q=Math.round(((cart.get(k)||0)+(+b.dataset.d))*10)/10;q>0?cart.set(k,q):cart.delete(k);renderCart();});
+const bruto=x=>Math.round(x.pm*1.19/10)*10;
 const fmtInfo=x=>{const k=x.f.match(/(\d+(?:,\d+)?)\s*kg/);const u=x.f.match(/(\d+)\s*(unidades|atados)/);return k?{kg:parseFloat(k[1].replace(',','.')),txt:x.f}:{kg:0,n:u?+u[1]:0,uu:u?u[2]:'',txt:x.f};};
 const pack=x=>x.f.split(' ')[0].toLowerCase();
-const card=(x,i)=>{const d=dates(x),fi=fmtInfo(x);return `<article class="prod"><div class="art">${pic(x,art(x.s,x.col))}</div><div class="info"><h3>${x.n}</h3><p class="origin">${x.o} · ${x.f}</p><dl class="harv"><div><dt>Cosecha</dt><dd>${fmt(d.h)}</dd></div><div><dt>Entrega</dt><dd>${fmt(d.e)}</dd></div></dl><label class="calsel"><span>Calibre</span><select id="c${i}">${x.c.map(c=>`<option>${c}</option>`).join('')}</select></label><p class="pref"><b>${clp(CATALOGO.precio(x.n,x.c[0])||0)}</b> + IVA · ${x.f.toLowerCase()}</p><div class="resv"><label class="qin"><span class="sr">Cajas de ${x.n}</span><button type="button" class="qm" data-i="${i}" data-d="-1" aria-label="Menos">−</button><input type="number" inputmode="numeric" min="1" step="1" value="1" id="q${i}"><span class="u">${pack(x)}${''}</span><button type="button" class="qm" data-i="${i}" data-d="1" aria-label="Más">+</button></label><button class="add rsv" type="button" data-i="${i}">Reservar</button></div></div></article>`;};
-const renderGrid=()=>{for(const k in grids) grids[k].innerHTML=P.map((x,i)=>[x,i]).filter(([x])=>x.k===k).sort((a,b)=>a[0].n.localeCompare(b[0].n,'es')).map(([x,i])=>card(x,i)).join('');};
-const onGrid=e=>{const m=e.target.closest('.qm'); if(m){const inp=document.getElementById('q'+m.dataset.i);inp.value=Math.max(1,(parseInt(inp.value)||0)+(+m.dataset.d));return;}
-const b=e.target.closest('.add'); if(!b)return; const i=+b.dataset.i, x=P[i];
-const q=parseInt(document.getElementById('q'+i).value)||0; if(q<1){flash('Indica cuántas cajas quieres reservar');return;}
-const cal=document.getElementById('c'+i).value, key=i+'|'+cal; cart.set(key,(cart.get(key)||0)+q); quote.add(x.n); sync(); renderCart();
-flash(`Reservaste ${q} ${pack(x)}${q>1?'s':''} de ${x.n} (${cal}) · entrega ${fmt(dates(x).e)}`);};
+const uinf=x=>{const fi=fmtInfo(x);return fi.kg?{u:'kg',q:fi.kg,st:0.5}:fi.n?{u:fi.uu==='atados'?'atado':'unidad',q:fi.n,st:1}:{u:'kg',q:0,st:0.5};};
+const r90=v=>Math.ceil((v-90)/100)*100+90;
+const upm=x=>{const u=uinf(x);return u.q?Math.round(bruto(x)/u.q):0;};
+const bmay=x=>x.nd?bruto(x):Math.round(bruto(x)*MAY_D/10)*10;
+const umay=x=>{const u=uinf(x);return u.q?Math.round(bmay(x)/u.q):0;};
+const udet=x=>{const v=upm(x);return DET_F===1?v:r90(v*DET_F);};
+const nf=v=>String(Math.round(v*10)/10).replace('.',',');
+const card=(x,i)=>{const u=uinf(x),det=mode==='kg'&&!x.nd;let pr;
+if(!x.pm)pr=det?'Precio del día según calibre':'Precio mayorista del día según calibre';
+else if(det)pr=`<b>${clp(udet(x))}</b> / ${u.u}<span class="ptot">IVA incl. · al por mayor ${clp(umay(x))}/${u.u} (−20%)</span>`;
+else pr=`<b>${clp(bmay(x))}</b> por ${pack(x)}<span class="ptot">${u.q?clp(umay(x))+'/'+u.u+' · ':''}${x.nd?'':'20% menos que al detalle · '}IVA incl.</span>`;
+const st=det?u.st:1,un=det?u.u:pack(x);
+return `<article class="prod"><div class="art">${pic(x,art(x.s,x.col))}</div><div class="info"><h3>${x.n}</h3><p class="origin">${x.o}${det?'':' · '+x.f}</p><label class="calsel"><span>Calibre</span><select id="c${i}">${x.c.map(c=>`<option>${c}</option>`).join('')}</select></label><p class="pref">${pr}</p><div class="resv"><label class="qin"><span class="sr">Cantidad de ${x.n}</span><button type="button" class="qm" data-i="${i}" data-d="-1" aria-label="Menos">−</button><input type="number" inputmode="decimal" min="${st}" step="${st}" value="1" id="q${i}"><span class="u">${un}</span><button type="button" class="qm" data-i="${i}" data-d="1" aria-label="Más">+</button></label><button class="add rsv" type="button" data-i="${i}">Agregar</button></div></div></article>`;};
+const renderGrid=()=>{for(const k in grids) grids[k].innerHTML=P.map((x,i)=>[x,i]).filter(([x])=>x.k===k&&(!x.only||x.only===mode)).sort((a,b)=>a[0].n.localeCompare(b[0].n,'es')).map(([x,i])=>card(x,i)).join('');};
+const onGrid=e=>{const m=e.target.closest('.qm'); if(m){const i=+m.dataset.i,x=P[i],inp=document.getElementById('q'+i),st=mode==='kg'&&!x.nd?uinf(x).st:1;inp.value=Math.max(st,Math.round(((parseFloat(String(inp.value).replace(',','.'))||0)+st*(+m.dataset.d))*2)/2);return;}
+const b=e.target.closest('.add'); if(!b)return; const i=+b.dataset.i, x=P[i], cal=document.getElementById('c'+i).value;
+const det=mode==='kg'&&!x.nd,q=det?Math.round((parseFloat(String(document.getElementById('q'+i).value).replace(',','.'))||0)*2)/2:(parseInt(document.getElementById('q'+i).value)||0); if(q<=0){flash('Indica la cantidad');return;}
+const key=(det?'d|':'m|')+i+'|'+cal; cart.set(key,Math.round(((cart.get(key)||0)+q)*10)/10); quote.add(x.n); sync(); renderCart();
+flash(det?`Agregaste ${nf(q)} ${uinf(x).u} de ${x.n} (${cal})`:`Agregaste ${q} ${pack(x)}${q>1?'s':''} de ${x.n} (${cal})`);};
 Object.values(grids).forEach(g=>g.addEventListener('click',onGrid));
-try{const sv=JSON.parse(localStorage.getItem(CK)||'[]');sv.forEach(it=>{const i=P.findIndex(x=>x.n===it.n);if(i>=0&&it.q>0&&P[i].c.includes(it.cal)){cart.set(i+'|'+it.cal,Math.floor(it.q));quote.add(it.n);}});sync();}catch(e){}
-renderGrid(); renderCart();
+const setMode=m=>{mode=m;document.querySelectorAll('.modebar .seg button').forEach(b=>{const on=b.dataset.mode===m;b.classList.toggle('on',on);b.setAttribute('aria-selected',on);});document.getElementById('modeNote').textContent=NOTE[m];renderGrid();};
+document.querySelectorAll('.modebar .seg button').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
+setMode('kg'); renderCart();
 const qf=document.getElementById('qform'), qok=document.getElementById('qOk');
-qf.addEventListener('submit',e=>{e.preventDefault();
+qf.addEventListener('submit',async e=>{e.preventDefault();
 const miss=[...qf.querySelectorAll('[required]')].find(i=>!i.value.trim());
 if(miss){qok.textContent='Completa los campos obligatorios para enviarte la cotización.';miss.focus();return;}
-qok.textContent=`Gracias. En el sitio real te enviaremos la cotización hoy mismo (prototipo: los datos no se envían).`;});
+const v=id=>document.getElementById(id).value.trim(),c={'Nombre del negocio':v('q-biz'),'Tipo de negocio':v('q-type'),'Contacto':v('q-name'),'Teléfono':v('q-phone'),'Comuna':v('q-place'),'Volumen semanal':v('q-vol'),'Productos que necesita':v('q-msg')};
+if(quote.size)c['Productos marcados en catálogo']=[...quote].join(', ');if(cart.size)c['Pedido (carrito)']=cartTxt();
+qok.textContent='Enviando…';if(!(await send(cart.size?'reserva':'pedido',c,qf.querySelector('button[type=submit]')))){qok.textContent=FAIL;return;}
+qok.textContent=`Gracias, ${v('q-name').split(' ')[0]}. Recibimos tu solicitud y te contactaremos hoy mismo.`;qf.reset();if(cart.size){cart.clear();quote.clear();sync();renderCart();}});
 const sf=document.getElementById('sellForm'), ok=document.getElementById('sellOk');
-sf.addEventListener('submit',e=>{e.preventDefault();
-const empty=[...sf.querySelectorAll('input')].find(i=>!i.value.trim());
-if(empty){ok.textContent='Completa todos los campos para que podamos contactarte.';empty.focus();return;}
-ok.textContent=`Gracias, ${sf.name.value.trim().split(' ')[0]}. En el sitio real te llamaremos esta semana (prototipo: los datos no se envían).`;sf.reset();});
+sf.addEventListener('submit',async e=>{e.preventDefault();
+const empty=[...sf.querySelectorAll('input[required]')].find(i=>!i.value.trim());
+if(empty){ok.textContent='Completa los campos obligatorios para que podamos contactarte.';empty.focus();return;}
+if(!sf.querySelector('[name=email]').checkValidity()){ok.textContent='Revisa tu correo electrónico.';sf.querySelector('[name=email]').focus();return;}
+const g=n=>sf.querySelector(`[name=${n}]`).value.trim(),nm=g('name');ok.textContent='Enviando…';
+if(!(await send('agricultor',{'Nombre':nm,'Agrícola o sociedad':g('org'),'Teléfono':g('phone'),'Correo':g('email'),'Página web':g('web'),'Comuna o localidad':g('place'),'Cultivo':g('crop'),'Calibre o variedad':g('calibre')},sf.querySelector('button[type=submit]')))){ok.textContent=FAIL;return;}
+ok.textContent=`Gracias, ${nm.split(' ')[0]}. Recibimos tus datos y te llamaremos esta semana.`;sf.reset();});
 const SL=[
+{name:'Cultivos en temporada',m:[]},
+{name:'Acelga de invernadero',m:[]},
+{name:'Plantación de temporada',m:[]},
 {name:'Hernán Muñoz, Quillota',m:[{n:'Palta Hass',f:'Calibre 22–24',c:'$4.990 / kg',s:'avocado',col:'#3F5A2A'},{n:'Limón',f:'Grande',c:'$1.590 / kg',s:'round',col:'#D9B92E'}]},
 {name:'Familia Rojas, Limache',m:[{n:'Tomate limachino',f:'Primera',c:'$1.990 / kg',s:'round',col:'#C8402E'},{n:'Lechuga costina',f:'Primera',c:'$990 / unidad',s:'leaf',col:'#86B35A'}]},
 {name:'Cooperativa Los Aromos, Chillán',m:[{n:'Frutillas',f:'Primera',c:'$5.490 / kg',s:'berry',col:'#D23A3A'},{n:'Arándanos',f:'Extra',c:'$8.990 / kg',s:'round',col:'#3B4A8C'}]}
@@ -497,9 +586,9 @@ let cur=0, timer;
 const show=k=>{cur=(k+SL.length)%SL.length;
 slides.forEach((el,i)=>el.classList.toggle('is-on',i===cur));
 dots.forEach((d,i)=>{d.classList.toggle('is-on',i===cur);d.setAttribute('aria-selected',i===cur);});
-slName.textContent=SL[cur].name;
-minis.innerHTML=SL[cur].m.map(x=>`<div class="mini"><div class="ar">${pic(x,art(x.s,x.col))}</div><div class="tx"><b>${x.n}</b><span>${x.f}</span><strong>${x.c}</strong></div></div>`).join('');};
-const auto=()=>{clearInterval(timer); if(!matchMedia('(prefers-reduced-motion: reduce)').matches) timer=setInterval(()=>show(cur+1),6000);};
+if(slName)slName.textContent=SL[cur].name;
+if(minis)minis.innerHTML=SL[cur].m.map(x=>`<div class="mini"><div class="ar">${pic(x,art(x.s,x.col))}</div><div class="tx"><b>${x.n}</b><span>${x.f}</span><strong>${x.c}</strong></div></div>`).join('');};
+const auto=()=>{clearInterval(timer); if(!matchMedia('(prefers-reduced-motion: reduce)').matches) timer=setInterval(()=>show(cur+1),3000);};
 dots.forEach((d,i)=>d.addEventListener('click',()=>{show(i);auto();}));
 document.querySelector('.arrow.prev').addEventListener('click',()=>{show(cur-1);auto();});
 document.querySelector('.arrow.next').addEventListener('click',()=>{show(cur+1);auto();});
@@ -516,5 +605,14 @@ drawAll(); let rt; window.addEventListener('resize',()=>{clearTimeout(rt);rt=set
 })();
 </script>
 
+<script>
+(()=>{const els=[...document.querySelectorAll('.cnt')];if(!els.length)return;
+const run=el=>{const to=+el.dataset.to,t0=performance.now(),D=2000;
+const step=t=>{const k=Math.min(1,(t-t0)/D);el.textContent=Math.round(to*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(step);};requestAnimationFrame(step);};
+if(matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window))return;
+els.forEach(e=>e.textContent='0');
+const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){els.forEach(run);io.disconnect();}},{threshold:.4});
+io.observe(document.querySelector('.stds'));})();
+</script>
 </body>
 </html>

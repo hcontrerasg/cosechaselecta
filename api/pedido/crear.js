@@ -76,7 +76,7 @@ module.exports = async (req, res) => {
   try {
     const r = await createPayment({
       commerceOrder: pedido,
-      subject: `CosechaSelecta · Pedido ${pedido}`,
+      subject: `CosechaSelecta · Pedido ${pedido} · Productos ${clp(c.total)} + despacho ${c.despacho ? clp(c.despacho) : '$0 (gratis)'}`,
       currency: 'CLP',
       amount: String(c.totalConDespacho),
       email: cliente.email,

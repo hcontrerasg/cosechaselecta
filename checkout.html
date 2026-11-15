@@ -31,7 +31,7 @@ label{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600}
 h2{font:400 26px/1.1 var(--display);margin:0}textarea{font:500 15px var(--body);padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);width:100%;min-height:80px;resize:vertical}
 .pay{display:grid;gap:10px}.opt{flex-direction:row!important;align-items:flex-start;gap:12px!important;border:1px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;font-weight:500!important;font-size:14px!important}.opt:has(input:checked){border-color:var(--forest);box-shadow:0 0 0 1px var(--forest)}.opt.off{opacity:.5;cursor:not-allowed}.cart-grp{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding-top:12px}.opt input{width:auto;margin-top:3px;accent-color:var(--forest)}.opt b{display:block;font-size:15px}.opt span{color:var(--muted)}
 .sum{position:sticky;top:16px}.li{display:flex;justify-content:space-between;gap:12px;font-size:14px;padding:10px 0;border-bottom:1px solid var(--line)}.li small{display:block;color:var(--muted)}.li b{white-space:nowrap}
-.tr{display:flex;justify-content:space-between;font-size:14px;color:var(--muted)}.tr b{color:var(--ink)}.tr.big{font-size:20px;color:var(--ink)}.tr.big b{font-weight:700}
+.tr{display:flex;justify-content:space-between;font-size:14px;color:var(--muted)}.tr b{color:var(--ink)}.tr s{color:var(--muted);font-weight:500;margin-right:6px}.tr .free{color:var(--forest)}.tr.big{font-size:20px;color:var(--ink)}.tr.big b{font-weight:700}
 .req{color:var(--chili)}.fact{border:1px solid var(--line);border-radius:14px;padding:16px;margin:0;display:flex;flex-direction:column;gap:14px;background:var(--bg)}.fact[hidden]{display:none}.fact legend{font-weight:700;font-size:14px;padding:0 6px}.fact input{background:var(--surface)}a.back{color:var(--muted);font-size:14px}
 </style>
 <main>
@@ -80,6 +80,7 @@ h2{font:400 26px/1.1 var(--display);margin:0}textarea{font:500 15px var(--body);
 <aside class="card sum" aria-label="Resumen del pedido">
 <h2>Tu pedido</h2>
 <div id="lines"></div>
+<div class="tr"><span>Productos</span><b id="prod"></b></div>
 <div class="tr"><span>Despacho</span><b id="ship"></b></div>
 <div class="tr big"><span>Total</span><b id="total"></b></div>
 <p class="note" id="min"></p>
@@ -100,7 +101,8 @@ async function cotizar(){
   $('lines').innerHTML=t.lineas.map(l=>{const g=l.t!==last?(last=l.t,`<div class="cart-grp">${l.t==='d'?'Al detalle':'Al por mayor'}</div>`):'';
     const qty=l.t==='d'?`${nf(l.q)} ${esc(l.unidad)}`:`${l.q} × ${esc(l.f)}`;
     return g+`<div class="li"><span>${esc(l.n)} · ${esc(l.cal)}<small>${qty}${l.precio!=null?' · '+clp(l.precio)+(l.t==='d'?' / '+esc(l.unidad):' c/u'):''}</small></span><b>${l.subtotal!=null?clp(l.subtotal):'Por confirmar'}</b></div>`}).join('');
-  $('ship').textContent=t.despachoGratis?'Gratis en la RM':clp(t.despacho);
+  $('prod').textContent=clp(t.total)+(t.todoConPrecio?'':' + por confirmar');
+  $('ship').innerHTML=t.despachoGratis?`<s>${clp(t.SHIP)}</s><span class="free">Gratis</span>`:clp(t.despacho);
   $('total').textContent=t.todoConPrecio?clp(t.totalConDespacho):clp(t.totalConDespacho)+' + por confirmar';
   $('min').textContent=t.despachoGratis?'':'Te faltan '+clp(t.faltaDespacho)+' para despacho gratis en la RM.';
   if(!t.pagable){f.pago.value='contra';f.querySelector('input[value=flow]').disabled=true;$('optFlow').classList.add('off');$('noFlow').hidden=false;

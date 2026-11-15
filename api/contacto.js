@@ -14,6 +14,7 @@ const TIPOS = {
   agricultor: 'Agricultor quiere vender',
   exportacion: 'Solicitud de exportación',
   contacto: 'Contacto',
+  pago: 'Pago en línea (Flow)',
 };
 
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));

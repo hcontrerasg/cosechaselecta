@@ -1,13 +1,16 @@
 // POST /api/pedido/crear
-// { items:[{n,cal,q}], cliente:{contacto,email,telefono,direccion,comuna,notas},
+// { items:[{t,n,f,cal,q}], cliente:{contacto,email,telefono,direccion,comuna,notas},
 //   documento:{tipo:'boleta'} | {tipo:'factura',nombre,rut,telefono,giro,direccion}, pago:'flow'|'contra' }
-// Recalcula el total con la lista de precios del servidor (no confía en el navegador),
-// valida pedido mínimo y datos, y crea el pago en Flow si corresponde.
-const CATALOGO = require('../../catalogo.js');
+// Recalcula el total con los precios de index.html (lib/precios.js), avisa por correo y hoja
+// (como los demás formularios) y, si corresponde, abre el pago en Flow.
+const { cotizar, pagableEnLinea } = require('../../lib/precios');
 const { createPayment, siteUrl } = require('../../lib/flow');
 const rut = require('../../lib/rut');
+const avisar = require('../../lib/avisar');
 
 const txt = (v, n) => String(v || '').trim().slice(0, n);
+const clp = v => '$' + Math.round(v).toLocaleString('es-CL');
+const nf = v => String(Math.round(v * 10) / 10).replace('.', ',');
 
 function numeroPedido() {
   const d = new Date(Date.now() - 3 * 3600e3); // fecha aproximada de Chile para el prefijo
@@ -15,41 +18,57 @@ function numeroPedido() {
   return `CS-${ymd}-${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
 }
 
+const lineaTxt = l => `${l.n} · ${l.cal} · ${l.t === 'd' ? `${nf(l.q)} ${l.unidad} (al detalle)` : `${l.q} × ${l.f} (mayorista)`}`
+  + (l.precio != null ? ` × ${clp(l.precio)} = ${clp(l.subtotal)}` : ' · precio por confirmar');
+
 module.exports = async (req, res) => {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Método no permitido' });
   let b = req.body || {};
   if (typeof b === 'string') { try { b = JSON.parse(b); } catch { b = {}; } }
 
-  const items = Array.isArray(b.items) ? b.items.slice(0, 60) : [];
-  const t = CATALOGO.totales(items);
-  if (!t.lineas.length) return res.status(400).json({ error: 'Tu carrito está vacío.' });
-  if (t.neto < CATALOGO.pedidoMinimo) return res.status(400).json({ error: `El pedido mínimo es $${CATALOGO.pedidoMinimo.toLocaleString('es-CL')} + IVA.` });
+  const c = cotizar(b.items);
+  if (!c.lineas.length) return res.status(400).json({ error: 'Tu carrito está vacío.' });
 
-  const c = b.cliente || {};
+  const k = b.cliente || {};
   const cliente = {
-    contacto: txt(c.contacto, 80),
-    email: txt(c.email, 120), telefono: txt(c.telefono, 20), direccion: txt(c.direccion, 150),
-    comuna: txt(c.comuna, 60), notas: txt(c.notas, 500),
+    contacto: txt(k.contacto, 80), email: txt(k.email, 120), telefono: txt(k.telefono, 20),
+    direccion: txt(k.direccion, 150), comuna: txt(k.comuna, 60), notas: txt(k.notas, 500),
   };
-  for (const k of ['contacto', 'email', 'telefono', 'direccion', 'comuna'])
-    if (!cliente[k]) return res.status(400).json({ error: 'Completa los campos obligatorios.' });
+  for (const f of ['contacto', 'email', 'telefono', 'direccion', 'comuna'])
+    if (!cliente[f]) return res.status(400).json({ error: 'Completa los campos obligatorios.' });
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(cliente.email)) return res.status(400).json({ error: 'Revisa el correo.' });
 
   const d = b.documento || {};
   let documento = { tipo: 'boleta' };
   if (d.tipo === 'factura') {
     documento = { tipo: 'factura', nombre: txt(d.nombre, 100), rut: txt(d.rut, 15), telefono: txt(d.telefono, 20), giro: txt(d.giro, 120), direccion: txt(d.direccion, 150) };
-    for (const k of ['nombre', 'rut', 'telefono', 'giro', 'direccion'])
-      if (!documento[k]) return res.status(400).json({ error: 'Completa los datos para facturar.' });
+    for (const f of ['nombre', 'rut', 'telefono', 'giro', 'direccion'])
+      if (!documento[f]) return res.status(400).json({ error: 'Completa los datos para facturar.' });
     if (!rut.valido(documento.rut)) return res.status(400).json({ error: 'Revisa el RUT de facturación.' });
     documento.rut = rut.formato(documento.rut);
   }
-  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(cliente.email)) return res.status(400).json({ error: 'Revisa el correo.' });
 
-  const pago = b.pago === 'contra' ? 'contra' : 'flow';
+  // Pago en línea solo si el monto es definitivo (todo con precio y despacho gratis).
+  const pago = b.pago === 'flow' && pagableEnLinea(c) ? 'flow' : 'contra';
   const pedido = numeroPedido();
-  console.log('PEDIDO', JSON.stringify({ pedido, pago, cliente, documento, ...t }));
+  console.log('PEDIDO', JSON.stringify({ pedido, pago, cliente, documento, ...c }));
 
-  if (pago === 'contra') return res.status(200).json({ pedido, total: t.total, redirect: `/pago-resultado.html?estado=reservado&pedido=${pedido}` });
+  const campos = {
+    'N° de pedido': pedido,
+    'Forma de pago': pago === 'flow' ? 'En línea con Flow (pendiente hasta que Flow confirme)' : 'Contra entrega',
+    'Contacto': cliente.contacto, 'Teléfono': cliente.telefono, 'Correo': cliente.email,
+    'Dirección de entrega': cliente.direccion, 'Comuna': cliente.comuna, 'Notas': cliente.notas,
+    'Documento': documento.tipo === 'factura' ? 'Factura' : 'Boleta',
+    ...(documento.tipo === 'factura' ? {
+      'Factura: nombre o razón social': documento.nombre, 'Factura: RUT': documento.rut, 'Factura: teléfono': documento.telefono,
+      'Factura: giro': documento.giro, 'Factura: dirección': documento.direccion,
+    } : {}),
+    'Pedido (carrito)': c.lineas.map(lineaTxt).join('\n'),
+    'Total': clp(c.total) + (c.todoConPrecio ? '' : ' + productos por confirmar') + (c.despachoGratis ? ' · despacho gratis RM' : ' · despacho por confirmar'),
+  };
+  await avisar('reserva', campos);
+
+  if (pago === 'contra') return res.status(200).json({ pedido, total: c.total, redirect: `/pago-resultado.html?estado=reservado&pedido=${pedido}` });
 
   const site = siteUrl(req);
   try {
@@ -57,15 +76,15 @@ module.exports = async (req, res) => {
       commerceOrder: pedido,
       subject: `CosechaSelecta · Pedido ${pedido}`,
       currency: 'CLP',
-      amount: String(t.total),
+      amount: String(c.total),
       email: cliente.email,
       urlConfirmation: `${site}/api/pago/confirmacion`,
       urlReturn: `${site}/api/pago/retorno`,
       optional: JSON.stringify({ pedido, nombre: documento.nombre || cliente.contacto }),
     });
-    return res.status(200).json({ pedido, total: t.total, redirect: `${r.url}?token=${r.token}` });
+    return res.status(200).json({ pedido, total: c.total, redirect: `${r.url}?token=${r.token}` });
   } catch (e) {
     console.error('pedido flow', e.message);
-    return res.status(502).json({ pedido, error: 'Tu pedido quedó registrado, pero no pudimos abrir el pago en línea. Intenta de nuevo o elige pago contra entrega.' });
+    return res.status(502).json({ pedido, error: `Recibimos tu pedido ${pedido}, pero no pudimos abrir el pago en línea. Te contactaremos para coordinar el pago.` });
   }
 };

@@ -29,7 +29,7 @@ label{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600}
 <style>
 .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:start}@media (max-width:820px){.grid{grid-template-columns:1fr}.sum{order:-1}}
 h2{font:400 26px/1.1 var(--display);margin:0}textarea{font:500 15px var(--body);padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);width:100%;min-height:80px;resize:vertical}
-.pay{display:grid;gap:10px}.opt{flex-direction:row!important;align-items:flex-start;gap:12px!important;border:1px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;font-weight:500!important;font-size:14px!important}.opt:has(input:checked){border-color:var(--forest);box-shadow:0 0 0 1px var(--forest)}.opt input{width:auto;margin-top:3px;accent-color:var(--forest)}.opt b{display:block;font-size:15px}.opt span{color:var(--muted)}
+.pay{display:grid;gap:10px}.opt{flex-direction:row!important;align-items:flex-start;gap:12px!important;border:1px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;font-weight:500!important;font-size:14px!important}.opt:has(input:checked){border-color:var(--forest);box-shadow:0 0 0 1px var(--forest)}.opt.off{opacity:.5;cursor:not-allowed}.cart-grp{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding-top:12px}.opt input{width:auto;margin-top:3px;accent-color:var(--forest)}.opt b{display:block;font-size:15px}.opt span{color:var(--muted)}
 .sum{position:sticky;top:16px}.li{display:flex;justify-content:space-between;gap:12px;font-size:14px;padding:10px 0;border-bottom:1px solid var(--line)}.li small{display:block;color:var(--muted)}.li b{white-space:nowrap}
 .tr{display:flex;justify-content:space-between;font-size:14px;color:var(--muted)}.tr b{color:var(--ink)}.tr.big{font-size:20px;color:var(--ink)}.tr.big b{font-weight:700}
 .req{color:var(--chili)}.fact{border:1px solid var(--line);border-radius:14px;padding:16px;margin:0;display:flex;flex-direction:column;gap:14px;background:var(--bg)}.fact[hidden]{display:none}.fact legend{font-weight:700;font-size:14px;padding:0 6px}.fact input{background:var(--surface)}a.back{color:var(--muted);font-size:14px}
@@ -37,7 +37,7 @@ h2{font:400 26px/1.1 var(--display);margin:0}textarea{font:500 15px var(--body);
 <main>
 <p><a class="back" href="/#catalogo">← Seguir comprando</a></p>
 <h1>Finalizar <em>pedido</em></h1>
-<p class="lead">Precio fijo al reservar. Elige boleta o factura electrónica.</p>
+<p class="lead">Precios con IVA incluido. Boleta o factura electrónica.</p>
 <div class="grid">
 <form class="card" id="cf" novalidate>
 <h2>Contacto</h2>
@@ -69,9 +69,10 @@ h2{font:400 26px/1.1 var(--display);margin:0}textarea{font:500 15px var(--body);
 </fieldset>
 <h2 style="margin-top:8px">Pago</h2>
 <div class="pay">
-<label class="opt"><input type="radio" name="pago" value="flow" checked><span><b>Pagar ahora</b>Webpay (débito o crédito) o transferencia, a través de Flow.</span></label>
+<label class="opt" id="optFlow"><input type="radio" name="pago" value="flow" checked><span><b>Pagar ahora</b>Webpay (débito o crédito) o transferencia, a través de Flow.</span></label>
 <label class="opt"><input type="radio" name="pago" value="contra"><span><b>Pagar contra entrega</b>Transferencia o efectivo al recibir. Sin crédito.</span></label>
 </div>
+<p class="note" id="noFlow" hidden></p>
 <p class="err" id="err" role="alert"></p>
 <button class="btn" type="submit" id="go">Confirmar y pagar</button>
 <p class="note">CosechaSelecta no ve ni guarda los datos de tu tarjeta.</p>
@@ -79,26 +80,35 @@ h2{font:400 26px/1.1 var(--display);margin:0}textarea{font:500 15px var(--body);
 <aside class="card sum" aria-label="Resumen del pedido">
 <h2>Tu pedido</h2>
 <div id="lines"></div>
-<div class="tr"><span>Neto</span><b id="neto"></b></div>
-<div class="tr"><span>IVA 19%</span><b id="iva"></b></div>
-<div class="tr"><span>Despacho</span><b>Incluido</b></div>
+<div class="tr"><span>Despacho</span><b id="ship"></b></div>
 <div class="tr big"><span>Total</span><b id="total"></b></div>
 <p class="note" id="min"></p>
 </aside>
 </div>
 </main>
-<script src="/catalogo.js"></script>
 <script>
-const $=id=>document.getElementById(id), clp=v=>'$'+v.toLocaleString('es-CL'), esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const $=id=>document.getElementById(id), clp=v=>'$'+Math.round(v).toLocaleString('es-CL'), esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])), nf=v=>String(Math.round(v*10)/10).replace('.',',');
 let items=[];try{items=JSON.parse(localStorage.getItem('cs_carrito')||'[]')}catch(e){}
-const t=CATALOGO.totales(items);
-if(!t.lineas.length){location.replace('/#catalogo');}
-$('lines').innerHTML=t.lineas.map(l=>`<div class="li"><span>${esc(l.n)} · ${esc(l.cal)}<small>${l.q} × ${esc(l.bulto)} · ${clp(l.precio)} c/u</small></span><b>${clp(l.subtotal)}</b></div>`).join('');
-$('neto').textContent=clp(t.neto);$('iva').textContent=clp(t.iva);$('total').textContent=clp(t.total);
-const bajo=t.neto<CATALOGO.pedidoMinimo;
-$('min').textContent=bajo?'Te faltan '+clp(CATALOGO.pedidoMinimo-t.neto)+' + IVA para el pedido mínimo.':'';
+if(!items.length)location.replace('/#catalogo');
+let t={lineas:[],total:0,pagable:false};
 const f=$('cf'), go=$('go');
-const label=()=>{go.textContent=f.pago.value==='contra'?'Confirmar reserva':'Confirmar y pagar '+clp(t.total)};label();
+const label=()=>{go.textContent=f.pago.value==='contra'?'Confirmar pedido':'Confirmar y pagar '+clp(t.total)};
+async function cotizar(){
+  try{const r=await fetch('/api/pedido/cotizar',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({items})});t=await r.json();}catch(e){$('err').textContent='No pudimos cargar tu pedido. Recarga la página.';return}
+  if(!t.lineas||!t.lineas.length){location.replace('/#catalogo');return}
+  let last='';
+  $('lines').innerHTML=t.lineas.map(l=>{const g=l.t!==last?(last=l.t,`<div class="cart-grp">${l.t==='d'?'Al detalle':'Al por mayor'}</div>`):'';
+    const qty=l.t==='d'?`${nf(l.q)} ${esc(l.unidad)}`:`${l.q} × ${esc(l.f)}`;
+    return g+`<div class="li"><span>${esc(l.n)} · ${esc(l.cal)}<small>${qty}${l.precio!=null?' · '+clp(l.precio)+(l.t==='d'?' / '+esc(l.unidad):' c/u'):''}</small></span><b>${l.subtotal!=null?clp(l.subtotal):'Por confirmar'}</b></div>`}).join('');
+  $('ship').textContent=t.despachoGratis?'Gratis en la RM':'Por confirmar';
+  $('total').textContent=t.todoConPrecio?clp(t.total):clp(t.total)+' + por confirmar';
+  $('min').textContent=t.despachoGratis?'':'Te faltan '+clp(t.faltaDespacho)+' para despacho gratis en la RM.';
+  if(!t.pagable){f.pago.value='contra';f.querySelector('input[value=flow]').disabled=true;$('optFlow').classList.add('off');$('noFlow').hidden=false;
+    $('noFlow').textContent=!t.todoConPrecio?'Tu pedido tiene productos con precio del día. Te confirmamos el monto y te enviamos un enlace para pagar en línea.':'Bajo '+clp(t.FREE_RM)+' te confirmamos el costo de despacho y te enviamos un enlace para pagar en línea.';}
+  label();
+}
+cotizar();
+
 const fact=$('fact');
 const doc=()=>{const on=f.doc.value==='factura';fact.hidden=!on;fact.querySelectorAll('[data-req]').forEach(i=>i.required=on);
  if(on){if(!f.f_telefono.value)f.f_telefono.value=f.telefono.value;if(!f.f_direccion.value&&f.direccion.value)f.f_direccion.value=f.direccion.value+(f.comuna.value?', '+f.comuna.value:'');}};
@@ -107,7 +117,7 @@ try{const d=JSON.parse(localStorage.getItem('cs_cliente')||'{}');for(const k in 
 const rutOk=r=>{const s=String(r).replace(/[^0-9kK]/g,'').toUpperCase();if(s.length<8||s.length>9)return false;let su=0,m=2;for(let i=s.length-2;i>=0;i--){su+=+s[i]*m;m=m===7?2:m+1}const x=11-su%11;return s.slice(-1)===(x===11?'0':x===10?'K':String(x))};
 f.addEventListener('submit',async e=>{
   e.preventDefault();$('err').textContent='';
-  if(bajo){$('err').textContent='Tu pedido no alcanza el mínimo.';return}
+  if(!t.lineas.length)return;
   const miss=[...f.querySelectorAll('[required]')].find(i=>!i.value.trim());
   if(miss){$('err').textContent='Completa los campos marcados con *.';miss.focus();return}
   if(f.doc.value==='factura'&&!rutOk(f.f_rut.value)){$('err').textContent='Revisa el RUT de facturación.';f.f_rut.focus();return}

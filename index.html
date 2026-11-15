@@ -484,7 +484,8 @@ const P=[
 {k:'s',n:'Nueces',o:'Paine · Chandler',p:7990,u:'kg',f:'Saco 10 kg',c:['Con cáscara','Mariposa'],col:'#8A6640',s:'round'},
 {k:'s',n:'Chía',o:'Importado',p:5990,u:'kg',f:'Saco 25 kg',c:['Negra','Blanca'],col:'#4A4A48',s:'round'},
 {k:'s',n:'Linaza',o:'Importado',p:3490,u:'kg',f:'Saco 25 kg',c:['Café','Dorada'],col:'#8A4F2C',s:'round'},
-{k:'h',n:'Huevos de campo',o:'Pirque',p:4490,u:'docena',f:'Bandeja 180 unidades',c:['Extra','Grande'],col:'#D9B98A',s:'egg'}
+{k:'h',n:'Huevos de campo',o:'Pirque',p:4490,u:'docena',f:'Bandeja 30 unidades',pm:4202,c:['Extra','Grande'],col:'#D9B98A',s:'egg'},
+{k:'h',n:'Huevos de campo',o:'Pirque',p:4490,u:'docena',f:'Caja 180 unidades',pm:16807,c:['Extra','Grande'],col:'#D9B98A',s:'egg'}
 ];
 const quote=new Set(); const qc=document.getElementById('qCount'), ql=document.getElementById('qList'), toast=document.getElementById('toast'); let tt;
 const flash=t=>{toast.textContent=t;toast.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove('show'),1800);};

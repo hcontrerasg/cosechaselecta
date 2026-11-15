@@ -492,7 +492,7 @@ const sync=()=>{qc.textContent=quote.size; ql.textContent=quote.size?'En tu pedi
 const grids={f:document.getElementById('products-f'),v:document.getElementById('products-v'),h:document.getElementById('products-h'),s:document.getElementById('products-s')};
 const clp=v=>'$'+v.toLocaleString('es-CL');
 const cart=new Map(); const FREE_RM=24990, MIN_DET=15000, DET_F=1, MAY_D=0.8; let mode='kg';
-const NOTE={kg:'Por kilo o por unidad, para tu casa · compra mínima $15.000',may:'Por caja, saco o malla completa · 20% de descuento sobre el precio por kilo, ideal para revender'};
+const NOTE={kg:'Por kilo o por unidad, para tu casa · sin compra mínima',may:'Por caja, saco o malla completa · 20% de descuento sobre el precio por kilo, ideal para revender'};
 const cc=document.getElementById('cCount'), cItems=document.getElementById('cItems'), cTotal=document.getElementById('cTotal'), cartEl=document.getElementById('cart'), scrim=document.getElementById('cartScrim');
 const openCart=o=>{cartEl.hidden=!o;scrim.hidden=!o;};
 document.getElementById('cartBtn').addEventListener('click',()=>openCart(true));
@@ -527,7 +527,7 @@ return hd+`<li>${img}<span class="nm">${x.n} · ${cal}<small>${l1}</small>${l2?`
 cc.textContent=cart.size;const tot=sum+sd;
 const parts=[];if(n)parts.push(`${n} ${n===1?'bulto':'bultos'}${t?' · '+String(Math.round(t)).replace(/\B(?=(\d{3})+(?!\d))/g,'.')+' kg':''}`);if(cart.size&&priced)parts.push(clp(tot));
 cTotal.textContent=parts.length?parts.join(' · '):(cart.size&&priced?clp(tot):'$0');
-const cMin=document.getElementById('cMin');cMin.hidden=!(sd&&!n&&sd<MIN_DET);cMin.textContent=`Compra mínima al detalle: ${clp(MIN_DET)}. Te faltan ${clp(MIN_DET-sd)}.`;
+const cMin=document.getElementById('cMin');cMin.hidden=true;cMin.textContent=`Compra mínima al detalle: ${clp(MIN_DET)}. Te faltan ${clp(MIN_DET-sd)}.`;
 const cShip=document.getElementById('cShip');cShip.hidden=!(cart.size&&priced&&cMin.hidden);cShip.textContent=tot>=FREE_RM?'¡Tienes despacho gratis en la Región Metropolitana!':`Te faltan ${clp(FREE_RM-tot)} para despacho gratis en la RM.`;
 document.getElementById('cNote').textContent=priced&&cart.size?'Precios con IVA incluido. Boleta o factura. Pago al confirmar o contra entrega.':'Te confirmamos el precio del día por calibre antes del despacho. Boleta o factura. Pago al confirmar o contra entrega.';};
 cItems.addEventListener('click',e=>{const b=e.target.closest('button[data-d]');if(!b)return;const k=b.dataset.k,q=Math.round(((cart.get(k)||0)+(+b.dataset.d))*10)/10;q>0?cart.set(k,q):cart.delete(k);renderCart();});

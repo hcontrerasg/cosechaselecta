@@ -26,8 +26,9 @@ También queda en los logs de Vercel como `FORMULARIO {...}`.
 - `api/pedido/cotizar.js` y `api/pedido/crear.js` recalculan el total en el servidor con `lib/precios.js`,
   que lee el catálogo `const P=[...]` directamente de `index.html` (los precios se siguen editando allí).
   Las fórmulas de precio (`bruto`, `bmay`, `udet`) están copiadas en `lib/precios.js`: si cambian, cambiarlas en ambos.
-- Pago en línea solo cuando el monto es definitivo: todos los productos con precio y despacho gratis
-  (desde `FREE_RM`). Si no, el pedido queda "contra entrega" y se puede cobrar después con `/pagar.html?pedido=X&monto=Y`.
+- Despacho: `SHIP` ($3.990) bajo `FREE_RM` ($24.990), gratis desde ahí; se suma al total en carrito, checkout y cobro.
+- Pago en línea con cualquier monto si todos los productos tienen precio. Si alguno tiene "precio del día",
+  el pedido queda "contra entrega" y se puede cobrar después con `/pagar.html?pedido=X&monto=Y`.
 - Cada pedido llega por correo y a la hoja como "Pedido desde el carrito"; cada pago confirmado por Flow,
   como "Pago en línea (Flow)". También en los logs de Vercel (`PEDIDO {...}`, `PAGO {...}`).
 - `pago-resultado.html` muestra pagado, pendiente, rechazado, anulado o reservado.

@@ -214,7 +214,7 @@ body{overflow-x:clip}
 <div><p class="eyebrow" id="seasonEyebrow">Catálogo · noviembre</p><h2>Al detalle o al por mayor.</h2></div>
 <p id="catLead">Compra <b>al detalle</b>, por kilo o unidad, para tu casa. O <b>al por mayor</b>, por caja, malla o saco con 20% de descuento, si tienes un negocio o revendes. Sin RUT de empresa.</p>
 </div>
-<div class="modebar"><div class="seg" role="tablist" aria-label="Tipo de compra"><button type="button" role="tab" class="on" aria-selected="true" data-mode="kg">Al detalle</button><button type="button" role="tab" aria-selected="false" data-mode="may">Al por mayor</button></div><p class="mode-note" id="modeNote"></p></div><p class="ship-free"><span aria-hidden="true">🚚</span> <b>Despacho gratis en la Región Metropolitana</b> desde $24.990</p>
+<div class="modebar"><div class="seg" role="tablist" aria-label="Tipo de compra"><button type="button" role="tab" class="on" aria-selected="true" data-mode="kg">Al detalle</button><button type="button" role="tab" aria-selected="false" data-mode="may">Al por mayor</button></div><p class="mode-note" id="modeNote"></p></div><p class="ship-free"><span aria-hidden="true">🚚</span> <b>Despacho gratis en la Región Metropolitana</b> desde $24.990 · bajo ese monto, $3.990</p>
 <div class="catsec" id="frutas"><div class="cat-h"><h3>Frutas</h3><span>Fruta de temporada, de la A a la Z</span></div><div class="products" id="products-f"></div></div>
 <div class="catsec" id="verduras"><div class="cat-h"><h3>Verduras</h3><span>Hortalizas y verduras de hoja, de la A a la Z</span></div><div class="products" id="products-v"></div></div>
 <div class="catsec" id="frutos-secos"><div class="cat-h"><h3>Frutos secos y semillas</h3><span>Seleccionados por calibre, de la A a la Z</span></div><div class="products" id="products-s"></div></div>
@@ -491,7 +491,7 @@ const FAIL='No pudimos enviar tu mensaje. Escríbenos a hector.contreras@cosecha
 const sync=()=>{qc.textContent=quote.size; ql.textContent=quote.size?'En tu pedido semanal: '+[...quote].join(', ')+'.':'Aún no agregas productos del catálogo.';};
 const grids={f:document.getElementById('products-f'),v:document.getElementById('products-v'),h:document.getElementById('products-h'),s:document.getElementById('products-s')};
 const clp=v=>'$'+v.toLocaleString('es-CL');
-const cart=new Map(); const FREE_RM=24990, MIN_DET=15000, DET_F=1, MAY_D=0.8; let mode='kg';
+const cart=new Map(); const FREE_RM=24990, SHIP=3990, MIN_DET=15000, DET_F=1, MAY_D=0.8; let mode='kg';
 const NOTE={kg:'Por kilo o por unidad, para tu casa · sin compra mínima',may:'Por caja, saco o malla completa · 20% de descuento sobre el precio por kilo, ideal para revender'};
 const cc=document.getElementById('cCount'), cItems=document.getElementById('cItems'), cTotal=document.getElementById('cTotal'), cartEl=document.getElementById('cart'), scrim=document.getElementById('cartScrim');
 const openCart=o=>{cartEl.hidden=!o;scrim.hidden=!o;};
@@ -527,10 +527,10 @@ else{n+=q;t+=q*fi.kg;l1=`${q} × ${x.f} · `+(fi.kg?`${nf(q*fi.kg)} kg`:`${q*fi.
 const d=ty==='d'?u.st:1;const hd=ty!==lastT?(lastT=ty,`<li class="cart-grp">${ty==='d'?'Al detalle':'Al por mayor'}</li>`):'';
 return hd+`<li>${img}<span class="nm">${x.n} · ${cal}<small>${l1}</small>${l2?`<small>${l2}</small>`:''}</span><span class="qty"><button type="button" data-d="${-d}" data-k="${key}" aria-label="Quitar">−</button><b class="num">${ty==='d'?nf(q):q}</b><button type="button" data-d="${d}" data-k="${key}" aria-label="Agregar">+</button></span></li>`}).join(''):'<li class="cart-empty">Aún no agregas productos.</li>';
 cc.textContent=cart.size;const tot=sum+sd;
-const parts=[];if(n)parts.push(`${n} ${n===1?'bulto':'bultos'}${t?' · '+String(Math.round(t)).replace(/\B(?=(\d{3})+(?!\d))/g,'.')+' kg':''}`);if(cart.size&&priced)parts.push(clp(tot));
-cTotal.textContent=parts.length?parts.join(' · '):(cart.size&&priced?clp(tot):'$0');
+const parts=[];if(n)parts.push(`${n} ${n===1?'bulto':'bultos'}${t?' · '+String(Math.round(t)).replace(/\B(?=(\d{3})+(?!\d))/g,'.')+' kg':''}`);if(cart.size&&priced)parts.push(clp(tot+(tot>=FREE_RM?0:SHIP)));
+cTotal.textContent=parts.length?parts.join(' · '):(cart.size&&priced?clp(tot+(tot>=FREE_RM?0:SHIP)):'$0');
 const cMin=document.getElementById('cMin');cMin.hidden=true;cMin.textContent=`Compra mínima al detalle: ${clp(MIN_DET)}. Te faltan ${clp(MIN_DET-sd)}.`;
-const cShip=document.getElementById('cShip');cShip.hidden=!(cart.size&&priced&&cMin.hidden);cShip.textContent=tot>=FREE_RM?'¡Tienes despacho gratis en la Región Metropolitana!':`Te faltan ${clp(FREE_RM-tot)} para despacho gratis en la RM. Bajo ese monto, te confirmamos el costo de despacho.`;
+const cShip=document.getElementById('cShip');cShip.hidden=!(cart.size&&priced&&cMin.hidden);cShip.textContent=tot>=FREE_RM?'¡Tienes despacho gratis en la Región Metropolitana!':`Despacho ${clp(SHIP)} (incluido en el total). Te faltan ${clp(FREE_RM-tot)} para despacho gratis en la RM.`;
 document.getElementById('cNote').textContent=priced&&cart.size?'Precios con IVA incluido. Boleta o factura. Paga en línea con Webpay o transferencia, o contra entrega.':'Te confirmamos el precio del día por calibre antes del despacho. Boleta o factura. Paga en línea con Webpay o transferencia, o contra entrega.';saveCart();};
 cItems.addEventListener('click',e=>{const b=e.target.closest('button[data-d]');if(!b)return;const k=b.dataset.k,q=Math.round(((cart.get(k)||0)+(+b.dataset.d))*10)/10;q>0?cart.set(k,q):cart.delete(k);renderCart();});
 /* Estas fórmulas de precio están copiadas en lib/precios.js (cobro en línea): si cambian aquí, cambiarlas allá. */

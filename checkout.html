@@ -92,7 +92,7 @@ let items=[];try{items=JSON.parse(localStorage.getItem('cs_carrito')||'[]')}catc
 if(!items.length)location.replace('/#catalogo');
 let t={lineas:[],total:0,pagable:false};
 const f=$('cf'), go=$('go');
-const label=()=>{go.textContent=f.pago.value==='contra'?'Confirmar pedido':'Confirmar y pagar '+clp(t.total)};
+const label=()=>{go.textContent=f.pago.value==='contra'?'Confirmar pedido':'Confirmar y pagar '+clp(t.totalConDespacho)};
 async function cotizar(){
   try{const r=await fetch('/api/pedido/cotizar',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({items})});t=await r.json();}catch(e){$('err').textContent='No pudimos cargar tu pedido. Recarga la página.';return}
   if(!t.lineas||!t.lineas.length){location.replace('/#catalogo');return}
@@ -100,11 +100,11 @@ async function cotizar(){
   $('lines').innerHTML=t.lineas.map(l=>{const g=l.t!==last?(last=l.t,`<div class="cart-grp">${l.t==='d'?'Al detalle':'Al por mayor'}</div>`):'';
     const qty=l.t==='d'?`${nf(l.q)} ${esc(l.unidad)}`:`${l.q} × ${esc(l.f)}`;
     return g+`<div class="li"><span>${esc(l.n)} · ${esc(l.cal)}<small>${qty}${l.precio!=null?' · '+clp(l.precio)+(l.t==='d'?' / '+esc(l.unidad):' c/u'):''}</small></span><b>${l.subtotal!=null?clp(l.subtotal):'Por confirmar'}</b></div>`}).join('');
-  $('ship').textContent=t.despachoGratis?'Gratis en la RM':'Por confirmar';
-  $('total').textContent=t.todoConPrecio?clp(t.total):clp(t.total)+' + por confirmar';
+  $('ship').textContent=t.despachoGratis?'Gratis en la RM':clp(t.despacho);
+  $('total').textContent=t.todoConPrecio?clp(t.totalConDespacho):clp(t.totalConDespacho)+' + por confirmar';
   $('min').textContent=t.despachoGratis?'':'Te faltan '+clp(t.faltaDespacho)+' para despacho gratis en la RM.';
   if(!t.pagable){f.pago.value='contra';f.querySelector('input[value=flow]').disabled=true;$('optFlow').classList.add('off');$('noFlow').hidden=false;
-    $('noFlow').textContent=!t.todoConPrecio?'Tu pedido tiene productos con precio del día. Te confirmamos el monto y te enviamos un enlace para pagar en línea.':'Bajo '+clp(t.FREE_RM)+' te confirmamos el costo de despacho y te enviamos un enlace para pagar en línea.';}
+    $('noFlow').textContent='Tu pedido tiene productos con precio del día. Te confirmamos el monto y te enviamos un enlace para pagar en línea.';}
   label();
 }
 cotizar();

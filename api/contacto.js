@@ -10,7 +10,7 @@ const FROM = process.env.MAIL_FROM || 'CosechaSelecta Web <onboarding@resend.dev
 
 const TIPOS = {
   pedido: 'Pedido semanal / cuenta de negocio',
-  reserva: 'Reserva desde el carrito',
+  reserva: 'Pedido desde el carrito',
   agricultor: 'Agricultor quiere vender',
   exportacion: 'Solicitud de exportación',
   contacto: 'Contacto',

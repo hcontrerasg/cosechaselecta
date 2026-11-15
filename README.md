@@ -1,6 +1,6 @@
 # CosechaSelecta
 
-Sitio web de CosechaSelecta: fruta y verdura mayorista en preventa, directo del agricultor.
+Sitio web de CosechaSelecta: fruta y verdura a precio mayorista para todos, directo del agricultor.
 
 - `index.html`: página principal (HTML estático, sin build).
 - `logo.png`, `logo-claro.png`: logo para fondo claro y oscuro.
@@ -11,7 +11,7 @@ Estado: prototipo. Productores, precios y formatos son ejemplos; fotos de Pexels
 
 ## Formularios
 
-Todos los formularios (pedido semanal, reserva del carrito, agricultores y exportación) se envían a
+Todos los formularios (pedido semanal, pedido del carrito, agricultores y exportación) se envían a
 `api/contacto.js`, que manda un correo a **hector.contreras@cosechaselecta.com** usando Resend.
 
 Variables de entorno en Vercel: `RESEND_API_KEY` (obligatoria), `MAIL_TO` y `MAIL_FROM` (opcionales).
